@@ -1,4 +1,4 @@
-// package Modelos.GestionVehiculos;
+package progAvan.autos;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
