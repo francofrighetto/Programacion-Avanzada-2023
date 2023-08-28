@@ -1,4 +1,4 @@
-package progAvan.autos;
+package progAvan.modelos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

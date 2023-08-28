@@ -1,4 +1,4 @@
-package progAvan.autos;
+package progAvan.modelos;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,16 +9,17 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table (name="modelo") 
+@Table(name = "modelo")
 public class Modelo {
-	@Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = javax.persistence.GenerationType.AUTO)
     private long modelo_id;
     private String nombre;
     private String descripcion;
     private Integer puertas;
-    @OneToOne (targetEntity = Marca.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToOne(targetEntity = Marca.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Marca marca;
-    
+
     public long getId() {
         return modelo_id;
     }
@@ -58,5 +59,5 @@ public class Modelo {
     public void setIdMarca(Marca idMarca) {
         this.marca = idMarca;
     }
-    
+
 }
