@@ -1,4 +1,4 @@
-package progAvan.modelos;
+package progAvan.Modelos;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
