@@ -1,4 +1,4 @@
-package Hibernate;
+package progAvan.Hibernate;
 
 import java.awt.HeadlessException;
 
@@ -29,14 +29,10 @@ public class HibernateUtil {
             conf.setProperty("hibernate.connection.pool_size", "10");
             conf.setProperty("hibernate.hbm2ddl.auto", "update");
 
-            conf.addPackage("Modelos.GestionPersona");
-            conf.addPackage("Modelos.GestionVehiculo");
-
-            conf.addAnnotatedClass(Modelos.GestionPersonas.Persona.class);
-            conf.addAnnotatedClass(Modelos.GestionVehiculos.Auto.class);
-            conf.addAnnotatedClass(Modelos.GestionVehiculos.Marca.class);
-            conf.addAnnotatedClass(Modelos.GestionVehiculos.Modelo.class);
-            conf.addAnnotatedClass(Modelos.GestionVehiculos.Pais.class);
+            conf.addPackage("progAvan.Modelos");
+            conf.addAnnotatedClass(progAvan.Modelos.Auto.class);
+            conf.addAnnotatedClass(progAvan.Modelos.Marca.class);
+            conf.addAnnotatedClass(progAvan.Modelos.Modelo.class);
 
             try {
                 sessionFactory = conf.buildSessionFactory();
