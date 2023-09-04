@@ -1,10 +1,10 @@
-package progAvan.autos;
+package com.example.Taller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AutosApplicationTests {
+class TallerApplicationTests {
 
 	@Test
 	void contextLoads() {

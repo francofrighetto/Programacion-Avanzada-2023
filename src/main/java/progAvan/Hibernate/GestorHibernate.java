@@ -6,17 +6,13 @@ import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 public class GestorHibernate extends HibernateUtil {
 
     private Transaction tx;
 
     public static void main(String[] args) {
-        HibernateUtil.inicializar();
+
     }
     /**
      * Elimina un objeto del repositorio

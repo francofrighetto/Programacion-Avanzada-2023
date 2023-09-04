@@ -24,15 +24,15 @@ public class HibernateUtil {
 
             // Datos conexion db
             conf.setProperty("hibernate.connection.username", "postgres");
-            conf.setProperty("hibernate.connection.password", "123");
+            conf.setProperty("hibernate.connection.password", "postgres");
 
             conf.setProperty("hibernate.connection.pool_size", "10");
             conf.setProperty("hibernate.hbm2ddl.auto", "update");
 
             conf.addPackage("progAvan.Modelos");
-            conf.addAnnotatedClass(progAvan.Modelos.Auto.class);
-            conf.addAnnotatedClass(progAvan.Modelos.Marca.class);
-            conf.addAnnotatedClass(progAvan.Modelos.Modelo.class);
+            conf.addAnnotatedClass(progAvan.Model.Auto.class);
+            conf.addAnnotatedClass(progAvan.Model.Marca.class);
+            conf.addAnnotatedClass(progAvan.Model.Modelo.class);
 
             try {
                 sessionFactory = conf.buildSessionFactory();

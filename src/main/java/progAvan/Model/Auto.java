@@ -1,4 +1,4 @@
-package progAvan.Modelos;
+package progAvan.Model;
 
 import java.util.Date;
 

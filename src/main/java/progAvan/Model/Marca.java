@@ -1,4 +1,4 @@
-package progAvan.Modelos;
+package progAvan.Model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
