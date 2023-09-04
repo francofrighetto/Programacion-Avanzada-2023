@@ -3,18 +3,13 @@ package progAvan.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.batch.BatchProperties.Jdbc;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import jakarta.transaction.Transactional;
+import progAvan.Model.Marca;
 
-public class MarcaRepository {
+@Repository
+public interface MarcaRepository extends JpaRepository<Marca, Long> {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    @Transactional
-    public void createMarca() {
-        jdbcTemplate.execute("DROP TABLE marca IF EXISTS");
-        jdbcTemplate.execute("CREATE TABLE marca("
-                + "marca_id SERIAL, nombre VARCHAR(255))");
-    }
 }

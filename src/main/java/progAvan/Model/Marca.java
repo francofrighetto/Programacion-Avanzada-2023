@@ -1,27 +1,25 @@
 package progAvan.Model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
-@Table(name = "marca")
+@Data
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Marca {
+
     @Id
-    @GeneratedValue(strategy = javax.persistence.GenerationType.AUTO)
-    private long marca_id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipo_objeto_id_seq")
+    @SequenceGenerator(name = "tipo_objeto_id_seq", sequenceName = "tipo_objeto_id_seq", allocationSize = 1)
+    private Integer id;
     private String nombre;
 
-    public long getId() {
-        return marca_id;
+    public Integer getId() {
+        return id;
     }
 
     public void setId(Integer id) {
-        this.marca_id = id;
+        this.id = id;
     }
 
     public String getNombre() {

@@ -1,8 +1,27 @@
 package progAvan.Service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import progAvan.Model.Marca;
+import progAvan.Repository.MarcaRepository;
+
+@Service
 public class MarcaService {
 
-    public void createMarca() {
+    @Autowired
+    MarcaRepository marcaRepository;
+
+    // public void createMarca() {
+    // marcaRepository.
+    // }
+
+    public void save(Marca model) {
+        marcaRepository.save(model);
+    }
+
+    public Object findById(long id) {
+        return marcaRepository.findById(id);
     }
 
 }
