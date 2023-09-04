@@ -1,6 +1,7 @@
 package progAvan.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class MarcaService {
         marcaRepository.save(model);
     }
 
-    public Object findById(long id) {
+    public Optional<Marca> findById(long id) {
         return marcaRepository.findById(id);
     }
 

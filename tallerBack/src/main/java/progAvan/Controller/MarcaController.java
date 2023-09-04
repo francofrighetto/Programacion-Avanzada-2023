@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,5 +65,14 @@ public class MarcaController {
     @GetMapping(value = "/mostrar")
     public List<Marca> mostrar() {
         return marcaService.findAll();
+    }
+
+    @PostMapping(value = "/editar/{id}")
+    public String actualizar(@PathVariable int id, @RequestBody Marca model) {
+        Marca marca = marcaService.findById(id).orElse(null);
+        marca.setNombre("Fiat2");
+        marcaService.save(marca);
+
+        return "success";
     }
 }
