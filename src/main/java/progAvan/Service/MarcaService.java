@@ -1,5 +1,7 @@
 package progAvan.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,10 @@ public class MarcaService {
 
     public Object findById(long id) {
         return marcaRepository.findById(id);
+    }
+
+    public List<Marca> findAll() {
+        return marcaRepository.findAll();
     }
 
 }

@@ -1,5 +1,7 @@
 package progAvan.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -62,5 +64,10 @@ public class MarcaController {
     public String guardar(@RequestBody Marca model) {
         marcaService.save(model);
         return "success";
+    }
+
+    @GetMapping(value = "/mostrar")
+    public List<Marca> mostrar() {
+        return marcaService.findAll();
     }
 }
