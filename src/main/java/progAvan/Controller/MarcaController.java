@@ -29,11 +29,6 @@ public class MarcaController {
     @Value("${path_general}")
     String path;
 
-    @GetMapping("/createMarca")
-    public String createMarca() {
-        return "Marca table created";
-    }
-
     @GetMapping(value = "/agregar")
     public String agregar(Model model) {
         model.addAttribute("modelo", new Marca());
