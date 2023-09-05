@@ -1,30 +1,30 @@
 package progAvan.Model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "modelo")
 public class Modelo {
     @Id
-    @GeneratedValue(strategy = javax.persistence.GenerationType.AUTO)
-    private long modelo_id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipo_objeto_id_seq")
+    @SequenceGenerator(name = "tipo_objeto_id_seq", sequenceName = "tipo_objeto_id_seq", allocationSize = 1)
+    private Integer modelo_id;
     private String nombre;
-    private String descripcion;
-    private Integer puertas;
     @OneToOne(targetEntity = Marca.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "marca_id", referencedColumnName = "id")
     private Marca marca;
+    @Column(columnDefinition = "boolean default true")
+    private boolean estado;
 
-    public long getId() {
+    public int getId() {
         return modelo_id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.modelo_id = id;
     }
 
@@ -34,22 +34,6 @@ public class Modelo {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Integer getPuertas() {
-        return puertas;
-    }
-
-    public void setPuertas(Integer puertas) {
-        this.puertas = puertas;
     }
 
     public Marca getIdMarca() {

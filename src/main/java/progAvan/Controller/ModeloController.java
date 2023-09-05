@@ -17,44 +17,44 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 
-import progAvan.Model.Marca;
-import progAvan.Service.MarcaService;
+import progAvan.Model.Modelo;
+import progAvan.Service.ModeloService;
 
 @RestController
-@RequestMapping(path = "/marca")
-public class MarcaController {
+@RequestMapping(path = "/modelo")
+public class ModeloController {
 
     @Autowired
-    private MarcaService marcaService;
+    private ModeloService modeloService;
 
     @Value("${path_general}")
     String path;
 
     @PostMapping(value = "/guardar")
-    public String guardar(@RequestBody Marca model) {
-        marcaService.save(model);
+    public String guardar(@RequestBody Modelo model) {
+        modeloService.save(model);
         return "success";
     }
 
     @GetMapping(value = "/mostrar")
-    public List<Marca> mostrar() {
-        return marcaService.findAll();
+    public List<Modelo> mostrar() {
+        return modeloService.findAll();
     }
 
     @PostMapping(value = "/editar/{id}")
-    public String actualizar(@PathVariable int id, @RequestBody Marca model) {
-        Marca marca = marcaService.findById(id).orElse(null);
-        marca.setNombre("Fiat2");
-        marcaService.save(marca);
+    public String actualizar(@PathVariable int id, @RequestBody Modelo model) {
+        Modelo modelo = modeloService.findById(id).orElse(null);
+        modelo.setNombre("Fiat2");
+        modeloService.save(modelo);
 
         return "success";
     }
 
     @PostMapping(value = "/eliminar/{id}")
     public String eliminar(@PathVariable int id) {
-        Marca marca = marcaService.findById(id).orElse(null);
-        marca.setEstado(false);
-        marcaService.save(marca);
+        Modelo modelo = modeloService.findById(id).orElse(null);
+        modelo.setEstado(false);
+        modeloService.save(modelo);
         return "success";
     }
 }

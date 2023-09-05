@@ -32,8 +32,8 @@ public class AutoController {
         return autoService.findAll();
     }
 
-    @GetMapping(value = "/mostrar")
-    public Object mostrarPorId(@PathVariable long id) {
+    @GetMapping(value = "/mostrar/{id}")
+    public Object mostrarPorId(@PathVariable int id) {
         return autoService.findById(id);
     }
 

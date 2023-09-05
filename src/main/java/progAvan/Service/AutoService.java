@@ -19,7 +19,7 @@ public class AutoService {
         autoRepository.save(auto);
     }
 
-    public Object findById(long id) {
+    public Object findById(int id) {
         return autoRepository.findById(id);
     }
 

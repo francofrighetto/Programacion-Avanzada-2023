@@ -1,16 +1,16 @@
 package progAvan.Model;
 
 import java.util.Date;
-
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "auto")
 
 public class Auto {
     @Id
-    @GeneratedValue(strategy = javax.persistence.GenerationType.AUTO)
-    private int auto_id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipo_objeto_id_seq")
+    @SequenceGenerator(name = "tipo_objeto_id_seq", sequenceName = "tipo_objeto_id_seq", allocationSize = 1)
+    private Integer auto_id;
     @OneToOne(targetEntity = Modelo.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Modelo modelo;
     private String color;
