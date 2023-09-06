@@ -38,6 +38,7 @@ public class MarcaController {
         return "success";
     }
 
+        @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrar")
     public List<Marca> mostrar() {
         return marcaService.findAll();
