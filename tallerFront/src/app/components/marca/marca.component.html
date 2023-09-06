@@ -20,12 +20,13 @@
     </thead>
     <tbody>
         <tr *ngFor="let m of marcas">
-            <th>{{m.id}}</th>
+            <td>{{m.id}}</td>
             <td>{{m.nombre}}</td>
             <td>{{m.estado}}</td>
-            <button type="button" class="btn btn-primary">Editar</button>
-            <button type="button" class="btn btn-danger">Eliminar</button>
-            <td></td>
+            <td>
+                <button type="button" class="btn btn-primary">Editar</button>
+                <button type="button" class="btn btn-danger">Eliminar</button>
+            </td>
         </tr>
     </tbody>
 </table>

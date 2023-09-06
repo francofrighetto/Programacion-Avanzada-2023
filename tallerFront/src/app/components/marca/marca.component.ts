@@ -17,7 +17,7 @@ export class MarcaComponent implements OnInit {
     this.marca.estado=true;
   }
   ngOnInit(): void {
-    // this.getMarcas();
+    this.getMarcas();
   }
 
   getMarcas(){
@@ -28,7 +28,16 @@ export class MarcaComponent implements OnInit {
 
   nuevaMarca(){
     this.marcaService.nuevaMarca(this.marca).subscribe(data=>{
+
       console.log(data);
+      if (data=="success"){
+        this.getMarcas();
+      }
+    },error=>{
+      if (error.status==200){
+        this.getMarcas();
+
+      }
     })
   }
 
