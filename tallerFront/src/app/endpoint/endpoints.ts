@@ -4,6 +4,6 @@ export enum endpoints {
 
 
 
-  mostrar='mostrar',
-  nuevo='nuevo'
+  mostrar = 'mostrar',
+  nuevo = 'guardar'
 }
