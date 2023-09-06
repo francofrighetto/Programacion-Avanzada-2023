@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import progAvan.Model.Modelo;
+import progAvan.Repository.MarcaRepository;
 import progAvan.Repository.ModeloRepository;
 
 @Service
@@ -14,6 +15,9 @@ public class ModeloService {
 
     @Autowired
     ModeloRepository modeloRepository;
+
+    @Autowired
+    MarcaRepository marcaRepository;
 
     // public void createmodelo() {
     // modeloRepository.
