@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import progAvan.Model.Marca;
@@ -33,12 +35,12 @@ public class MarcaController {
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/guardar")
-    public String guardar(@RequestBody Marca model) {
+    public ResponseEntity guardar(@RequestBody Marca model) {
         marcaService.save(model);
-        return "success";
+        return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
-        @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrar")
     public List<Marca> mostrar() {
         return marcaService.findAll();
