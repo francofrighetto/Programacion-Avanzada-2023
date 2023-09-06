@@ -6,10 +6,14 @@ describe('AutoComponent', () => {
   let component: AutoComponent;
   let fixture: ComponentFixture<AutoComponent>;
 
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ AutoComponent ]
+    })
+    .compileComponents();
+  });
+
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [AutoComponent]
-    });
     fixture = TestBed.createComponent(AutoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
