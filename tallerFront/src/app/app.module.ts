@@ -16,10 +16,12 @@ import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es-AR';
 import { AutoComponent } from './components/auto/auto.component';
 import { MarcaComponent } from './components/marca/marca.component';
+import { ModeloComponent } from './components/modelo/modelo.component';
 
 const routes: Routes = [
   { path: 'auto', component: AutoComponent },
   { path: 'marca', component: MarcaComponent },
+  { path: 'modelo', component: ModeloComponent },
   { path: '', component: HomeComponent },
 ];
 
@@ -32,6 +34,7 @@ registerLocaleData(localeEs, 'es-AR');
     HomeComponent,
     AutoComponent,
     MarcaComponent,
+    ModeloComponent,
   ],
   imports: [
     BrowserModule,
