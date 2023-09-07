@@ -3,12 +3,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Marca } from 'src/app/modelos/Marca';
 import { MarcaService } from 'src/app/servicios/marca/marca.service';
 
+
 @Component({
-  selector: 'app-auto',
-  templateUrl: './auto.component.html',
-  styleUrls: ['./auto.component.css']
+  selector: 'app-modelo',
+  templateUrl: './modelo.component.html',
+  styleUrls: ['./modelo.component.css']
 })
-export class AutoComponent implements OnInit {
+export class ModeloComponent implements OnInit {
 
   marcas?: Marca[];
   marca!: Marca;
