@@ -1,6 +1,9 @@
 package progAvan.Controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -29,6 +32,7 @@ public class MarcaController {
 
     @Autowired
     private MarcaService marcaService;
+    Map<String, String> response = new HashMap<>();
 
     @Value("${path_general}")
     String path;
@@ -36,8 +40,15 @@ public class MarcaController {
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/guardar")
     public ResponseEntity guardar(@RequestBody Marca model) {
-        marcaService.save(model);
-        return new ResponseEntity<>("success", HttpStatus.OK);
+        try {
+            marcaService.save(model);
+            this.response.put("message", "success");
+            return new ResponseEntity<>(this.response, HttpStatus.OK);
+        } catch (Exception e) {
+            // Puedes agregar un registro de errores aquí para depuración
+            this.response.put("message", "error interno");
+            return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
@@ -46,20 +57,42 @@ public class MarcaController {
         return marcaService.findAll();
     }
 
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/editar/{id}")
-    public String actualizar(@PathVariable int id, @RequestBody Marca model) {
-        Marca marca = marcaService.findById(id).orElse(null);
-        marca.setNombre("Fiat2");
-        marcaService.save(marca);
-
-        return "success";
+    public ResponseEntity actualizar(@PathVariable int id, @RequestBody Marca model) {
+        // Marca marca = marcaService.findById(id).orElse(null);
+        try {
+            marcaService.save(model);
+            this.response.put("message", "success");
+            return new ResponseEntity<>(this.response, HttpStatus.OK);
+        } catch (Exception e) {
+            // Puedes agregar un registro de errores aquí para depuración
+            this.response.put("message", "error interno");
+            return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/eliminar/{id}")
-    public String eliminar(@PathVariable int id) {
-        Marca marca = marcaService.findById(id).orElse(null);
-        marca.setEstado(false);
-        marcaService.save(marca);
-        return "success";
+    public ResponseEntity eliminar(@PathVariable int id) {
+        try {
+            Optional<Marca> optionalMarca = marcaService.findById(id);
+
+            if (optionalMarca.isPresent()) {
+                Marca marca = optionalMarca.get();
+                marca.setEstado(!marca.getEstado());
+                marcaService.save(marca);
+
+                this.response.put("message", "success");
+                return new ResponseEntity<>(this.response, HttpStatus.OK);
+            } else {
+                this.response.put("message", "error");
+                return new ResponseEntity<>(this.response, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            // Puedes agregar un registro de errores aquí para depuración
+            this.response.put("message", "error interno");
+            return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

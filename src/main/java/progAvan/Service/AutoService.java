@@ -10,7 +10,7 @@ import progAvan.Model.Marca;
 import progAvan.Repository.AutoRepository;
 
 @Service
-public class AutoService {
+public class AutoService{
 
     @Autowired
     AutoRepository autoRepository;

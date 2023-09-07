@@ -37,4 +37,7 @@ public class Marca {
         this.nombre = nombre;
     }
 
+    public boolean getEstado() {
+        return estado;
+    }
 }

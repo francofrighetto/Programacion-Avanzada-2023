@@ -1,11 +1,17 @@
-c:\Users\botta\OneDrive\Documentos\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\MarcaRepository.java
-c:\Users\botta\OneDrive\Documentos\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\MarcaController.java
-c:\Users\botta\OneDrive\Documentos\Programacion-Avanzada-2023\src\main\java\progAvan\Hibernate\GestorHibernate.java
-c:\Users\botta\OneDrive\Documentos\Programacion-Avanzada-2023\src\main\java\progAvan\Hibernate\HibernateUtil.java
-c:\Users\botta\OneDrive\Documentos\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\JpaRepository.java
-c:\Users\botta\OneDrive\Documentos\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Auto.java
-c:\Users\botta\OneDrive\Documentos\Programacion-Avanzada-2023\src\main\java\progAvan\Service\MarcaService.java
-c:\Users\botta\OneDrive\Documentos\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Modelo.java
-c:\Users\botta\OneDrive\Documentos\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Marca.java
-c:\Users\botta\OneDrive\Documentos\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Pais.java
-c:\Users\botta\OneDrive\Documentos\Programacion-Avanzada-2023\src\main\java\progAvan\AutosApplication.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\JpaRepository.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Service\ModeloService.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Marca.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Pais.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Modelo.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\ModeloController.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Hibernate\HibernateUtil.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Auto.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\MarcaRepository.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\AutoController.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\AutosApplication.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Hibernate\GestorHibernate.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Service\MarcaService.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\MarcaController.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\ModeloRepository.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Service\AutoService.java
+d:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\AutoRepository.java
