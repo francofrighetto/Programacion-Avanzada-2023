@@ -11,13 +11,15 @@ import lombok.Setter;
 public class Modelo {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipo_objeto_id_seq")
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @SequenceGenerator(name = "tipo_objeto_id_seq", sequenceName = "tipo_objeto_id_seq", allocationSize = 1)
     private Integer modelo_id;
     private String nombre;
-    @OneToOne(targetEntity = Marca.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    @ManyToOne
     @JoinColumn(name = "marca_id", referencedColumnName = "id")
     private Marca marca;
-    @Column(columnDefinition = "boolean default true")
     private boolean estado;
 
     public int getId() {
