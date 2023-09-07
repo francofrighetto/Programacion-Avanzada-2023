@@ -45,7 +45,6 @@ public class MarcaController {
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
         } catch (Exception e) {
-            // Puedes agregar un registro de errores aquí para depuración
             this.response.put("message", "error interno");
             return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -66,7 +65,6 @@ public class MarcaController {
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
         } catch (Exception e) {
-            // Puedes agregar un registro de errores aquí para depuración
             this.response.put("message", "error interno");
             return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -90,7 +88,6 @@ public class MarcaController {
                 return new ResponseEntity<>(this.response, HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
-            // Puedes agregar un registro de errores aquí para depuración
             this.response.put("message", "error interno");
             return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
