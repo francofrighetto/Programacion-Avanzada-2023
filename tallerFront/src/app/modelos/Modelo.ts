@@ -1,5 +1,9 @@
+import { Marca } from "./Marca";
+
 export class Modelo {
-  id?:number;
-  nombre?:string;
-  estado?:boolean;
+  modelo_id?: number;
+  nombre?: string;
+  marca?: Marca;
+  estado?: boolean;
+  id?: number;
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Marca } from 'src/app/modelos/Marca';
-import { MarcaService } from 'src/app/servicios/marca/marca.service';
+import { Modelo } from 'src/app/modelos/Modelo';
+import { ModeloService } from 'src/app/servicios/modelo/modelo.service';
 
 
 @Component({
@@ -11,8 +11,8 @@ import { MarcaService } from 'src/app/servicios/marca/marca.service';
 })
 export class ModeloComponent implements OnInit {
 
-  marcas?: Marca[];
-  marca!: Marca;
+  modelos?: Modelo[];
+  modelo!: Modelo;
   nuevo: boolean = true;
 
   alerta = {
@@ -27,78 +27,79 @@ export class ModeloComponent implements OnInit {
     )
   });
 
-  constructor(private marcaService: MarcaService) {
+  constructor(private modeloService: ModeloService) {
   }
   ngOnInit(): void {
-    this.resetMarca();
+    this.resetModelo();
   }
 
-  getMarcas() {
-    this.marcaService.getMarcas().subscribe(data => {
-      this.marcas = data;
+  getModelos() {
+    this.modeloService.getModelos().subscribe(data => {
+      this.modelos = data;
     })
   }
 
-  nuevaMarca() {
+  nuevaModelo() {
     if (this.formRegister.valid) {
-      this.marcaService.nuevaMarca(this.marca).subscribe((data: any) => {
+      this.modeloService.nuevaModelo(this.modelo).subscribe((data: any) => {
         if (data.message == "success") {
-          this.resetMarca();
-          this.mostrarAlerta("success", "Marca creada con éxito");
+          this.resetModelo();
+          this.mostrarAlerta("success", "Modelo creada con éxito");
         }
       }, error => {
         console.log(error);
-        this.mostrarAlerta("danger", "Error al crear marca");
+        this.mostrarAlerta("danger", "Error al crear modelo");
       })
     } else {
       this.mostrarAlerta("danger", "Validaciones incorrectas");
     }
   }
 
-  actualizarMarca() {
+  actualizarModelo() {
     if (this.formRegister.valid) {
-      this.marcaService.actualizarMarca(this.marca).subscribe((data: any) => {
+      this.modeloService.actualizarModelo(this.modelo).subscribe((data: any) => {
         if (data.message == "success") {
-          this.resetMarca();
-          this.mostrarAlerta("success", "Marca editada con éxito");
+          this.resetModelo();
+          this.mostrarAlerta("success", "Modelo editada con éxito");
         }
       }, error => {
         console.log(error);
-        this.mostrarAlerta("danger", "Error al editar marca");
+        this.mostrarAlerta("danger", "Error al editar modelo");
       })
     } else {
       this.mostrarAlerta("danger", "Validaciones incorrectas");
     }
   }
 
-  editar(marca: Marca) {
+  editar(modelo: Modelo) {
     this.nuevo = false;
-    this.marca = marca;
+    this.modelo = modelo;
   }
 
-  eliminar(marca: Marca) {
-    if (marca.id != undefined) {
-      this.marcaService.eliminarMarca(marca.id).subscribe((data: any) => {
+  eliminar(modelo: Modelo) {
+    console.log(modelo);
+    if (modelo.id != undefined) {
+      this.modeloService.eliminarModelo(modelo.id).subscribe((data: any) => {
         if (data.message == "success") {
-          this.resetMarca();
+          this.resetModelo();
           this.mostrarAlerta("success", "Exito al cambiar el estado");
         }
       }, error => {
         console.log(error);
-        this.mostrarAlerta("danger", "Error al eliminar marca");
+        this.mostrarAlerta("danger", "Error al eliminar modelo");
       })
     }
   }
 
   cancelar() {
-    this.marca = new Marca;
-    this.marca.estado = true;
+    this.modelo = new Modelo;
+    this.modelo.estado = true;
     this.nuevo = true;
     this.formRegister.markAsUntouched();
   }
 
-  resetMarca() {
-    this.getMarcas();
+  resetModelo() {
+    this.getModelos();
     this.cancelar();
   }
 

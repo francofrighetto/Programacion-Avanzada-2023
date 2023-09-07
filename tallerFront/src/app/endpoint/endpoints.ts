@@ -1,6 +1,7 @@
 export enum endpoints {
   // modulo
   marca = 'marca/',
+  modelo = 'modelo/',
 
 
 
