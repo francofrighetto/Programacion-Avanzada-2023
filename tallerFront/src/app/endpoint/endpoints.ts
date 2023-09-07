@@ -1,9 +1,12 @@
 export enum endpoints {
+  // modulo
   marca = 'marca/',
 
 
 
-
+ // metodos
   mostrar = 'mostrar',
-  nuevo = 'guardar'
+  nuevo = 'guardar',
+  editar = 'editar',
+  eliminar='eliminar'
 }
