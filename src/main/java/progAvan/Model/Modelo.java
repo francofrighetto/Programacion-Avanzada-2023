@@ -14,7 +14,7 @@ public class Modelo {
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @SequenceGenerator(name = "tipo_objeto_id_seq", sequenceName = "tipo_objeto_id_seq", allocationSize = 1)
-    private Integer modelo_id;
+    private Integer id;
     private String nombre;
 
     @ManyToOne
@@ -22,28 +22,11 @@ public class Modelo {
     private Marca marca;
     private boolean estado;
 
-    public int getId() {
-        return modelo_id;
+    public boolean getEstado() {
+        return estado;
     }
 
-    public void setId(int id) {
-        this.modelo_id = id;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Marca getIdMarca() {
-        return marca;
-    }
-
-    public void setIdMarca(Marca idMarca) {
-        this.marca = idMarca;
-    }
-
 }

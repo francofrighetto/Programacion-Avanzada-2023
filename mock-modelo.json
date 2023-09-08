@@ -1,16 +1,23 @@
-[{
+[
+    {
         "nombre": "Juan",
         "marca": {
             "nombre": "Chevrolet"
         }
     },
-
-
     {
         "estado": false,
         "nombre": "nose",
         "marca": {
             "id": 1
         }
+    },
+    {
+        "estado": true,
+        "patente": "123 ASD",
+        "modelo": {
+            "id": 3
+        },
+        "año": 2010
     }
 ]

@@ -2,54 +2,32 @@ package progAvan.Model;
 
 import java.util.Date;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "auto")
-
+@Getter
+@Setter
 public class Auto {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipo_objeto_id_seq")
     @SequenceGenerator(name = "tipo_objeto_id_seq", sequenceName = "tipo_objeto_id_seq", allocationSize = 1)
     private Integer auto_id;
-    @OneToOne(targetEntity = Modelo.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    @ManyToOne
+    @JoinColumn(name = "modelo_id", referencedColumnName = "id")
     private Modelo modelo;
-    private String color;
+    private String patente;
     private String año;
+    private boolean estado;
 
-    public int getCodigo() {
-        return auto_id;
+    public boolean getEstado() {
+        return estado;
     }
 
-    public void setCodigo(Integer codigo) {
-        this.auto_id = codigo;
-    }
-
-    public Modelo getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(Modelo modelo) {
-        this.modelo = modelo;
-    }
-
-    public void setModelo(Object modelo) {
-        this.modelo = (Modelo) modelo;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getAño() {
-        return año;
-    }
-
-    public void setAño(String date) {
-        this.año = date;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
 }

@@ -3,6 +3,7 @@ package progAvan.Controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
+import progAvan.Model.Auto;
 import progAvan.Model.Modelo;
 import progAvan.Service.ModeloService;
 
@@ -32,16 +34,12 @@ public class ModeloController {
     @Autowired
     private ModeloService modeloService;
 
-    @Value("${path_general}")
-    String path;
-
     Map<String, String> response = new HashMap<>();
-
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/guardar")
     public ResponseEntity guardar(@RequestBody Modelo model) {
-          try {
+        try {
             modeloService.save(model);
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
@@ -59,20 +57,38 @@ public class ModeloController {
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/editar/{id}")
-    public String actualizar(@PathVariable int id, @RequestBody Modelo model) {
-        Modelo modelo = modeloService.findById(id).orElse(null);
-        modelo.setNombre("Fiat2");
-        modeloService.save(modelo);
-
-        return "success";
+    public ResponseEntity actualizar(@PathVariable int id, @RequestBody Modelo model) {
+        // Modelo modelo = modeloService.findById(id).orElse(null);
+        try {
+            modeloService.save(model);
+            this.response.put("message", "success");
+            return new ResponseEntity<>(this.response, HttpStatus.OK);
+        } catch (Exception e) {
+            this.response.put("message", "error interno");
+            return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/eliminar/{id}")
-    public String eliminar(@PathVariable int id) {
-        Modelo modelo = modeloService.findById(id).orElse(null);
-        modelo.setEstado(false);
-        modeloService.save(modelo);
-        return "success";
+    public ResponseEntity eliminar(@PathVariable int id) {
+        try {
+            Optional<Modelo> optionalModelo = modeloService.findById(id);
+
+            if (optionalModelo.isPresent()) {
+                Modelo modelo = optionalModelo.get();
+                modelo.setEstado(!modelo.getEstado());
+                modeloService.save(modelo);
+
+                this.response.put("message", "success");
+                return new ResponseEntity<>(this.response, HttpStatus.OK);
+            } else {
+                this.response.put("message", "error");
+                return new ResponseEntity<>(this.response, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            this.response.put("message", "error interno");
+            return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
