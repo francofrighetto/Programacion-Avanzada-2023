@@ -8,17 +8,24 @@
         <input type="checkbox" id="check" name="estado" [checked]="true" [(ngModel)]="modelo.estado">
         <label for="check" checked="true">Estado</label>
         <br>
+
+        <label for="combo">Marca:</label>
+        <select id="combo" name="combo" (change)="seleccionarMarca($event.target)">
+            <option [value]="m.id" *ngFor="let m of marcas" >{{m.nombre}}</option>
+        </select>
+        <br>
+
         <button type="button" class="btn btn-success ms-2" (click)="nuevaModelo()" *ngIf="nuevo">Crear</button>
         <button type="button" class="btn btn-success" (click)="actualizarModelo()" *ngIf="!nuevo">Modificar</button>
         <button type="button" class="btn btn-danger ms-4" (click)="cancelar()">Cancelar</button>
-
+        <br>
         <div class="alert alert-{{alerta.color}} px-3 mx-5" role="alert" *ngIf="alerta.activo">
             {{alerta.mensaje}}
         </div>
 
     </form>
     <div class="col-8">
-        <table class="table" *ngIf="modelos != undefined && modelos != []">
+        <table class="table" *ngIf="modelos != undefined && modelos.length != 0">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -54,7 +61,7 @@
                 </tr>
             </tbody>
         </table>
-        <div *ngIf="modelos == undefined || modelos == []">
+        <div *ngIf="modelos == undefined || modelos.length==0">
             No hay modelos
         </div>
     </div>

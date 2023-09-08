@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Marca } from 'src/app/modelos/Marca';
 import { Modelo } from 'src/app/modelos/Modelo';
+import { MarcaService } from 'src/app/servicios/marca/marca.service';
 import { ModeloService } from 'src/app/servicios/modelo/modelo.service';
 
 
@@ -15,6 +17,9 @@ export class ModeloComponent implements OnInit {
   modelo!: Modelo;
   nuevo: boolean = true;
 
+  marcas!: Marca[];
+  marca: Marca = new Marca;
+
   alerta = {
     color: "",
     mensaje: "",
@@ -27,19 +32,28 @@ export class ModeloComponent implements OnInit {
     )
   });
 
-  constructor(private modeloService: ModeloService) {
+  constructor(private modeloService: ModeloService, private marcaService: MarcaService) {
   }
   ngOnInit(): void {
     this.resetModelo();
+    this.getMarcas();
   }
 
   getModelos() {
-    this.modeloService.getModelos().subscribe(data => {
+    this.modeloService.getModelosHabilitados().subscribe(data => {
       this.modelos = data;
     })
   }
 
+  getMarcas() {
+    this.marcaService.getMarcas().subscribe(data => {
+      this.marcas = data;
+      console.log(this.modelos)
+    })
+  }
+
   nuevaModelo() {
+    console.log(this.modelo);
     if (this.formRegister.valid) {
       this.modeloService.nuevaModelo(this.modelo).subscribe((data: any) => {
         if (data.message == "success") {
@@ -94,6 +108,7 @@ export class ModeloComponent implements OnInit {
   cancelar() {
     this.modelo = new Modelo;
     this.modelo.estado = true;
+    this.modelo.marca = new Marca;
     this.nuevo = true;
     this.formRegister.markAsUntouched();
   }
@@ -110,6 +125,13 @@ export class ModeloComponent implements OnInit {
     setTimeout(() => {
       this.alerta.activo = false;
     }, 3000);
+  }
+
+
+  seleccionarMarca(marca_id: any) {
+    if (marca_id != undefined && marca_id.value != undefined) {
+      this.modelo.marca.id = marca_id.value;
+    }
   }
 
 }

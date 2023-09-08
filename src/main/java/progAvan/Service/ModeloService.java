@@ -35,4 +35,8 @@ public class ModeloService {
         return modeloRepository.findAll();
     }
 
+    public List<Modelo> findHabiliitados() {
+        return modeloRepository.findByEstadoIsTrue();
+    }
+
 }

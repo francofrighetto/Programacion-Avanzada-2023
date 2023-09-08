@@ -23,6 +23,8 @@ const routes: Routes = [
   { path: 'marca', component: MarcaComponent },
   { path: 'modelo', component: ModeloComponent },
   { path: '', component: HomeComponent },
+  { path: '**', component: HomeComponent },
+
 ];
 
 registerLocaleData(localeEs, 'es-AR');

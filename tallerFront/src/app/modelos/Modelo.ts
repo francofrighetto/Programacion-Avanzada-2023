@@ -3,7 +3,7 @@ import { Marca } from "./Marca";
 export class Modelo {
   modelo_id?: number;
   nombre?: string;
-  marca?: Marca;
+  marca?: any;
   estado?: boolean;
   id?: number;
 }

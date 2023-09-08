@@ -55,6 +55,12 @@ public class ModeloController {
         return modeloService.findAll();
     }
 
+        @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/mostrarHabilitados")
+    public List<Modelo> mostrarHabilitados() {
+        return modeloService.findHabiliitados();
+    }
+
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/editar/{id}")
     public ResponseEntity actualizar(@PathVariable int id, @RequestBody Modelo model) {

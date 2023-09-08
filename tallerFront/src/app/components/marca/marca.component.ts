@@ -74,7 +74,6 @@ export class MarcaComponent implements OnInit {
     this.nuevo = false;
     this.marca = marca;
   }
-
   eliminar(marca: Marca) {
     if (marca.id != undefined) {
       this.marcaService.eliminarMarca(marca.id).subscribe((data: any) => {

@@ -22,7 +22,6 @@ public class MarcaService {
     public void save(Marca model) {
         marcaRepository.save(model);
     }
-
     public Optional<Marca> findById(long id) {
         return marcaRepository.findById(id);
     }

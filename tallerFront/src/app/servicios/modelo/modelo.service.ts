@@ -17,6 +17,10 @@ export class ModeloService {
     return this.http.get<Modelo[]>(environment.apiUrl + endpoints.modelo + endpoints.mostrar);
   }
 
+  getModelosHabilitados(): Observable<Modelo[]>{
+    return this.http.get<Modelo[]>(environment.apiUrl + endpoints.modelo + endpoints.mostrarHabilitados);
+  }
+
   nuevaModelo(modelo:Modelo){
     return this.http.post(environment.apiUrl + endpoints.modelo + endpoints.nuevo, modelo);
   }
