@@ -18,6 +18,7 @@ public class Auto {
     @ManyToOne
     @JoinColumn(name = "modelo_id", referencedColumnName = "id")
     private Modelo modelo;
+    @Column(unique = true)
     private String patente;
     private String año;
     private boolean estado;

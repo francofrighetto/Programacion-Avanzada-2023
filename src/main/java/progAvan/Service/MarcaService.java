@@ -22,6 +22,7 @@ public class MarcaService {
     public void save(Marca model) {
         marcaRepository.save(model);
     }
+
     public Optional<Marca> findById(long id) {
         return marcaRepository.findById(id);
     }
@@ -29,5 +30,9 @@ public class MarcaService {
     public List<Marca> findAll() {
         return marcaRepository.findAll();
     }
+
+    // public boolean esUnico(Marca marca) {
+    // return marcaRepository.existsByNombre(marca);
+    // }
 
 }

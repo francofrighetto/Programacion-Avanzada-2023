@@ -18,6 +18,7 @@ public class Marca {
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
     @SequenceGenerator(name = "tipo_objeto_id_seq", sequenceName = "tipo_objeto_id_seq", allocationSize = 1)
     private Integer id;
+    @Column(unique = true)
     private String nombre;
     @Column(columnDefinition = "boolean default true")
     private boolean estado;

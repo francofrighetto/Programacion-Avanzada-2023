@@ -4,10 +4,8 @@ progAvan\Model\Modelo.class
 progAvan\Repository\AutoRepository.class
 progAvan\Model\Marca.class
 progAvan\Model\Auto.class
-progAvan\Hibernate\HibernateUtil.class
 progAvan\Controller\AutoController.class
 progAvan\Service\MarcaService.class
-progAvan\Hibernate\GestorHibernate.class
 progAvan\Repository\JpaRepository.class
 progAvan\Service\ModeloService.class
 progAvan\Controller\MarcaController.class

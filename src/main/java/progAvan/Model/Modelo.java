@@ -15,8 +15,8 @@ public class Modelo {
 
     @SequenceGenerator(name = "tipo_objeto_id_seq", sequenceName = "tipo_objeto_id_seq", allocationSize = 1)
     private Integer id;
+    @Column(unique = true)
     private String nombre;
-
     @ManyToOne
     @JoinColumn(name = "marca_id", referencedColumnName = "id")
     private Marca marca;
