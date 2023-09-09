@@ -22,7 +22,7 @@ public class Auto {
     @Column(unique = true)
     @jakarta.validation.constraints.Pattern(regexp = "[A-Z]{2}\\d{3}[A-Z]{2}", message = "El formato de la patente no es válido")
     private String patente;
-    private String año;
+    private String anio;
     private boolean estado;
 
     public boolean getEstado() {
