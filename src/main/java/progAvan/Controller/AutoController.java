@@ -81,8 +81,9 @@ public class AutoController {
 
             if (optionalAuto.isPresent()) {
                 Auto auto = optionalAuto.get();
-                auto.setEstado(!auto.getEstado());
-                autoService.save(auto);
+                // auto.setEstado(!auto.getEstado());
+                // autoService.save(auto);
+                autoService.deshabilitarAuto(auto.getAuto_id());
 
                 this.response.put("message", "success");
                 return new ResponseEntity<>(this.response, HttpStatus.OK);

@@ -78,8 +78,9 @@ public class MarcaController {
 
             if (optionalMarca.isPresent()) {
                 Marca marca = optionalMarca.get();
-                marca.setEstado(!marca.getEstado());
-                marcaService.save(marca);
+                // marca.setEstado(!marca.getEstado());
+                // marcaService.save(marca);
+                marcaService.deshabilitarMarcaYRelacionados(marca.getId());
 
                 this.response.put("message", "success");
                 return new ResponseEntity<>(this.response, HttpStatus.OK);

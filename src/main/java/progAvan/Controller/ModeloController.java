@@ -55,7 +55,7 @@ public class ModeloController {
         return modeloService.findAll();
     }
 
-        @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrarHabilitados")
     public List<Modelo> mostrarHabilitados() {
         return modeloService.findHabiliitados();
@@ -83,8 +83,9 @@ public class ModeloController {
 
             if (optionalModelo.isPresent()) {
                 Modelo modelo = optionalModelo.get();
-                modelo.setEstado(!modelo.getEstado());
-                modeloService.save(modelo);
+                // modelo.setEstado(!modelo.getEstado());
+                // modeloService.save(modelo);
+                modeloService.deshabilitarModeloYRelacionados(modelo.getId());
 
                 this.response.put("message", "success");
                 return new ResponseEntity<>(this.response, HttpStatus.OK);
