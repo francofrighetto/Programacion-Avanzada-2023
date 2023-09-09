@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Auto } from 'src/app/modelos/Auto';
+import { Marca } from 'src/app/modelos/Marca';
 import { Modelo } from 'src/app/modelos/Modelo';
 import { AutoService } from 'src/app/servicios/auto/auto.service';
+import { MarcaService } from 'src/app/servicios/marca/marca.service';
 import { ModeloService } from 'src/app/servicios/modelo/modelo.service';
 
 @Component({
@@ -18,6 +20,9 @@ export class AutoComponent implements OnInit {
 
   modelo:Modelo=new Modelo;
   modelos?:Modelo[];
+
+  marca:Marca=new Marca;
+  marcas?:Marca[];
 
   alerta = {
     color: "",
@@ -37,11 +42,12 @@ export class AutoComponent implements OnInit {
     )
   });
 
-  constructor(private autoService: AutoService, private modeloService:ModeloService) {
+  constructor(private autoService: AutoService, private modeloService:ModeloService,
+    private marcaService:MarcaService) {
   }
   ngOnInit(): void {
     this.resetAuto();
-    this.getModelos();
+    this.getMarcas();
   }
 
   getAutos() {
@@ -49,9 +55,14 @@ export class AutoComponent implements OnInit {
       this.autos = data;
     })
   }
-  getModelos() {
-    this.modeloService.getModelosHabilitados().subscribe(data => {
+  getModelosXMarca(id:number) {
+    this.modeloService.getModelosXMarca(id).subscribe(data => {
       this.modelos = data;
+    })
+  }
+  getMarcas() {
+    this.marcaService.getMarcas().subscribe(data => {
+      this.marcas = data;
     })
   }
 
@@ -117,6 +128,8 @@ export class AutoComponent implements OnInit {
     this.auto = new Auto;
     this.auto.estado = true;
     this.auto.modelo = new Modelo;
+    this.marca= new Marca;
+    this.modelos=undefined;
     this.nuevo = true;
     this.formRegister.markAsUntouched();
   }
@@ -135,4 +148,10 @@ export class AutoComponent implements OnInit {
     }, 3000);
   }
 
+  seleccionarMarca(){
+    console.log(this.marca.id);
+    if (this.marca.id!=undefined){
+      this.getModelosXMarca(this.marca.id);
+    }
+  }
 }

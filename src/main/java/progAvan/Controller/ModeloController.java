@@ -62,6 +62,13 @@ public class ModeloController {
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/mostrarXMarca/{id}")
+    public List<Modelo> mostrarXMarca(@PathVariable int id) {
+        System.out.println(id);
+        return modeloService.findModelosXMarca(id);
+    }
+
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/editar/{id}")
     public ResponseEntity actualizar(@PathVariable int id, @RequestBody Modelo model) {
         // Modelo modelo = modeloService.findById(id).orElse(null);

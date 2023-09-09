@@ -18,11 +18,15 @@ import { AutoComponent } from './components/auto/auto.component';
 import { MarcaComponent } from './components/marca/marca.component';
 import { ModeloComponent } from './components/modelo/modelo.component';
 import { MatSelectModule } from '@angular/material/select';
+import { ClienteComponent } from './components/cliente/cliente.component';
+import { TecnicoComponent } from './components/tecnico/tecnico.component';
 
 const routes: Routes = [
   { path: 'auto', component: AutoComponent },
   { path: 'marca', component: MarcaComponent },
   { path: 'modelo', component: ModeloComponent },
+  { path: 'cliente', component: ClienteComponent },
+  { path: 'tecnico', component: TecnicoComponent },
   { path: '', component: HomeComponent },
   { path: '**', component: HomeComponent },
 
@@ -38,6 +42,8 @@ registerLocaleData(localeEs, 'es-AR');
     AutoComponent,
     MarcaComponent,
     ModeloComponent,
+    ClienteComponent,
+    TecnicoComponent,
   ],
   imports: [
     BrowserModule,

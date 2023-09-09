@@ -21,6 +21,10 @@ export class ModeloService {
     return this.http.get<Modelo[]>(environment.apiUrl + endpoints.modelo + endpoints.mostrarHabilitados);
   }
 
+  getModelosXMarca(idMarca:number): Observable<Modelo[]>{
+    return this.http.get<Modelo[]>(environment.apiUrl + endpoints.modelo + endpoints.mostrarXMarca +"/"+idMarca);
+  }
+
   nuevaModelo(modelo:Modelo){
     return this.http.post(environment.apiUrl + endpoints.modelo + endpoints.nuevo, modelo);
   }

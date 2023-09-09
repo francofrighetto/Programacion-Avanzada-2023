@@ -4,9 +4,7 @@
     <form class="col-4 " [formGroup]="formRegister">
         <input type="text" id="inputNombre" class="form-control" name="inputNombre" placeholder="Nombre" [(ngModel)]="modelo.nombre" formControlName="inputNombre" [class.is-invalid]="formRegister.get('inputNombre')?.touched && formRegister.get('inputNombre')?.invalid"
             [class.is-valid]="formRegister.get('inputNombre')?.valid">
-        <br>
-        <input type="checkbox" id="check" name="estado" [checked]="true" [(ngModel)]="modelo.estado">
-        <label for="check" checked="true">Estado</label>
+
         <br>
         <mat-form-field>
             <mat-label>Marca</mat-label>

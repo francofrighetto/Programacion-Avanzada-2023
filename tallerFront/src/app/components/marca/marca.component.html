@@ -6,9 +6,6 @@
         <input type="text" id="inputNombre" class="form-control" name="inputNombre" placeholder="Nombre" [(ngModel)]="marca.nombre" formControlName="inputNombre" [class.is-invalid]="formRegister.get('inputNombre')?.touched && formRegister.get('inputNombre')?.invalid"
             [class.is-valid]="formRegister.get('inputNombre')?.valid">
         <br>
-        <input type="checkbox" id="check" name="estado" [checked]="true" [(ngModel)]="marca.estado">
-        <label for="check" checked="true">Estado</label>
-        <br>
         <button type="button" class="btn btn-success ms-2" (click)="nuevaMarca()" *ngIf="nuevo">Crear</button>
         <button type="button" class="btn btn-success" (click)="actualizarMarca()" *ngIf="!nuevo">Modificar</button>
         <button type="button" class="btn btn-danger ms-4" (click)="cancelar()">Cancelar</button>

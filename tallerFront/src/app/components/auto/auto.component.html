@@ -13,7 +13,16 @@
         <!-- <input type="checkbox" id="check" name="estado" [checked]="true" [(ngModel)]="auto.estado">
         <label for="check" checked="true">Estado</label>
         <br> -->
+
         <mat-form-field>
+            <mat-label>Marca</mat-label>
+            <mat-select [(value)]="marca.id" (selectionChange)="seleccionarMarca()">
+                <mat-option [value]="m.id" *ngFor="let m of marcas">{{m.nombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field *ngIf="modelos!=undefined">
             <mat-label>Modelo</mat-label>
             <mat-select [(value)]="auto.modelo.id">
                 <mat-option [value]="m.id" *ngFor="let m of modelos">{{m.nombre}}</mat-option>
