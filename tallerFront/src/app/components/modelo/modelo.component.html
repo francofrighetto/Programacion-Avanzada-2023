@@ -8,11 +8,13 @@
         <input type="checkbox" id="check" name="estado" [checked]="true" [(ngModel)]="modelo.estado">
         <label for="check" checked="true">Estado</label>
         <br>
+        <mat-form-field>
+            <mat-label>Marca</mat-label>
+            <mat-select [(value)]="modelo.marca.id">
+                <mat-option [value]="m.id" *ngFor="let m of marcas">{{m.nombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-        <label for="combo">Marca:</label>
-        <select id="combo" name="combo" (change)="seleccionarMarca($event.target)">
-            <option [value]="m.id" *ngFor="let m of marcas" >{{m.nombre}}</option>
-        </select>
         <br>
 
         <button type="button" class="btn btn-success ms-2" (click)="nuevaModelo()" *ngIf="nuevo">Crear</button>

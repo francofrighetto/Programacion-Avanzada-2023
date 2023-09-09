@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Marca } from 'src/app/modelos/Marca';
-import { MarcaService } from 'src/app/servicios/marca/marca.service';
+import { Auto } from 'src/app/modelos/Auto';
+import { Modelo } from 'src/app/modelos/Modelo';
+import { AutoService } from 'src/app/servicios/auto/auto.service';
+import { ModeloService } from 'src/app/servicios/modelo/modelo.service';
 
 @Component({
   selector: 'app-auto',
@@ -10,9 +12,12 @@ import { MarcaService } from 'src/app/servicios/marca/marca.service';
 })
 export class AutoComponent implements OnInit {
 
-  marcas?: Marca[];
-  marca!: Marca;
+  autos?: Auto[];
+  auto!: Auto;
   nuevo: boolean = true;
+
+  modelo:Modelo=new Modelo;
+  modelos?:Modelo[];
 
   alerta = {
     color: "",
@@ -20,84 +25,104 @@ export class AutoComponent implements OnInit {
     activo: false
   }
 
+  patentePatron:string = "[A-Z]{2}\\d{3}[A-Z]{2}";
+  anioPatron:string="\\d{4}";
+
   public formRegister = new FormGroup({
-    inputNombre: new FormControl(
-      "", Validators.compose([Validators.required])
+    inputPatente: new FormControl(
+      "", Validators.compose([Validators.required, Validators.pattern(this.patentePatron)])
+    ),
+    inputAño: new FormControl(
+      "", Validators.compose([Validators.required, Validators.pattern(this.anioPatron)])
     )
   });
 
-  constructor(private marcaService: MarcaService) {
+  constructor(private autoService: AutoService, private modeloService:ModeloService) {
   }
   ngOnInit(): void {
-    this.resetMarca();
+    this.resetAuto();
+    this.getModelos();
   }
 
-  getMarcas() {
-    this.marcaService.getMarcas().subscribe(data => {
-      this.marcas = data;
+  getAutos() {
+    this.autoService.getAutos().subscribe(data => {
+      this.autos = data;
+    })
+  }
+  getModelos() {
+    this.modeloService.getModelosHabilitados().subscribe(data => {
+      this.modelos = data;
     })
   }
 
-  nuevaMarca() {
+  nuevoAuto() {
+    console.log(this.auto);
     if (this.formRegister.valid) {
-      this.marcaService.nuevaMarca(this.marca).subscribe((data: any) => {
+      this.autoService.nuevoAuto(this.auto).subscribe((data: any) => {
         if (data.message == "success") {
-          this.resetMarca();
-          this.mostrarAlerta("success", "Marca creada con éxito");
+          this.resetAuto();
+          this.mostrarAlerta("success", "Auto creado con éxito");
         }
       }, error => {
         console.log(error);
-        this.mostrarAlerta("danger", "Error al crear marca");
+        this.mostrarAlerta("danger", "Error al crear auto");
       })
     } else {
       this.mostrarAlerta("danger", "Validaciones incorrectas");
     }
   }
 
-  actualizarMarca() {
+  actualizarAuto() {
     if (this.formRegister.valid) {
-      this.marcaService.actualizarMarca(this.marca).subscribe((data: any) => {
+      this.autoService.actualizarAuto(this.auto).subscribe((data: any) => {
         if (data.message == "success") {
-          this.resetMarca();
-          this.mostrarAlerta("success", "Marca editada con éxito");
+          this.resetAuto();
+          this.mostrarAlerta("success", "Auto editado con éxito");
         }
       }, error => {
         console.log(error);
-        this.mostrarAlerta("danger", "Error al editar marca");
+        this.mostrarAlerta("danger", "Error al editar auto");
       })
     } else {
       this.mostrarAlerta("danger", "Validaciones incorrectas");
     }
   }
 
-  editar(marca: Marca) {
+  editar(auto: Auto) {
     this.nuevo = false;
-    this.marca = marca;
+    this.auto = auto;
   }
 
-  eliminar(marca: Marca) {
-    if (marca.id != undefined) {
-      this.marcaService.eliminarMarca(marca.id).subscribe((data: any) => {
+  eliminar(auto: Auto) {
+    if (auto.auto_id != undefined) {
+      this.autoService.eliminarAuto(auto.auto_id).subscribe((data: any) => {
         if (data.message == "success") {
-          this.resetMarca();
+          this.resetAuto();
           this.mostrarAlerta("success", "Exito al cambiar el estado");
         }
       }, error => {
         console.log(error);
-        this.mostrarAlerta("danger", "Error al eliminar marca");
+        this.mostrarAlerta("danger", "Error al eliminar auto");
       })
     }
   }
 
+  seleccionarModelo(modelo_id: any) {
+    console.log(modelo_id);
+    if (modelo_id != undefined && modelo_id.value != undefined) {
+      this.auto.modelo.id = modelo_id.value;
+    }
+  }
   cancelar() {
-    this.marca = new Marca;
-    this.marca.estado = true;
+    this.auto = new Auto;
+    this.auto.estado = true;
+    this.auto.modelo = new Modelo;
     this.nuevo = true;
     this.formRegister.markAsUntouched();
   }
 
-  resetMarca() {
-    this.getMarcas();
+  resetAuto() {
+    this.getAutos();
     this.cancelar();
   }
 

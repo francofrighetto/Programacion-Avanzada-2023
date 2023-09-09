@@ -1,5 +1,9 @@
+import { Modelo } from "./Modelo";
+
 export class Auto {
-    id?:number;
-    nombre?:string;
+    auto_id?:number;
+    patente?:string;
     estado?:boolean;
+    anio?:number;
+    modelo?:any;
   }

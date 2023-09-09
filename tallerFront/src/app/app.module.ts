@@ -17,6 +17,7 @@ import localeEs from '@angular/common/locales/es-AR';
 import { AutoComponent } from './components/auto/auto.component';
 import { MarcaComponent } from './components/marca/marca.component';
 import { ModeloComponent } from './components/modelo/modelo.component';
+import { MatSelectModule } from '@angular/material/select';
 
 const routes: Routes = [
   { path: 'auto', component: AutoComponent },
@@ -49,6 +50,7 @@ registerLocaleData(localeEs, 'es-AR');
     BrowserAnimationsModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent],

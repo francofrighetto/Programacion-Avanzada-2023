@@ -2,7 +2,7 @@ export enum endpoints {
   // modulo
   marca = 'marca/',
   modelo = 'modelo/',
-  auto="auto",
+  auto="auto/",
 
 
  // metodos
