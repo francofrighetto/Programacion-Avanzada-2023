@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +42,7 @@ public class AutoController {
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/guardar")
-    public ResponseEntity guardar(@RequestBody Auto model) {
+    public ResponseEntity guardar(@Valid @RequestBody Auto model) {
         try {
             autoService.save(model);
             this.response.put("message", "success");
@@ -58,7 +61,7 @@ public class AutoController {
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/editar/{id}")
-    public ResponseEntity actualizar(@PathVariable int id, @RequestBody Auto model) {
+    public ResponseEntity actualizar(@PathVariable int id, @Valid @RequestBody Auto model) {
         // Auto auto = autoService.findById(id).orElse(null);
         try {
             autoService.save(model);
