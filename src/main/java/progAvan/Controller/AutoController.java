@@ -83,7 +83,7 @@ public class AutoController {
                 Auto auto = optionalAuto.get();
                 // auto.setEstado(!auto.getEstado());
                 // autoService.save(auto);
-                autoService.deshabilitarAuto(auto.getAuto_id());
+                autoService.deshabilitarAuto(auto.getId());
 
                 this.response.put("message", "success");
                 return new ResponseEntity<>(this.response, HttpStatus.OK);

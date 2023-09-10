@@ -14,7 +14,7 @@ public class Auto {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipo_objeto_id_seq")
     @SequenceGenerator(name = "tipo_objeto_id_seq", sequenceName = "tipo_objeto_id_seq", allocationSize = 1)
-    private Integer auto_id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "modelo_id", referencedColumnName = "id")
