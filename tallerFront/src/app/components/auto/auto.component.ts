@@ -107,8 +107,8 @@ export class AutoComponent implements OnInit {
   }
 
   eliminar(auto: Auto) {
-    if (auto.auto_id != undefined) {
-      this.autoService.eliminarAuto(auto.auto_id).subscribe((data: any) => {
+    if (auto.id != undefined) {
+      this.autoService.eliminarAuto(auto.id).subscribe((data: any) => {
         if (data.message == "success") {
           this.resetAuto();
           this.mostrarAlerta("success", "Exito al cambiar el estado");

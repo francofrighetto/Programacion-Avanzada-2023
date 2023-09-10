@@ -21,7 +21,7 @@ export class AutoService {
   }
 
   actualizarAuto(auto:Auto){
-    return this.http.post(environment.apiUrl + endpoints.auto + endpoints.editar + "/" + auto.auto_id, auto);
+    return this.http.post(environment.apiUrl + endpoints.auto + endpoints.editar + "/" + auto.id, auto);
   }
   eliminarAuto(id:number){
     return this.http.post(environment.apiUrl + endpoints.auto + endpoints.eliminar + "/" + id,{});

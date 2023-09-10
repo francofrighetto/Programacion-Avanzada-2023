@@ -36,7 +36,7 @@
 
     </form>
     <div class="col-8">
-        <table class="table" *ngIf="autos != undefined && autos != []">
+        <table class="table" *ngIf="autos != undefined && autos.length>0">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -49,7 +49,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let a of autos">
-                    <td>{{a.auto_id}}</td>
+                    <td>{{a.id}}</td>
                     <td>{{a.patente}}</td>
                     <td>{{a.anio}}</td>
                     <td>{{a.modelo?.nombre || 'Sin modelo'}}</td>
@@ -74,8 +74,8 @@
                 </tr>
             </tbody>
         </table>
-        <div *ngIf="autos == undefined || autos == []">
-            No hay marcas
+        <div *ngIf="autos == undefined || autos.length== 0">
+            No hay autos
         </div>
     </div>
 </div>

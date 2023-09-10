@@ -5,6 +5,8 @@
         <input type="text" id="inputNombre" class="form-control" name="inputNombre" placeholder="Nombre" [(ngModel)]="cliente.nombre" formControlName="inputNombre" [class.is-invalid]="formRegister.get('inputNombre')?.touched && formRegister.get('inputNombre')?.invalid"
             [class.is-valid]="formRegister.get('inputNombre')?.valid">
         <br>
+        <input type="number" id="inputDni" class="form-control" name="inputDni" placeholder="DNI" [(ngModel)]="cliente.dni" formControlName="inputDni" [class.is-invalid]="formRegister.get('inputDni')?.touched && formRegister.get('inputDni')?.invalid" [class.is-valid]="formRegister.get('inputDni')?.valid">
+        <br>
         <button type="button" class="btn btn-success ms-2" (click)="nuevoCliente()" *ngIf="nuevo">Crear</button>
         <button type="button" class="btn btn-success" (click)="actualizarCliente()" *ngIf="!nuevo">Modificar</button>
         <button type="button" class="btn btn-danger ms-4" (click)="cancelar()">Cancelar</button>
@@ -14,12 +16,12 @@
         </div>
     </form>
     <div class="col-8">
-        <table class="table" *ngIf="clientes != undefined && clientes != []">
+        <table class="table" *ngIf="clientes != undefined && clientes.length!=0">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Estado</th>
+                    <th scope="col">DNI</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -27,7 +29,7 @@
                 <tr *ngFor="let m of clientes">
                     <td>{{m.id}}</td>
                     <td>{{m.nombre}}</td>
-                    <td>{{m.estado}}</td>
+                    <td>{{m.dni}}</td>
                     <td>
                         <button type="button" class="btn btn-primary" (click)="editar(m)">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -48,7 +50,7 @@
                 </tr>
             </tbody>
         </table>
-        <div *ngIf="clientes == undefined || clientes == []">
+        <div *ngIf="clientes == undefined || clientes.length==0">
             No hay marcas
         </div>
     </div>

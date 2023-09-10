@@ -20,9 +20,15 @@ export class ClienteComponent implements OnInit {
     activo: false
   }
 
+  dniPatron:string="\\d{8}";
+
+
   public formRegister = new FormGroup({
     inputNombre: new FormControl(
       "", Validators.compose([Validators.required])
+    ),
+    inputDni: new FormControl(
+      "", Validators.compose([Validators.required, Validators.pattern(this.dniPatron)])
     )
   });
 
