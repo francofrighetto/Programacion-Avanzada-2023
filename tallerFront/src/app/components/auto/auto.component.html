@@ -10,9 +10,6 @@
         <input type="number" id="inputAño" class="form-control" name="inputAño" placeholder="2023" [(ngModel)]="auto.anio" formControlName="inputAño" [class.is-invalid]="formRegister.get('inputAño')?.touched && formRegister.get('inputAño')?.invalid" [class.is-valid]="formRegister.get('inputAño')?.valid">
         <br>
 
-        <!-- <input type="checkbox" id="check" name="estado" [checked]="true" [(ngModel)]="auto.estado">
-        <label for="check" checked="true">Estado</label>
-        <br> -->
 
         <mat-form-field>
             <mat-label>Marca</mat-label>

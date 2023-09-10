@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Cliente } from 'src/app/modelos/Cliente';
+import { ClienteService } from 'src/app/servicios/cliente/cliente.service';
 
 @Component({
   selector: 'app-cliente',
@@ -7,9 +10,103 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClienteComponent implements OnInit {
 
-  constructor() { }
+  clientes?: Cliente[];
+  cliente!: Cliente;
+  nuevo: boolean = true;
 
+  alerta = {
+    color: "",
+    mensaje: "",
+    activo: false
+  }
+
+  public formRegister = new FormGroup({
+    inputNombre: new FormControl(
+      "", Validators.compose([Validators.required])
+    )
+  });
+
+  constructor(private clienteService: ClienteService) {
+  }
   ngOnInit(): void {
+    this.resetCliente();
+  }
+
+  getClientes() {
+    this.clienteService.getClientes().subscribe(data => {
+      this.clientes = data;
+    })
+  }
+
+  nuevoCliente() {
+    if (this.formRegister.valid) {
+      this.clienteService.nuevoCliente(this.cliente).subscribe((data: any) => {
+        if (data.message == "success") {
+          this.resetCliente();
+          this.mostrarAlerta("success", "Cliente creado con éxito");
+        }
+      }, error => {
+        console.log(error);
+        this.mostrarAlerta("danger", "Error al crear cliente");
+      })
+    } else {
+      this.mostrarAlerta("danger", "Validaciones incorrectas");
+    }
+  }
+
+  actualizarCliente() {
+    if (this.formRegister.valid) {
+      this.clienteService.actualizarCliente(this.cliente).subscribe((data: any) => {
+        if (data.message == "success") {
+          this.resetCliente();
+          this.mostrarAlerta("success", "Cliente editado con éxito");
+        }
+      }, error => {
+        console.log(error);
+        this.mostrarAlerta("danger", "Error al editar cliente");
+      })
+    } else {
+      this.mostrarAlerta("danger", "Validaciones incorrectas");
+    }
+  }
+
+  editar(cliente: Cliente) {
+    this.nuevo = false;
+    this.cliente = cliente;
+  }
+  eliminar(cliente: Cliente) {
+    if (cliente.id != undefined) {
+      this.clienteService.eliminarCliente(cliente.id).subscribe((data: any) => {
+        if (data.message == "success") {
+          this.resetCliente();
+          this.mostrarAlerta("success", "Exito al cambiar el estado");
+        }
+      }, error => {
+        console.log(error);
+        this.mostrarAlerta("danger", "Error al eliminar cliente");
+      })
+    }
+  }
+
+  cancelar() {
+    this.cliente = new Cliente;
+    this.cliente.estado = true;
+    this.nuevo = true;
+    this.formRegister.markAsUntouched();
+  }
+
+  resetCliente() {
+    this.getClientes();
+    this.cancelar();
+  }
+
+  mostrarAlerta(color: string, mensaje: string) {
+    this.alerta.color = color;
+    this.alerta.mensaje = mensaje;
+    this.alerta.activo = true;
+    setTimeout(() => {
+      this.alerta.activo = false;
+    }, 3000);
   }
 
 }

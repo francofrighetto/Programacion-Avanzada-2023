@@ -102,6 +102,8 @@ export class AutoComponent implements OnInit {
   editar(auto: Auto) {
     this.nuevo = false;
     this.auto = auto;
+    this.marca.id = auto.modelo.marca.id;
+    this.seleccionarMarca();
   }
 
   eliminar(auto: Auto) {
@@ -118,12 +120,7 @@ export class AutoComponent implements OnInit {
     }
   }
 
-  seleccionarModelo(modelo_id: any) {
-    console.log(modelo_id);
-    if (modelo_id != undefined && modelo_id.value != undefined) {
-      this.auto.modelo.id = modelo_id.value;
-    }
-  }
+
   cancelar() {
     this.auto = new Auto;
     this.auto.estado = true;
@@ -149,7 +146,6 @@ export class AutoComponent implements OnInit {
   }
 
   seleccionarMarca(){
-    console.log(this.marca.id);
     if (this.marca.id!=undefined){
       this.getModelosXMarca(this.marca.id);
     }
