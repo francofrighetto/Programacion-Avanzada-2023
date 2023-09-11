@@ -33,6 +33,10 @@ public class AutoService {
         return autoRepository.findAll();
     }
 
+    public List<Auto> findHabiliitados() {
+        return autoRepository.findByEstadoIsTrue();
+    }
+
     @Transactional
     public void deshabilitarAuto(Integer autoId) {
         autoRepository.deshabilitarAuto(autoId);

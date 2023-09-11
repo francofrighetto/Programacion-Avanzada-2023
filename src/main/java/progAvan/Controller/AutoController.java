@@ -60,6 +60,12 @@ public class AutoController {
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/mostrarHabilitados")
+    public List<Auto> mostrarHabilitados() {
+        return autoService.findHabiliitados();
+    }
+
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/editar/{id}")
     public ResponseEntity actualizar(@PathVariable int id, @Valid @RequestBody Auto model) {
         // Auto auto = autoService.findById(id).orElse(null);
