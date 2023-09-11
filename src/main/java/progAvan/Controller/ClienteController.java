@@ -24,6 +24,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import progAvan.Model.Cliente;
+import progAvan.Model.Modelo;
 import progAvan.Service.ClienteService;
 
 @RestController
@@ -68,6 +69,12 @@ public class ClienteController {
             this.response.put("message", "error interno");
             return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/mostrarHabilitados")
+    public List<Cliente> mostrarHabilitados() {
+        return clienteService.findHabiliitados();
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)

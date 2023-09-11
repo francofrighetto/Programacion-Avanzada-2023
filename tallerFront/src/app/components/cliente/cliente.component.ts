@@ -39,7 +39,7 @@ export class ClienteComponent implements OnInit {
   }
 
   getClientes() {
-    this.clienteService.getClientes().subscribe(data => {
+    this.clienteService.getClientesHabilitados().subscribe(data => {
       this.clientes = data;
     })
   }

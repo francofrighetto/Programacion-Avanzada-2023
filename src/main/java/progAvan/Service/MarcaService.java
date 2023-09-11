@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import progAvan.Model.Marca;
+import progAvan.Model.Modelo;
 import progAvan.Repository.AutoRepository;
 import progAvan.Repository.MarcaRepository;
 import progAvan.Repository.ModeloRepository;
@@ -38,6 +39,10 @@ public class MarcaService {
 
     public List<Marca> findAll() {
         return marcaRepository.findAll();
+    }
+
+    public List<Marca> findHabiliitados() {
+        return marcaRepository.findByEstadoIsTrue();
     }
 
     @Transactional

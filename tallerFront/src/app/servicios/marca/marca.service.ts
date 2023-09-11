@@ -24,7 +24,14 @@ export class MarcaService {
   actualizarMarca(marca:Marca){
     return this.http.post(environment.apiUrl + endpoints.marca + endpoints.editar + "/" + marca.id, marca);
   }
+
   eliminarMarca(id:number){
     return this.http.post(environment.apiUrl + endpoints.marca + endpoints.eliminar + "/" + id,{});
   }
+
+  
+  getMarcasHabilitados(): Observable<Marca[]>{
+    return this.http.get<Marca[]>(environment.apiUrl + endpoints.marca + endpoints.mostrarHabilitados);
+  }
+
 }

@@ -23,6 +23,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
+import progAvan.Model.Modelo;
 import progAvan.Model.Tecnico;
 import progAvan.Service.TecnicoService;
 
@@ -54,6 +55,12 @@ public class TecnicoController {
     @GetMapping(value = "/mostrar")
     public List<Tecnico> mostrar() {
         return tecnicoService.findAll();
+    }
+
+     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/mostrarHabilitados")
+    public List<Tecnico> mostrarHabilitados() {
+        return tecnicoService.findHabiliitados();
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)

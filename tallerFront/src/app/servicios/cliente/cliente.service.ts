@@ -18,6 +18,10 @@ export class ClienteService {
   nuevoCliente(cliente:Cliente){
     return this.http.post(environment.apiUrl + endpoints.cliente + endpoints.nuevo, cliente);
   }
+  
+  getClientesHabilitados(): Observable<Cliente[]>{
+    return this.http.get<Cliente[]>(environment.apiUrl + endpoints.cliente + endpoints.mostrarHabilitados);
+  }
 
   actualizarCliente(cliente:Cliente){
     return this.http.post(environment.apiUrl + endpoints.cliente + endpoints.editar + "/" + cliente.id, cliente);

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import progAvan.Model.Modelo;
 import progAvan.Model.Tecnico;
 import progAvan.Repository.TecnicoRepository;
 
@@ -21,6 +22,10 @@ public class TecnicoService {
 
     public void save(Tecnico model) {
         tecnicoRepository.save(model);
+    }
+
+     public List<Tecnico> findHabiliitados() {
+        return tecnicoRepository.findByEstadoIsTrue();
     }
 
     public Optional<Tecnico> findById(long id) {
