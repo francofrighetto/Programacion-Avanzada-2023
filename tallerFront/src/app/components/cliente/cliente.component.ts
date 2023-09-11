@@ -20,7 +20,7 @@ export class ClienteComponent implements OnInit {
     activo: false
   }
 
-  dniPatron:string="\\d{8}";
+  dniPatron: string = "\\d{8}";
 
 
   public formRegister = new FormGroup({

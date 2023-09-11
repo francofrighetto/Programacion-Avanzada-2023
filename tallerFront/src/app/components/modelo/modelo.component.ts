@@ -46,7 +46,7 @@ export class ModeloComponent implements OnInit {
   }
 
   getMarcas() {
-    this.marcaService.getMarcas().subscribe(data => {
+    this.marcaService.getMarcasHabilitados().subscribe(data => {
       this.marcas = data;
       console.log(this.modelos)
     })
