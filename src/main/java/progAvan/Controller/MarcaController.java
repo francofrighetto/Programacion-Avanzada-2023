@@ -24,6 +24,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import progAvan.Model.Marca;
+import progAvan.Model.Modelo;
 import progAvan.Service.MarcaService;
 
 @RestController
@@ -54,6 +55,12 @@ public class MarcaController {
     @GetMapping(value = "/mostrar")
     public List<Marca> mostrar() {
         return marcaService.findAll();
+    }
+
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/mostrarHabilitados")
+    public List<Marca> mostrarHabilitados() {
+        return marcaService.findHabiliitados();
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
@@ -93,4 +100,5 @@ public class MarcaController {
             return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
 }

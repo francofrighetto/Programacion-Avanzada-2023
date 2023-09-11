@@ -33,7 +33,8 @@ export class MarcaComponent implements OnInit {
   }
 
   getMarcas() {
-    this.marcaService.getMarcas().subscribe(data => {
+    this.marcaService.getMarcasHabilitados().subscribe(data => {
+      console.log(data)
       this.marcas = data;
     })
   }

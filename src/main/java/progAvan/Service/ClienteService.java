@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import progAvan.Model.Cliente;
+import progAvan.Model.Modelo;
 import progAvan.Repository.ClienteRepository;
 
 @Service
@@ -25,6 +26,10 @@ public class ClienteService {
 
     public Optional<Cliente> findById(long id) {
         return clienteRepository.findById(id);
+    }
+
+      public List<Cliente> findHabiliitados() {
+        return clienteRepository.findByEstadoIsTrue();
     }
 
     public List<Cliente> findAll() {
