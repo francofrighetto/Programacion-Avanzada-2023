@@ -51,7 +51,7 @@ export class AutoComponent implements OnInit {
   }
 
   getAutos() {
-    this.autoService.getAutos().subscribe(data => {
+    this.autoService.getAutosHabilitados().subscribe(data => {
       this.autos = data;
     })
   }
@@ -61,7 +61,7 @@ export class AutoComponent implements OnInit {
     })
   }
   getMarcas() {
-    this.marcaService.getMarcas().subscribe(data => {
+    this.marcaService.getMarcasHabilitados().subscribe(data => {
       this.marcas = data;
     })
   }

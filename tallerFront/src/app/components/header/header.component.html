@@ -1,35 +1,34 @@
-
 <div id="header">
     <div class="logo">
-      <img src="assets/7942012.png" class="logo" />
-    </div>  
+        <img src="assets/7942012.png" class="logo" [routerLink]="['home']" />
+    </div>
     <nav>
-      <form class="search" action="search.php"> 
-        <input name="q" placeholder="Search..." type="search">
-      </form>
-      <ul>
-        <li>
-            <a routerLink="/auto">Auto</a>
-        </li>
+        <form class="search" action="search.php">
+            <input name="q" placeholder="Search..." type="search">
+        </form>
+        <ul>
+            <li>
+                <a routerLink="/auto">Auto</a>
+            </li>
 
-        <li>
-            <a routerLink="/marca">Marca</a>
-        </li>
+            <li>
+                <a routerLink="/marca">Marca</a>
+            </li>
 
-        <li>
-            <a routerLink="/modelo">Modelo</a>
-        </li>
+            <li>
+                <a routerLink="/modelo">Modelo</a>
+            </li>
 
-        <li>
-            <a routerLink="/cliente">Cliente</a>
-        </li>
+            <li>
+                <a routerLink="/cliente">Cliente</a>
+            </li>
 
-        <li>
-            <a routerLink="/tecnico">Tecnico</a>
-        </li>
-       
-      
-        
-      </ul>
+            <li>
+                <a routerLink="/tecnico">Tecnico</a>
+            </li>
+
+
+
+        </ul>
     </nav>
-  </div>
+</div>

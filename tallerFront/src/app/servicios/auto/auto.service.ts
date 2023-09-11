@@ -15,7 +15,9 @@ export class AutoService {
   getAutos(): Observable<Auto[]>{
     return this.http.get<Auto[]>(environment.apiUrl + endpoints.auto + endpoints.mostrar);
   }
-
+  getAutosHabilitados(): Observable<Auto[]>{
+    return this.http.get<Auto[]>(environment.apiUrl + endpoints.auto + endpoints.mostrarHabilitados);
+  }
   nuevoAuto(auto:Auto){
     return this.http.post(environment.apiUrl + endpoints.auto + endpoints.nuevo, auto);
   }
