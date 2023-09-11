@@ -23,6 +23,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
+import progAvan.Model.Cliente;
 import progAvan.Model.Modelo;
 import progAvan.Model.Tecnico;
 import progAvan.Service.TecnicoService;
@@ -50,6 +51,7 @@ public class TecnicoController {
             return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrar")

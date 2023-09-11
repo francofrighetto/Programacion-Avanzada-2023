@@ -17,6 +17,7 @@ export class TecnicoComponent implements OnInit {
   tecnicos?: Tecnico[];
   tecnico!: Tecnico;
   nuevo: boolean = true;
+  dniPatron:string="\\d{8}";
 
 
 
@@ -29,6 +30,9 @@ export class TecnicoComponent implements OnInit {
   public formRegister = new FormGroup({
     inputNombre: new FormControl(
       "", Validators.compose([Validators.required])
+    ),
+    inputDni: new FormControl(
+      "", Validators.compose([Validators.required, Validators.pattern(this.dniPatron)])
     )
   });
 
@@ -37,6 +41,7 @@ export class TecnicoComponent implements OnInit {
 
   getTecnicos() {
     this.TecnicoService.getTecnicosHabilitados().subscribe(data => {
+      console.log(data)
       this.tecnicos = data;
     })
   }
@@ -116,7 +121,7 @@ export class TecnicoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getTecnicos();
+    this.resetTecnico();
   }
 
  /*  getMarcas() {

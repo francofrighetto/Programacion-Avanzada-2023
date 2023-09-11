@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import progAvan.Model.Cliente;
 import progAvan.Model.Modelo;
 import progAvan.Model.Tecnico;
 import progAvan.Repository.TecnicoRepository;
