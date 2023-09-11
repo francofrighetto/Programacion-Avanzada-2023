@@ -74,7 +74,7 @@ public class ClienteController {
      @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrarHabilitados")
     public List<Cliente> mostrarHabilitados() {
-        return clienteService.findHabiliitados();
+        return clienteService.findHabilitados();
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)

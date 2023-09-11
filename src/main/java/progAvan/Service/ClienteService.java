@@ -28,7 +28,7 @@ public class ClienteService {
         return clienteRepository.findById(id);
     }
 
-      public List<Cliente> findHabiliitados() {
+      public List<Cliente> findHabilitados() {
         return clienteRepository.findByEstadoIsTrue();
     }
 
