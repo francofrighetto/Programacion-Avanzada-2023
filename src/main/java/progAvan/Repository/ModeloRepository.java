@@ -18,7 +18,7 @@ public interface ModeloRepository extends JpaRepository<Modelo, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "SELECT * FROM Modelo WHERE marca_id = :marcaId", nativeQuery = true)
+    @Query(value = "SELECT * FROM Modelo WHERE marca_id = :marcaId and estado", nativeQuery = true)
     List<Modelo> findByMarca(int marcaId);
 
     @Transactional
