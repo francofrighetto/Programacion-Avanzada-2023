@@ -1,6 +1,14 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #333;
+    display: flex;
+            justify-content: center;
+            align-items: center;
+          
+            margin: 0; 
+    background-image: url('/assets/tallerimg2.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    height:900px;
     /* Set the page background to white */
     margin: 0;
     padding: 0;
@@ -8,29 +16,38 @@ body {
     height: 100vh;
 }
 
+.logo{
+    background-image: url('/assets/7942012.png');
+    width: 300px;
+}
+
 .homepage {
-    text-align: left;
-    background-color: #333;
-    /* Set the navigation background to dark gray */
+    width: 200px;
+    text-align: center !important;
+   /*  text-align: center;
+    background-color: none;
     padding: 20px;
     width: 200px;
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-start; */
 }
 
 .homepage a {
-    display: block;
+    text-align: center !important;
+    display: flex;
     margin-bottom: 10px;
-    padding: 15px 30px;
+    padding: 15px;
     text-decoration: none;
     background-color: #FFA500;
     color: #333;
     border-radius: 5px;
     font-size: 18px;
+    font-weight: bold;
     transition: background-color 0.3s ease;
 }
+
 
 .homepage a:hover {
     background-color: #555;

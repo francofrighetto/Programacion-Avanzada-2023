@@ -20,6 +20,7 @@ import { ModeloComponent } from './components/modelo/modelo.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ClienteComponent } from './components/cliente/cliente.component';
 import { TecnicoComponent } from './components/tecnico/tecnico.component';
+import { HeaderComponent } from './components/header/header.component';
 
 const routes: Routes = [
   { path: 'auto', component: AutoComponent },
@@ -44,6 +45,7 @@ registerLocaleData(localeEs, 'es-AR');
     ModeloComponent,
     ClienteComponent,
     TecnicoComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
