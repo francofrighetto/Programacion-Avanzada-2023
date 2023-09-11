@@ -3,9 +3,7 @@
 
 <div class="row d-flex">
     <form class="col-4 " [formGroup]="formRegister">
-        <input type="text" id="inputNombre" class="form-control" name="inputNombre" placeholder="Nombre"
-            [(ngModel)]="modelo.nombre" formControlName="inputNombre"
-            [class.is-invalid]="formRegister.get('inputNombre')?.touched && formRegister.get('inputNombre')?.invalid"
+        <input type="text" id="inputNombre" class="form-control" name="inputNombre" placeholder="Nombre" [(ngModel)]="modelo.nombre" formControlName="inputNombre" [class.is-invalid]="formRegister.get('inputNombre')?.touched && formRegister.get('inputNombre')?.invalid"
             [class.is-valid]="formRegister.get('inputNombre')?.valid">
 
         <br>
@@ -34,7 +32,6 @@
                     <th scope="col">ID</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Marca</th>
-                    <th scope="col">Estado</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -43,7 +40,6 @@
                     <td>{{m.id}}</td>
                     <td>{{m.nombre}}</td>
                     <td>{{m.marca?.nombre || 'Sin marca'}}</td>
-                    <!-- <td>{{m.estado}}</td> -->
                     <td>
                         <button type="button" class="btn btn-primary" (click)="editar(m)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
