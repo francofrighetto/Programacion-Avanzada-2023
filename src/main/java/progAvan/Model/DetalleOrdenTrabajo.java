@@ -1,26 +1,28 @@
 package progAvan.Model;
 
 import java.util.Date;
+import java.util.List;
+
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table(name = "auto")
 @Getter
 @Setter
-public class Auto {
+@Entity
+@Table(name = "ordenTrabajo")
+public class DetalleOrdenTrabajo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne
-    @JoinColumn(name = "modelo_id", referencedColumnName = "id")
-    private Modelo modelo;
     @Column(unique = true)
-    @jakarta.validation.constraints.Pattern(regexp = "[A-Z]{2}\\d{3}[A-Z]{2}", message = "El formato de la patente no es válido")
-    private String patente;
-    private String anio;
+    private String descripcion;
+    private Date fecha;
+    public Integer total;
+    @OneToOne
+    @JoinColumn(name = "servicio_id", referencedColumnName = "id")
+    private Servicio servicio;
+    private double precio;
     private boolean estado;
 
     public boolean getEstado() {
@@ -30,5 +32,4 @@ public class Auto {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-
 }

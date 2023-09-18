@@ -14,9 +14,7 @@ import lombok.Setter;
 public class Marca {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipo_objeto_id_seq")
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name = "tipo_objeto_id_seq", sequenceName = "tipo_objeto_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(unique = true)
     private String nombre;
