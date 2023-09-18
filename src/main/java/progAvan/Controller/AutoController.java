@@ -1,5 +1,7 @@
 package progAvan.Controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +36,8 @@ import progAvan.Service.AutoService;
 
 @RestController
 @RequestMapping(path = "/auto")
+@Api(tags = "AutoController", description = "ABM completo de auto")
+
 public class AutoController {
 
     @Autowired
@@ -42,6 +46,7 @@ public class AutoController {
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/guardar")
+    @ApiOperation(value = "Traer auto")
     public ResponseEntity guardar(@Valid @RequestBody Auto model) {
         try {
             autoService.save(model);
