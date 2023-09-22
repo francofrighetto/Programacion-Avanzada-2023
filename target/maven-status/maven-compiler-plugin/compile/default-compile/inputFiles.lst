@@ -1,29 +1,34 @@
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\JpaRepository.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\TecnicoRepository.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Pais.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Service\ServicioService.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\ServicioRepository.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\ClienteController.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Auto.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\MarcaRepository.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Servicio.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\ServicioController.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\SwaggerConfig.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Service\TecnicoService.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Service\AutoService.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\TecnicoController.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Service\ModeloService.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Marca.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Modelo.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\ModeloController.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\AutoController.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\AutosApplication.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Cliente.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Service\MarcaService.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\MarcaController.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Service\ClienteService.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\ModeloRepository.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Tecnico.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\ClienteRepository.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\TallerApplicationTests.java
-D:\Franco\Universidad\Cuarto Año\Programación Avanzada\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\AutoRepository.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\SwaggerConfig.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Service\ModeloService.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Model\OrdenTrabajo.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\AutosApplication.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\TecnicoRepository.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\AutoRepository.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\ServicioRepository.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\ServicioController.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\ModeloController.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Service\TecnicoService.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Servicio.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Service\MarcaService.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Model\DetalleOrdenTrabajo.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\AutoController.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\MarcaRepository.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\ClienteRepository.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Auto.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Service\OrdenTrabajoService.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Cliente.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\MarcaController.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\JpaRepository.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Marca.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\OrdenTrabajoController.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Tecnico.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Service\AutoService.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\TecnicoController.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Pais.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Service\ServicioService.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\TallerApplicationTests.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Model\Modelo.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Controller\ClienteController.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\OrdenTrabajoRepository.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Service\ClienteService.java
+D:\Programacion\Programacion-Avanzada-2023\src\main\java\progAvan\Repository\ModeloRepository.java
