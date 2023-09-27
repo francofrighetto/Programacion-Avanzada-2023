@@ -12,7 +12,14 @@ import { ModeloService } from 'src/app/servicios/modelo/modelo.service';
   templateUrl: './auto.component.html',
   styleUrls: ['./auto.component.css']
 })
+
+
 export class AutoComponent implements OnInit {
+
+
+  // Variable para abrir y cerrar el MODAL.
+  modal: boolean = false;
+
 
   autos?: Auto[];
   auto!: Auto;
@@ -50,9 +57,19 @@ export class AutoComponent implements OnInit {
     this.getMarcas();
   }
 
+  //Abrir modal para ver cliente y servicios del auto.
+  openModal(){
+    this.modal = true;
+  }
+
+  closeModal(){
+    this.modal = false;
+  }
+
   getAutos() {
     this.autoService.getAutosHabilitados().subscribe(data => {
       this.autos = data;
+      console.log(data)
     })
   }
   getModelosXMarca(id:number) {

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es-AR';
@@ -40,10 +41,13 @@ registerLocaleData(localeEs, 'es-AR');
     HttpClientModule,
     RouterModule.forRoot(routes),
     FormsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [RouterModule]
+  exports: [
+    RouterModule,
+  ]
 })
 export class AppModule { }
 
