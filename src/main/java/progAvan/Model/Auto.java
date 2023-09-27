@@ -17,6 +17,9 @@ public class Auto {
     @ManyToOne
     @JoinColumn(name = "modelo_id", referencedColumnName = "id")
     private Modelo modelo;
+    @OneToOne
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    private Cliente cliente;
     @Column(unique = true)
     @jakarta.validation.constraints.Pattern(regexp = "[A-Z]{2}\\d{3}[A-Z]{2}", message = "El formato de la patente no es válido")
     private String patente;

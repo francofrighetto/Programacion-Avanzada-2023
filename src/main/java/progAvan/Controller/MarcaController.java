@@ -100,5 +100,5 @@ public class MarcaController {
             return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
 }
