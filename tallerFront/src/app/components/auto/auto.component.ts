@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Auto } from 'src/app/modelos/Auto';
+import { Cliente } from 'src/app/modelos/Cliente';
 import { Marca } from 'src/app/modelos/Marca';
 import { Modelo } from 'src/app/modelos/Modelo';
 import { AutoService } from 'src/app/servicios/auto/auto.service';
+import { ClienteService } from 'src/app/servicios/cliente/cliente.service';
 import { MarcaService } from 'src/app/servicios/marca/marca.service';
 import { ModeloService } from 'src/app/servicios/modelo/modelo.service';
 
@@ -31,6 +33,9 @@ export class AutoComponent implements OnInit {
   marca:Marca=new Marca;
   marcas?:Marca[];
 
+  cliente:Cliente = new Cliente;
+  clientes?:Cliente[];
+
   alerta = {
     color: "",
     mensaje: "",
@@ -50,11 +55,12 @@ export class AutoComponent implements OnInit {
   });
 
   constructor(private autoService: AutoService, private modeloService:ModeloService,
-    private marcaService:MarcaService) {
+    private marcaService:MarcaService, private clienteService: ClienteService) {
   }
   ngOnInit(): void {
     this.resetAuto();
     this.getMarcas();
+    this.getClientes();
   }
 
   //Abrir modal para ver cliente y servicios del auto.
@@ -83,7 +89,16 @@ export class AutoComponent implements OnInit {
     })
   }
 
+  getClientes() {
+    this.clienteService.getClientesHabilitados().subscribe(data => {
+      this.clientes = data;
+      console.log("clientes")
+      console.log(data)
+    })
+  }
+
   nuevoAuto() {
+    console.log("asd")
     console.log(this.auto);
     if (this.formRegister.valid) {
       this.autoService.nuevoAuto(this.auto).subscribe((data: any) => {

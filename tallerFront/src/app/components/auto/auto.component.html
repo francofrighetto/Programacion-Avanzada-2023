@@ -3,6 +3,15 @@
 
 <div class="row d-flex">
     <form class="col-4 " [formGroup]="formRegister">
+
+        <mat-form-field *ngIf="cliente!=undefined">
+            <mat-label>Cliente</mat-label>
+            <mat-select [(value)]="cliente.id">
+                <mat-option [value]="c.id" *ngFor="let c of clientes">{{c.nombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+
         <label for="inputPatente">Patente</label>
         <input type="text" id="inputPatente" class="form-control" name="inputPatente" placeholder="AB123CD" [(ngModel)]="auto.patente" formControlName="inputPatente" [class.is-invalid]="formRegister.get('inputPatente')?.touched && formRegister.get('inputPatente')?.invalid"
             [class.is-valid]="formRegister.get('inputPatente')?.valid">
@@ -27,6 +36,7 @@
             </mat-select>
         </mat-form-field>
         <br>
+
         <button type="button" class="btn btn-success ms-2" (click)="nuevoAuto()" *ngIf="nuevo">Crear</button>
         <button type="button" class="btn btn-success" (click)="actualizarAuto()" *ngIf="!nuevo">Modificar</button>
         <button type="button" class="btn btn-danger ms-4" (click)="cancelar()">Cancelar</button>

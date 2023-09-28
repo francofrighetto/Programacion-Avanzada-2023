@@ -1,0 +1,40 @@
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.contenedor {
+    display: flex;
+    height: 100%; 
+}
+
+
+.mitad {
+    display: flex;
+    padding: 20px; 
+}
+
+
+.izquierda {
+    background-color: red; 
+    width: 30% !important;
+}
+
+
+.derecha {
+    background-color: blue; 
+    width: 70%;
+}
+
+.contenedor-izquierda{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 50px;
+    width: 100%;
+    text-align: center;
+}
+
+.select-cliente{
+    width: 100%;
+}

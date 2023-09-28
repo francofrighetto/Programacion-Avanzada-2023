@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es-AR';
+import { OrdenComponent } from './components/orden/orden.component';
 
 
 const routes: Routes = [
@@ -32,7 +33,8 @@ registerLocaleData(localeEs, 'es-AR');
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    OrdenComponent
   ],
   imports: [
     BrowserModule,

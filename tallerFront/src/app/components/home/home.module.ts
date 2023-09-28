@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { OrdenComponent } from '../orden/orden.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,10 @@ const routes: Routes = [
       {path:
         'marca',
         component:MarcaComponent
+      },
+      {path:
+        'orden',
+        component:OrdenComponent
       },
 
       {path:

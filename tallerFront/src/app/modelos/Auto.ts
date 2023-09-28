@@ -6,4 +6,5 @@ export class Auto {
     estado?:boolean;
     anio?:number;
     modelo?:any;
+    idCliente?:number;
   }
