@@ -12,6 +12,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es-AR';
 import { OrdenComponent } from './components/orden/orden.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 const routes: Routes = [
@@ -43,7 +45,9 @@ registerLocaleData(localeEs, 'es-AR');
     HttpClientModule,
     RouterModule.forRoot(routes),
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
