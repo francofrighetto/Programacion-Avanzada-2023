@@ -1,15 +1,55 @@
-
-
 <body>
     <div class="contenedor">
         <div class="mitad izquierda">
            <div class="contenedor-izquierda">
-                <h2>Seleccionar Cliente</h2>
-                <select class="select-cliente" name="" aria-placeholder="Seleccionar Cliente" id=""></select>
+                <h3>Seleccionar Cliente</h3>
+                <select class="select-input" name="" [(ngModel)]="clienteSeleccioadoSelect"   (change)="onClienteSeleccionado($event)" id="">
+                    <option value="" disabled selected>Selecciona un objeto</option>
+                    <option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nombre }}</option>
+                </select>
+                <div *ngIf="clienteSeleccionado != null" class="p-dni">
+                    <p ><b>DNI: </b>{{clienteSeleccionado.dni}}</p>
+                </div>
+                <input  class="input-ptnt" type="text" placeholder="AA222AA">
+                <input  class="input-ptnt" type="text" placeholder="AÑO">
+                <h3>Marca</h3>
+                <select class="select-input" name="" aria-placeholder="Seleccionar Marca" id=""></select>
+                <h3>Modelo</h3>
+                <select class="select-input" name="" aria-placeholder="Seleccionar Modelo" id=""></select>
            </div>
         </div>
         <div class="mitad derecha">
-            <!-- Contenido del segundo contenedor -->
+            <div class="contenedor-derecha">
+                <div class="header-tabla">
+                    <input class="input-filtrar" type="text" placeholder="Filtrar...">
+                    <button class="btn btn-success" (click)="openModal()"> Nueva Orden </button>
+                </div>
+                <div class="ordenes">
+                    <select class="select-orden">
+
+                    </select>
+                </div>
+                <div>
+
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- MODAL AGREGAR ORDEN -->
+    <div *ngIf="modal == true">
+        <div class="container-modal-auto">
+            <div class="content-modal"> 
+                <h2>Cliente</h2>
+                <p><b>Nombre: </b> Valentino Lopez</p> <b></b>
+                <p><b>DNI: </b> 43604673</p>
+                <h2>Servicios Aplicados</h2>
+                <div class="btns">
+                    <button (click)="closeModal()" class="bnt-cerrar">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
 </body>
