@@ -12,6 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es-AR';
 import { OrdenComponent } from './components/orden/orden.component';
+import { AuthGuard } from './guards/AuthGuard';
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
   {
     path:
       'home',
-    loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule),
+    canActivate:[AuthGuard]
   },
   {path:'**',redirectTo:'login'}
 ];
