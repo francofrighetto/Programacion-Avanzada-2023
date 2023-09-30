@@ -5,6 +5,7 @@ export enum endpoints {
   auto="auto/",
   cliente="cliente/",
   tecnico="tecnico/",
+  auth="auth/",
 
 
  // metodos
@@ -13,5 +14,8 @@ export enum endpoints {
   mostrarHabilitados = 'mostrarHabilitados',
   nuevo = 'guardar',
   editar = 'editar',
-  eliminar='eliminar'
+  eliminar='eliminar',
+  login="login",
+  register="register",
+  current="current"
 }
