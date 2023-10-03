@@ -3,6 +3,7 @@ export enum endpoints {
   marca = 'marca/',
   modelo = 'modelo/',
   auto="auto/",
+  orden="ordenTrabajo/",
   cliente="cliente/",
   tecnico="tecnico/",
   auth="auth/",
@@ -18,4 +19,5 @@ export enum endpoints {
   login="login",
   register="register",
   current="current"
+
 }

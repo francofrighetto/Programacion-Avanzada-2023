@@ -12,12 +12,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es-AR';
 import { OrdenComponent } from './components/orden/orden.component';
-<<<<<<< HEAD
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-=======
 import { AuthGuard } from './guards/AuthGuard';
->>>>>>> b7e8ab1cad029e3bb6516f8fff202645e1139417
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 
 const routes: Routes = [
@@ -30,7 +28,7 @@ const routes: Routes = [
     path:
       'home',
     loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule),
-    canActivate:[AuthGuard]
+    //canActivate:[AuthGuard]
   },
   {path:'**',redirectTo:'login'}
 ];
@@ -51,8 +49,11 @@ registerLocaleData(localeEs, 'es-AR');
     RouterModule.forRoot(routes),
     FormsModule,
     MatDialogModule,
-    MatTableModule,
-    MatPaginatorModule,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -61,5 +62,4 @@ registerLocaleData(localeEs, 'es-AR');
   ]
 })
 export class AppModule { }
-
 

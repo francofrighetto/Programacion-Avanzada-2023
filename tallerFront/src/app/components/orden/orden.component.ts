@@ -1,60 +1,156 @@
-import {AfterViewInit, Component, NgModule, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Marca } from 'src/app/modelos/Marca';
+import { Auto } from 'src/app/modelos/Auto';
+import { Orden } from 'src/app/modelos/Orden';
+import { MarcaService } from 'src/app/servicios/marca/marca.service';
+import { AutoService } from 'src/app/servicios/auto/auto.service';
+import { OrdenService } from 'src/app/servicios/orden/orden.service';
+import { Tecnico } from 'src/app/modelos/Tecnico';
 
-/**
- * @title Table with pagination
- */
+
 @Component({
   selector: 'app-orden',
-  styleUrls: ['./orden.component.css'],
   templateUrl: './orden.component.html',
+  styleUrls: ['./orden.component.css']
 })
+export class OrdenComponent implements OnInit {
 
+  ordenes?: Orden[];
+  orden!: Orden;
+  nuevo: boolean = true;
 
-export class OrdenComponent implements AfterViewInit { 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  marcas!: Marca[];
+  marca: Marca = new Marca;
 
-  @ViewChild(MatPaginator, {static: false})
-  set paginator(value: MatPaginator) {
-    if (this.dataSource){
-      this.dataSource.paginator = value;
+  autos!: Auto[];
+  auto: Auto = new Auto;
+
+  alerta = {
+    color: "",
+    mensaje: "",
+    activo: false
+  }
+
+  public formRegister = new FormGroup({
+    inputNombre: new FormControl(
+      "", Validators.compose([Validators.required])
+    )
+  });
+
+  constructor(private ordenService: OrdenService, private marcaService: MarcaService, private autoService: AutoService) {
+  }
+  ngOnInit(): void {
+    this.resetOrden();
+    this.getAutos();
+  }
+
+  getOrdenes() {
+    this.ordenService.getOrdenesHabilitados().subscribe(data => {
+      this.ordenes = data;
+    })
+  }
+
+  // getMarcas() {
+  //   this.marcaService.getMarcasHabilitados().subscribe(data => {
+  //     this.marcas = data;
+  //     console.log(this.ordenes)
+  //   })
+  // }
+  getAutos() {
+    this.autoService.getAutosHabilitados().subscribe(data => {
+      this.autos = data;
+      console.log(this.ordenes)
+    })
+  }
+
+  nuevaOrden() {
+    console.log(this.orden);
+    if (this.formRegister.valid) {
+      this.ordenService.nuevaOrden(this.orden).subscribe((data: any) => {
+        if (data.message == "success") {
+          this.resetOrden();
+          this.mostrarAlerta("success", "Orden creada con éxito");
+        }
+      }, error => {
+        console.log(error);
+        this.mostrarAlerta("danger", "Error al crear orden");
+      })
+    } else {
+      this.mostrarAlerta("danger", "Validaciones incorrectas");
     }
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+  actualizarOrden() {
+    if (this.formRegister.valid) {
+      this.ordenService.actualizarOrden(this.orden).subscribe((data: any) => {
+        if (data.message == "success") {
+          this.resetOrden();
+          this.mostrarAlerta("success", "Orden editada con éxito");
+        }
+      }, error => {
+        console.log(error);
+        this.mostrarAlerta("danger", "Error al editar orden");
+      })
+    } else {
+      this.mostrarAlerta("danger", "Validaciones incorrectas");
+    }
   }
-}
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
+  editar(orden: Orden) {
+    this.nuevo = false;
+    this.orden = orden;
+  }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  {position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
-  {position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
-  {position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
-  {position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si'},
-  {position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
-  {position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S'},
-  {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
-  {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
-  {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
-  {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
-];
+  eliminar(orden: Orden) {
+    console.log(orden);
+    if (orden.id != undefined) {
+      this.ordenService.eliminarOrden(orden.id).subscribe((data: any) => {
+        if (data.message == "success") {
+          this.resetOrden();
+          this.mostrarAlerta("success", "Exito al cambiar el estado");
+        }
+      }, error => {
+        console.log(error);
+        this.mostrarAlerta("danger", "Error al eliminar orden");
+      })
+    }
+  }
+
+  cancelar() {
+    this.orden = new Orden;
+    this.orden.estado = true;
+    this.orden.auto = new Auto;
+    this.orden.tecnico = new Tecnico;
+    this.nuevo = true;
+    this.formRegister.markAsUntouched();
+  }
+
+  resetOrden() {
+    this.getOrdenes();
+    this.cancelar();
+  }
+
+  mostrarAlerta(color: string, mensaje: string) {
+    this.alerta.color = color;
+    this.alerta.mensaje = mensaje;
+    this.alerta.activo = true;
+    setTimeout(() => {
+      this.alerta.activo = false;
+    }, 3000);
+  }
+
+
+  // seleccionarMarca(marca_id: any) {
+  //   if (marca_id != undefined && marca_id.value != undefined) {
+  //     this.orden.marca.id = marca_id.value;
+  //   }
+  // }
+
+  seleccionarAuto(auto_id: any) {
+    if (auto_id != undefined && auto_id.value != undefined) {
+      this.orden.auto.id = auto_id.value;
+    }
+  }
+
+}
