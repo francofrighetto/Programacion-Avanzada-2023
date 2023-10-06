@@ -1,54 +1,54 @@
-<!-- <app-header></app-header> -->
+<app-header></app-header>
 <h2 class="text-center pt-2 py-5">Orden</h2>
 
 
 <div class="row d-flex">
-  <form class="col-4 " [formGroup]="formRegister">
-      <input type="text" id="inputNombre" class="form-control" name="inputNombre" placeholder="Nombre" [(ngModel)]="orden.descripcion" formControlName="inputNombre" [class.is-invalid]="formRegister.get('inputNombre')?.touched && formRegister.get('inputNombre')?.invalid"
-          [class.is-valid]="formRegister.get('inputNombre')?.valid">
+    <form class="col-4 " [formGroup]="formRegister">
+        <input type="text" id="inputNombre" class="form-control" name="inputNombre" placeholder="Nombre" [(ngModel)]="orden.descripcion" formControlName="inputNombre" [class.is-invalid]="formRegister.get('inputNombre')?.touched && formRegister.get('inputNombre')?.invalid"
+            [class.is-valid]="formRegister.get('inputNombre')?.valid">
 
-      <br>
-      <mat-form-field>
-          <mat-label>Autos</mat-label>
-          <mat-select [(value)]="orden.auto.id">
-              <mat-option [value]="m.id" *ngFor="let m of autos">{{m.patente}}</mat-option>
-          </mat-select>
-      </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>Autos</mat-label>
+            <mat-select [(value)]="orden.auto.id">
+                <mat-option [value]="m.id" *ngFor="let m of autos">{{m.patente}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-      <br>
+        <br>
 
-      <button type="button" class="btn btn-success ms-2" (click)="nuevaOrden()" *ngIf="nuevo">Crear</button>
-      <button type="button" class="btn btn-success" (click)="actualizarOrden()" *ngIf="!nuevo">Modificar</button>
-      <button type="button" class="btn btn-danger ms-4" (click)="cancelar()">Cancelar</button>
-      <br>
-      <div class="alert alert-{{alerta.color}} px-3 mx-5" role="alert" *ngIf="alerta.activo">
-          {{alerta.mensaje}}
-      </div>
+        <button type="button" class="btn btn-success ms-2" (click)="nuevaOrden()" *ngIf="nuevo">Crear</button>
+        <button type="button" class="btn btn-success" (click)="actualizarOrden()" *ngIf="!nuevo">Modificar</button>
+        <button type="button" class="btn btn-danger ms-4" (click)="cancelar()">Cancelar</button>
+        <br>
+        <div class="alert alert-{{alerta.color}} px-3 mx-5" role="alert" *ngIf="alerta.activo">
+            {{alerta.mensaje}}
+        </div>
 
-  </form>
-  <div class="col-8">
-      <table class="table" *ngIf="ordenes != undefined && ordenes.length != 0">
-          <thead>
-              <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Descripcion</th>
-                  <th scope="col">Auto</th>
-                  <th scope="col">Acciones</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr *ngFor="let m of ordenes">
-                  <td>{{m.id}}</td>
-                  <td>{{m.descripcion}}</td>
-                  <td>{{m.auto?.patente || 'Sin Auto'}}</td>
-                  <td>
-                      <button type="button" class="btn btn-primary" (click)="editar(m)">
+    </form>
+    <div class="col-8">
+        <table class="table" *ngIf="ordenes != undefined && ordenes.length != 0">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Auto</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let m of ordenes">
+                    <td>{{m.id}}</td>
+                    <td>{{m.descripcion}}</td>
+                    <td>{{m.auto?.patente || 'Sin Auto'}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" (click)="editar(m)">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                               class="bi bi-pencil-fill" viewBox="0 0 16 16">
                               <path
                                   d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
                           </svg></button>
-                      <button type="button" class="btn btn-danger" (click)="eliminar(m)">
+                        <button type="button" class="btn btn-danger" (click)="eliminar(m)">
 
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                               class="bi bi-trash-fill" viewBox="0 0 16 16" *ngIf="m.estado">
@@ -64,12 +64,12 @@
                           </svg>
 
                       </button>
-                  </td>
-              </tr>
-          </tbody>
-      </table>
-      <div *ngIf="ordenes == undefined || ordenes.length==0">
-          No hay ordenes
-      </div>
-  </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="ordenes == undefined || ordenes.length==0">
+            No hay ordenes
+        </div>
+    </div>
 </div>
