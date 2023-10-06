@@ -30,7 +30,7 @@ const routes: Routes = [
     loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule),
     //canActivate:[AuthGuard]
   },
-  {path:'**',redirectTo:'login'}
+  {path:'**',redirectTo:'home'}
 ];
 
 registerLocaleData(localeEs, 'es-AR');
@@ -38,9 +38,8 @@ registerLocaleData(localeEs, 'es-AR');
 
 @NgModule({
   declarations: [
-    AppComponent,
-    OrdenComponent
-  ],
+    AppComponent
+    ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

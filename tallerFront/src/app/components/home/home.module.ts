@@ -48,6 +48,10 @@ const routes: Routes = [
         'tecnico',
         component:TecnicoComponent,
       },
+      {path:
+        'orden',
+        component:OrdenComponent,
+      },
       { path: '**',
         redirectTo: '', pathMatch: 'full'
       },
@@ -65,7 +69,8 @@ const routes: Routes = [
     ClienteComponent,
     TecnicoComponent,
     HeaderComponent,
-    MarcaComponent
+    MarcaComponent,
+    OrdenComponent
   ],
   imports: [
     RouterModule.forChild(routes),
