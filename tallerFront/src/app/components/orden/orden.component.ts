@@ -6,6 +6,9 @@ import { AutoService } from 'src/app/servicios/auto/auto.service';
 import { OrdenService } from 'src/app/servicios/orden/orden.service';
 import { Tecnico } from 'src/app/modelos/Tecnico';
 import { TecnicoService } from 'src/app/servicios/tecnico/tecnico.service';
+import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
+import { Servicio } from 'src/app/modelos/Servicio';
+import { DetalleOrden } from 'src/app/modelos/DetalleOrden';
 
 
 @Component({
@@ -26,6 +29,9 @@ export class OrdenComponent implements OnInit {
   tecnicos!: Tecnico[];
   tecnico: Tecnico = new Tecnico;
 
+  servicios!:Servicio[];
+  servicio:Servicio = new Servicio;
+
   alerta = {
     color: "",
     mensaje: "",
@@ -35,15 +41,20 @@ export class OrdenComponent implements OnInit {
   public formRegister = new FormGroup({
     inputDescripcion: new FormControl(
       "", Validators.compose([Validators.required])
+    ),
+    inputCantidad: new FormControl(
+      "", Validators.compose([Validators.required])
     )
   });
 
-  constructor(private ordenService: OrdenService, private autoService: AutoService,private tecnicoService: TecnicoService) {
+  constructor(private ordenService: OrdenService, private autoService: AutoService,private tecnicoService: TecnicoService,
+    private servicioService:ServicioService) {
   }
   ngOnInit(): void {
     this.resetOrden();
     this.getAutos();
     this.getTecnicos();
+    this.getServicios();
   }
 
   getOrdenes() {
@@ -54,13 +65,17 @@ export class OrdenComponent implements OnInit {
   getAutos() {
     this.autoService.getAutosHabilitados().subscribe(data => {
       this.autos = data;
-      console.log(this.ordenes)
     })
   }
   getTecnicos() {
     this.tecnicoService.getTecnicosHabilitados().subscribe(data => {
       this.tecnicos = data;
-      console.log(this.ordenes)
+    })
+  }
+
+  getServicios() {
+    this.servicioService.getServicios().subscribe(data => {
+      this.servicios = data;
     })
   }
 
@@ -115,6 +130,13 @@ export class OrdenComponent implements OnInit {
         this.mostrarAlerta("danger", "Error al eliminar orden");
       })
     }
+  }
+
+  agregarFila(){
+    console.log(this.orden);
+    this.orden.detalle?.push(new DetalleOrden);
+    console.log(this.orden);
+
   }
 
   cancelar() {

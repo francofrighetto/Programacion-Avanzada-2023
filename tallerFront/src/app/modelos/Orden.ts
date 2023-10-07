@@ -1,4 +1,5 @@
 import { Auto } from "./Auto";
+import { DetalleOrden } from "./DetalleOrden";
 import { Tecnico } from "./Tecnico";
 
 export class Orden {
@@ -10,4 +11,5 @@ export class Orden {
   fechaFin?: Date;
   total?: number;
   id?: number;
+  detalle:DetalleOrden[]=[];
 }

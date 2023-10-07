@@ -7,6 +7,7 @@ export enum endpoints {
   cliente="cliente/",
   tecnico="tecnico/",
   auth="auth/",
+  servicio="servicio/",
 
 
  // metodos
