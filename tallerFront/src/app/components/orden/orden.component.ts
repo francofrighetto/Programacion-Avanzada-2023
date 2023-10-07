@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Marca } from 'src/app/modelos/Marca';
 import { Auto } from 'src/app/modelos/Auto';
 import { Orden } from 'src/app/modelos/Orden';
-import { MarcaService } from 'src/app/servicios/marca/marca.service';
 import { AutoService } from 'src/app/servicios/auto/auto.service';
 import { OrdenService } from 'src/app/servicios/orden/orden.service';
 import { Tecnico } from 'src/app/modelos/Tecnico';
+import { TecnicoService } from 'src/app/servicios/tecnico/tecnico.service';
 
 
 @Component({
@@ -20,11 +19,12 @@ export class OrdenComponent implements OnInit {
   orden!: Orden;
   nuevo: boolean = true;
 
-  marcas!: Marca[];
-  marca: Marca = new Marca;
 
   autos!: Auto[];
   auto: Auto = new Auto;
+
+  tecnicos!: Tecnico[];
+  tecnico: Tecnico = new Tecnico;
 
   alerta = {
     color: "",
@@ -33,16 +33,17 @@ export class OrdenComponent implements OnInit {
   }
 
   public formRegister = new FormGroup({
-    inputNombre: new FormControl(
+    inputDescripcion: new FormControl(
       "", Validators.compose([Validators.required])
     )
   });
 
-  constructor(private ordenService: OrdenService, private marcaService: MarcaService, private autoService: AutoService) {
+  constructor(private ordenService: OrdenService, private autoService: AutoService,private tecnicoService: TecnicoService) {
   }
   ngOnInit(): void {
     this.resetOrden();
     this.getAutos();
+    this.getTecnicos();
   }
 
   getOrdenes() {
@@ -50,16 +51,15 @@ export class OrdenComponent implements OnInit {
       this.ordenes = data;
     })
   }
-
-  // getMarcas() {
-  //   this.marcaService.getMarcasHabilitados().subscribe(data => {
-  //     this.marcas = data;
-  //     console.log(this.ordenes)
-  //   })
-  // }
   getAutos() {
     this.autoService.getAutosHabilitados().subscribe(data => {
       this.autos = data;
+      console.log(this.ordenes)
+    })
+  }
+  getTecnicos() {
+    this.tecnicoService.getTecnicosHabilitados().subscribe(data => {
+      this.tecnicos = data;
       console.log(this.ordenes)
     })
   }
@@ -140,16 +140,14 @@ export class OrdenComponent implements OnInit {
     }, 3000);
   }
 
-
-  // seleccionarMarca(marca_id: any) {
-  //   if (marca_id != undefined && marca_id.value != undefined) {
-  //     this.orden.marca.id = marca_id.value;
-  //   }
-  // }
-
   seleccionarAuto(auto_id: any) {
     if (auto_id != undefined && auto_id.value != undefined) {
       this.orden.auto.id = auto_id.value;
+    }
+  }
+  seleccionarTecnico(tecnico_id: any) {
+    if (tecnico_id != undefined && tecnico_id.value != undefined) {
+      this.orden.tecnico.id = tecnico_id.value;
     }
   }
 

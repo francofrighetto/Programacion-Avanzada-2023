@@ -4,14 +4,38 @@
 
 <div class="row d-flex">
     <form class="col-4 " [formGroup]="formRegister">
-        <input type="text" id="inputNombre" class="form-control" name="inputNombre" placeholder="Nombre" [(ngModel)]="orden.descripcion" formControlName="inputNombre" [class.is-invalid]="formRegister.get('inputNombre')?.touched && formRegister.get('inputNombre')?.invalid"
-            [class.is-valid]="formRegister.get('inputNombre')?.valid">
+        <label for="inputTotal">Descripcion</label>
+        <input type="text" id="inputDescripcion" class="form-control" name="inputDescripcion" placeholder="Breve descripcion" [(ngModel)]="orden.descripcion" formControlName="inputDescripcion" [class.is-invalid]="formRegister.get('inputDescripcion')?.touched && formRegister.get('inputDescripcion')?.invalid"
+            [class.is-valid]="formRegister.get('inputDescripcion')?.valid">
 
+        <br>
+        <label for="inputTotal">Total</label>
+        <input type="number" id="inputTotal" class="form-control" name="inputTotal" placeholder="2023" [(ngModel)]="orden.total" formControlName="inputTotal" [class.is-invalid]="formRegister.get('inputTotal')?.touched && formRegister.get('inputTotal')?.invalid" [class.is-valid]="formRegister.get('inputTotal')?.valid">
+        <br>
+        <label for="inputFecha">Fecha Creada</label>
+        <input type="date" id="inputFecha" class="form-control" name="inputFecha" placeholder="" [(ngModel)]="orden.fechaInicio" formControlName="inputFecha" [class.is-invalid]="formRegister.get('inputFecha')?.touched && formRegister.get('inputFecha')?.invalid" [class.is-valid]="formRegister.get('inputFecha')?.valid">
+        <br>
+
+        <label for="inputFechaFin">Fecha Finalizada</label>
+        <input type="date" id="inputFechaFin" class="form-control" name="inputFechaFin" placeholder="" [(ngModel)]="orden.fechaFin" formControlName="inputFechaFin" [class.is-invalid]="formRegister.get('inputFechaFin')?.touched && formRegister.get('inputFechaFin')?.invalid" [class.is-valid]="formRegister.get('inputFechaFin')?.valid">
+        <br>
+        
+        <label for="inputAuto">Auto</label>
         <br>
         <mat-form-field>
             <mat-label>Autos</mat-label>
             <mat-select [(value)]="orden.auto.id">
                 <mat-option [value]="m.id" *ngFor="let m of autos">{{m.patente}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <br>
+        <label for="inputAuto">Tecnico</label>
+        <br>
+        <mat-form-field>
+            <mat-label>Tecnicos</mat-label>
+            <mat-select [(value)]="orden.tecnico.id">
+                <mat-option [value]="m.id" *ngFor="let m of tecnicos">{{m.nombre}}</mat-option>
             </mat-select>
         </mat-form-field>
 

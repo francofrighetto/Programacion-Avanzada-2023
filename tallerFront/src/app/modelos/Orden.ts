@@ -6,8 +6,8 @@ export class Orden {
   auto?: any;
   tecnico?: any;
   estado?: boolean;
-  startDate?: Date;
-  endDate?: Date;
+  fechaInicio?: Date;
+  fechaFin?: Date;
   total?: number;
   id?: number;
 }
