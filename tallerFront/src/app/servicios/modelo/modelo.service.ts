@@ -35,4 +35,9 @@ export class ModeloService {
   eliminarModelo(id:number){
     return this.http.post(environment.apiUrl + endpoints.modelo + endpoints.eliminar + "/" + id,{});
   }
+
+  getModelosPag(page:number,size:number): Observable<Modelo[]>{
+    const params = { page, size };
+    return this.http.get<Modelo[]>(environment.apiUrl + endpoints.modelo + endpoints.mostrarpaginado, { params });
+  }
 }

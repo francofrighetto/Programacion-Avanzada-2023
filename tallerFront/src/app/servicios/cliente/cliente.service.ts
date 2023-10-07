@@ -29,4 +29,8 @@ export class ClienteService {
   eliminarCliente(id:number){
     return this.http.post(environment.apiUrl + endpoints.cliente + endpoints.eliminar + "/" + id,{});
   }
+  getClientesPag(page:number,size:number): Observable<Cliente[]>{
+    const params = { page, size };
+    return this.http.get<Cliente[]>(environment.apiUrl + endpoints.cliente + endpoints.mostrarpaginado, { params });
+  }
 }

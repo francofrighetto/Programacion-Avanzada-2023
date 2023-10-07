@@ -20,6 +20,11 @@ export class ModeloComponent implements OnInit {
   marcas!: Marca[];
   marca: Marca = new Marca;
 
+  // paginado
+  pageNumber: number = 0;
+  pageSize: number = 10;
+  totalItems?: number;
+
   alerta = {
     color: "",
     mensaje: "",
@@ -40,7 +45,7 @@ export class ModeloComponent implements OnInit {
   }
 
   getModelos() {
-    this.modeloService.getModelosHabilitados().subscribe(data => {
+    this.modeloService.getModelosPag(this.pageNumber, this.pageSize).subscribe(data=>{
       this.modelos = data;
     })
   }
@@ -134,4 +139,13 @@ export class ModeloComponent implements OnInit {
     }
   }
 
+  onPageChange(event: any) {
+    console.log(event);
+    this.pageNumber = event.pageIndex;
+
+    this.modeloService.getModelosPag(this.pageNumber, this.pageSize)
+      .subscribe(data => {
+        this.modelos=data;
+      });
+  }
 }

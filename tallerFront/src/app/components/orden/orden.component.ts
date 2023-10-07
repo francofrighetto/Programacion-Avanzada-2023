@@ -32,6 +32,11 @@ export class OrdenComponent implements OnInit {
   servicios!:Servicio[];
   servicio:Servicio = new Servicio;
 
+  // paginado
+  pageNumber: number = 0;
+  pageSize: number = 10;
+  totalItems?: number;
+
   alerta = {
     color: "",
     mensaje: "",
@@ -67,7 +72,7 @@ export class OrdenComponent implements OnInit {
   }
 
   getOrdenes() {
-    this.ordenService.getOrdenesHabilitados().subscribe(data => {
+    this.ordenService.getOrdenesPag(this.pageNumber, this.pageSize).subscribe(data=>{
       this.ordenes = data;
     })
   }
@@ -181,5 +186,13 @@ export class OrdenComponent implements OnInit {
       this.orden.tecnico.id = tecnico_id.value;
     }
   }
+  onPageChange(event: any) {
+    console.log(event);
+    this.pageNumber = event.pageIndex;
 
+    this.ordenService.getOrdenesPag(this.pageNumber, this.pageSize)
+      .subscribe(data => {
+        this.ordenes=data;
+      });
+  }
 }

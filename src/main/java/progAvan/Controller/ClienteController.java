@@ -28,6 +28,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import progAvan.Model.Cliente;
+import progAvan.Model.Marca;
 import progAvan.Model.Modelo;
 import progAvan.Service.ClienteService;
 
@@ -39,17 +40,12 @@ public class ClienteController {
     private ClienteService clienteService;
     Map<String, String> response = new HashMap<>();
 
-    // ClienteService.java
-    public interface ClienteService {
-    Page<Cliente> findPaginado(Pageable pageable);
-    // Otros métodos de servicio para Cliente
-    }
-
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrarpaginado")
-    public Page<Cliente> mostrarPaginado(@RequestParam(defaultValue = "0") int page,
-                                         @RequestParam(defaultValue = "10") int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return clienteService.findPaginado(pageable);
+    public List<Cliente> mostrarPaginado(@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return clienteService.findPaginado(page, size);
+    }
 
     @Value("${path_general}")
     String path;

@@ -25,6 +25,12 @@ export class AutoService {
   actualizarAuto(auto:Auto){
     return this.http.post(environment.apiUrl + endpoints.auto + endpoints.editar + "/" + auto.id, auto);
   }
+
+  getAutosPag(page:number,size:number): Observable<Auto[]>{
+    const params = { page, size };
+    return this.http.get<Auto[]>(environment.apiUrl + endpoints.auto + endpoints.mostrarpaginado, { params });
+  }
+
   eliminarAuto(id:number){
     return this.http.post(environment.apiUrl + endpoints.auto + endpoints.eliminar + "/" + id,{});
   }}

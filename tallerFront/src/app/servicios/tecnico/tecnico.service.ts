@@ -36,4 +36,9 @@ export class TecnicoService {
   eliminarTecnico(id:number){
     return this.http.post(environment.apiUrl + endpoints.tecnico + endpoints.eliminar + "/" + id,{});
   }
+
+  getTecnicosPag(page:number,size:number): Observable<Tecnico[]>{
+    const params = { page, size };
+    return this.http.get<Tecnico[]>(environment.apiUrl + endpoints.tecnico + endpoints.mostrarpaginado, { params });
+  }
 }

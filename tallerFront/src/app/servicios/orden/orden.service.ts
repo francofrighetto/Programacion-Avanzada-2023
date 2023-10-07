@@ -35,4 +35,8 @@ export class OrdenService {
   eliminarOrden(id:number){
     return this.http.post(environment.apiUrl + endpoints.orden + endpoints.eliminar + "/" + id,{});
   }
+  getOrdenesPag(page:number,size:number): Observable<Orden[]>{
+    const params = { page, size };
+    return this.http.get<Orden[]>(environment.apiUrl + endpoints.orden + endpoints.mostrarpaginado, { params });
+  }
 }

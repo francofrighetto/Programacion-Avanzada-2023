@@ -108,6 +108,8 @@
             </div>
 
         </table>
+        <mat-paginator [length]="totalItems" [pageSize]="10" [pageSizeOptions]="[10]" aria-label="Select page" (page)="onPageChange($event)">
+        </mat-paginator>
         <div *ngIf="autos == undefined || autos.length== 0">
             No hay autos
         </div>

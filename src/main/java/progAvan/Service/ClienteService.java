@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import progAvan.Model.Cliente;
+import progAvan.Model.Marca;
 import progAvan.Model.Modelo;
 import progAvan.Repository.ClienteRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 @Service
@@ -41,8 +43,10 @@ public class ClienteService {
     }
 
     // paginación
-    public Page<Cliente> findPaginado(Pageable pageable) {
-        return clienteRepository.findAll(pageable);
+    public List<Cliente> findPaginado(int page, int size) {
+        Pageable paging = PageRequest.of(page, size);
+        Page<Cliente> pagedResult = clienteRepository.findAll(paging);
+        return pagedResult.toList();
     }
 
     // public boolean esUnico(Cliente cliente) {

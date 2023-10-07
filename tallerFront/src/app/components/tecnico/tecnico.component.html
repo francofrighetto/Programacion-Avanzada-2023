@@ -138,6 +138,8 @@
         </tr>
       </tbody>
     </table>
+    <mat-paginator [length]="totalItems" [pageSize]="10" [pageSizeOptions]="[10]" aria-label="Select page" (page)="onPageChange($event)">
+    </mat-paginator>
     <div *ngIf="tecnicos == undefined || tecnicos.length == 0">
       No hay Tecnicos
     </div>

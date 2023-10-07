@@ -36,6 +36,11 @@ export class AutoComponent implements OnInit {
   cliente:Cliente = new Cliente;
   clientes?:Cliente[];
 
+  // paginado
+  pageNumber: number = 0;
+  pageSize: number = 10;
+  totalItems?: number;
+
   alerta = {
     color: "",
     mensaje: "",
@@ -73,9 +78,8 @@ export class AutoComponent implements OnInit {
   }
 
   getAutos() {
-    this.autoService.getAutosHabilitados().subscribe(data => {
+    this.autoService.getAutosPag(this.pageNumber, this.pageSize).subscribe(data=>{
       this.autos = data;
-      console.log(data)
     })
   }
   getModelosXMarca(id:number) {
@@ -181,5 +185,15 @@ export class AutoComponent implements OnInit {
     if (this.marca.id!=undefined){
       this.getModelosXMarca(this.marca.id);
     }
+  }
+
+  onPageChange(event: any) {
+    console.log(event);
+    this.pageNumber = event.pageIndex;
+
+    this.autoService.getAutosPag(this.pageNumber, this.pageSize)
+      .subscribe(data => {
+        this.autos=data;
+      });
   }
 }

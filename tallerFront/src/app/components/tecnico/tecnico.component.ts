@@ -19,7 +19,10 @@ export class TecnicoComponent implements OnInit {
   nuevo: boolean = true;
   dniPatron:string="\\d{8}";
 
-
+  // paginado
+  pageNumber: number = 0;
+  pageSize: number = 10;
+  totalItems?: number;
 
   alerta = {
     color: "",
@@ -40,8 +43,7 @@ export class TecnicoComponent implements OnInit {
 
 
   getTecnicos() {
-    this.TecnicoService.getTecnicosHabilitados().subscribe(data => {
-      console.log(data)
+    this.TecnicoService.getTecnicosPag(this.pageNumber, this.pageSize).subscribe(data=>{
       this.tecnicos = data;
     })
   }
@@ -122,6 +124,16 @@ export class TecnicoComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetTecnico();
+  }
+
+  onPageChange(event: any) {
+    console.log(event);
+    this.pageNumber = event.pageIndex;
+
+    this.TecnicoService.getTecnicosPag(this.pageNumber, this.pageSize)
+      .subscribe(data => {
+        this.tecnicos=data;
+      });
   }
 
  /*  getMarcas() {

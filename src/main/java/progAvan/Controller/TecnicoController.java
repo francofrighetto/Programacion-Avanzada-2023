@@ -61,7 +61,7 @@ public class TecnicoController {
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
-    @GetMapping(value = "/mostrar")
+    @GetMapping(value = "/mostrarpaginado")
     public Page<Tecnico> mostrar(Pageable pageable) {
         return tecnicoService.findPaginado(pageable);
     }

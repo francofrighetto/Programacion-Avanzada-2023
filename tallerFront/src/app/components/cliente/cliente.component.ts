@@ -14,6 +14,12 @@ export class ClienteComponent implements OnInit {
   cliente!: Cliente;
   nuevo: boolean = true;
 
+    // paginado
+    pageNumber: number = 0;
+    pageSize: number = 10;
+    totalItems?: number;
+
+    
   alerta = {
     color: "",
     mensaje: "",
@@ -39,7 +45,7 @@ export class ClienteComponent implements OnInit {
   }
 
   getClientes() {
-    this.clienteService.getClientesHabilitados().subscribe(data => {
+    this.clienteService.getClientesPag(this.pageNumber, this.pageSize).subscribe(data=>{
       this.clientes = data;
     })
   }
@@ -114,5 +120,13 @@ export class ClienteComponent implements OnInit {
       this.alerta.activo = false;
     }, 3000);
   }
+  onPageChange(event: any) {
+    console.log(event);
+    this.pageNumber = event.pageIndex;
 
+    this.clienteService.getClientesPag(this.pageNumber, this.pageSize)
+      .subscribe(data => {
+        this.clientes=data;
+      });
+  }
 }

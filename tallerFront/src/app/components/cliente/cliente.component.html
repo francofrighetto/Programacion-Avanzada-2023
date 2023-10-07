@@ -63,6 +63,8 @@
                 </tr>
             </tbody>
         </table>
+        <mat-paginator [length]="totalItems" [pageSize]="10" [pageSizeOptions]="[10]" aria-label="Select page" (page)="onPageChange($event)">
+        </mat-paginator>
         <div *ngIf="clientes == undefined || clientes.length==0">
             No hay clientes
         </div>
