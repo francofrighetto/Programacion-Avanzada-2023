@@ -66,12 +66,6 @@ public class ServicioController {
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
-    @GetMapping(value = "/mostrar")
-    public Page<Servicio> mostrar(Pageable pageable) {
-        return servicioService.findPaginado(pageable);
-    }
-
-    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/editar/{id}")
     public ResponseEntity actualizar(@PathVariable int id, @RequestBody Servicio model) {
         // Servicio servicio = servicioService.findById(id).orElse(null);

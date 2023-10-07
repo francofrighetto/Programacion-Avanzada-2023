@@ -45,8 +45,8 @@ public class ClienteService {
     // paginación
     public List<Cliente> findPaginado(int page, int size) {
         Pageable paging = PageRequest.of(page, size);
-        Page<Cliente> pagedResult = clienteRepository.findAll(paging);
-        return pagedResult.toList();
+        List<Cliente> pagedResult = clienteRepository.findByEstadoIsTrue(paging);
+        return pagedResult;
     }
 
     // public boolean esUnico(Cliente cliente) {
