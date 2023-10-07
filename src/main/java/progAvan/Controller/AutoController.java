@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -47,9 +48,10 @@ public class AutoController {
     Map<String, String> response = new HashMap<>();
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
-    @GetMapping(value = "/mostrar")
-    public Page<Auto> mostrar(Pageable pageable) {
-        return autoService.findPaginado(pageable);
+    @GetMapping(value = "/mostrarpaginado")
+    public List<Auto> mostrarPaginado(@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return autoService.findPaginado(page, size);
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)

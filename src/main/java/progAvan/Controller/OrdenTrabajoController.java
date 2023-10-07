@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import progAvan.Model.Auto;
+import progAvan.Model.Marca;
 import progAvan.Model.OrdenTrabajo;
 import progAvan.Service.OrdenTrabajoService;
 
@@ -50,10 +52,11 @@ public class OrdenTrabajoController {
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
-    @GetMapping(value = "/mostrar")
-    public List<OrdenTrabajo> mostrar() {
-        return ordenTrabajoService.findAll();
-    }  
+    @GetMapping(value = "/mostrarpaginado")
+    public List<OrdenTrabajo> mostrarPaginado(@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return ordenTrabajoService.findPaginado(page, size);
+    }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrarHabilitados")

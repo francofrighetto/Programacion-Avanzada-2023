@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import progAvan.Model.Modelo;
+import progAvan.Model.OrdenTrabajo;
 import progAvan.Repository.AutoRepository;
 import progAvan.Repository.MarcaRepository;
 import progAvan.Repository.ModeloRepository;
@@ -60,6 +61,11 @@ public class ModeloService {
         return modeloRepository.findAll(pageable);
     }
 
+    public List<Modelo> findPaginado(int page, int size) {
+        Pageable paging = PageRequest.of(page, size);
+        Page<Modelo> pagedResult = modeloRepository.findAll(paging);
+        return pagedResult.toList();
+    }
 
     @Transactional
     public void deshabilitarModeloYRelacionados(Integer modeloId) {

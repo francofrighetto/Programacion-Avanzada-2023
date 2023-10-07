@@ -44,6 +44,12 @@ public class AutoService {
         return autoRepository.findByEstadoIsTrue();
     }
 
+    public List<Auto> findPaginado(int page, int size) {
+        Pageable paging = PageRequest.of(page, size);
+        Page<Auto> pagedResult = autoRepository.findAll(paging);
+        return pagedResult.toList();
+    }
+
     @Transactional
     public void deshabilitarAuto(Integer autoId) {
         autoRepository.deshabilitarAuto(autoId);

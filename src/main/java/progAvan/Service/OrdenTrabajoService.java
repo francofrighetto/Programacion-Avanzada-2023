@@ -4,10 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import progAvan.Model.OrdenTrabajo;
+import progAvan.Model.Tecnico;
 import progAvan.Repository.AutoRepository;
 import progAvan.Repository.MarcaRepository;
 import progAvan.Repository.OrdenTrabajoRepository;
@@ -44,4 +48,9 @@ public class OrdenTrabajoService {
         return ordenTrabajoRepository.findByEstadoIsTrue();
     }
 
+    public List<OrdenTrabajo> findPaginado(int page, int size) {
+        Pageable paging = PageRequest.of(page, size);
+        Page<OrdenTrabajo> pagedResult = ordenTrabajoRepository.findAll(paging);
+        return pagedResult.toList();
+    }
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +26,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
+import progAvan.Model.Marca;
 import progAvan.Model.Modelo;
 import progAvan.Model.Tecnico;
 import progAvan.Service.TecnicoService;
@@ -62,8 +64,9 @@ public class TecnicoController {
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrarpaginado")
-    public Page<Tecnico> mostrar(Pageable pageable) {
-        return tecnicoService.findPaginado(pageable);
+    public List<Tecnico> mostrarPaginado(@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return tecnicoService.findPaginado(page, size);
     }
 
 
