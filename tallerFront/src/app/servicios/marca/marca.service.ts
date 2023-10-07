@@ -34,4 +34,9 @@ export class MarcaService {
     return this.http.get<Marca[]>(environment.apiUrl + endpoints.marca + endpoints.mostrarHabilitados);
   }
 
+  getMarcasPag(currentPage:number,pageSize:number): Observable<Marca[]>{
+    const params = { currentPage, pageSize };
+    return this.http.get<Marca[]>(environment.apiUrl + endpoints.marca + endpoints.mostrarHabilitados, { params });
+  }
+
 }
