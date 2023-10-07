@@ -13,6 +13,9 @@ import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es-AR';
 import { OrdenComponent } from './components/orden/orden.component';
 import { AuthGuard } from './guards/AuthGuard';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 
 const routes: Routes = [
@@ -25,9 +28,9 @@ const routes: Routes = [
     path:
       'home',
     loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule),
-    canActivate:[AuthGuard]
+    //canActivate:[AuthGuard]
   },
-  {path:'**',redirectTo:'login'}
+  {path:'**',redirectTo:'home'}
 ];
 
 registerLocaleData(localeEs, 'es-AR');
@@ -35,9 +38,8 @@ registerLocaleData(localeEs, 'es-AR');
 
 @NgModule({
   declarations: [
-    AppComponent,
-    OrdenComponent
-  ],
+    AppComponent
+    ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -45,7 +47,12 @@ registerLocaleData(localeEs, 'es-AR');
     HttpClientModule,
     RouterModule.forRoot(routes),
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -54,5 +61,4 @@ registerLocaleData(localeEs, 'es-AR');
   ]
 })
 export class AppModule { }
-
 

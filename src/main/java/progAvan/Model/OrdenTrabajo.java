@@ -16,15 +16,16 @@ public class OrdenTrabajo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(unique = true)
-    private String nombre;
-    private Date fecha;
+    private String descripcion;
+    private Date fechaInicio;
+    private Date fechaFin;
     public Integer total;
     @OneToOne
     @JoinColumn(name = "tecnico_id", referencedColumnName = "id")
     private Tecnico tecnico;
     @OneToOne
     @JoinColumn(name = "vehiculo_id", referencedColumnName = "id")
-    private Auto vehiculo;
+    private Auto auto;
     private boolean estado;
 
     public boolean getEstado() {
