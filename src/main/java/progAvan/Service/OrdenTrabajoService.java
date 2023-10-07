@@ -50,7 +50,7 @@ public class OrdenTrabajoService {
 
     public List<OrdenTrabajo> findPaginado(int page, int size) {
         Pageable paging = PageRequest.of(page, size);
-        Page<OrdenTrabajo> pagedResult = ordenTrabajoRepository.findAll(paging);
-        return pagedResult.toList();
+        List<OrdenTrabajo> pagedResult = ordenTrabajoRepository.findByEstadoIsTrue(paging);
+        return pagedResult;
     }
 }

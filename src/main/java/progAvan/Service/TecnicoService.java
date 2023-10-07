@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import progAvan.Model.Cliente;
 import progAvan.Model.Marca;
 import progAvan.Model.Modelo;
 import progAvan.Model.Tecnico;
@@ -29,13 +30,7 @@ public class TecnicoService {
         tecnicoRepository.save(model);
     }
 
-    public List<Tecnico> findPaginado(int page, int size) {
-        Pageable paging = PageRequest.of(page, size);
-        Page<Tecnico> pagedResult = tecnicoRepository.findAll(paging);
-        return pagedResult.toList();
-    }
-
-     public List<Tecnico> findHabiliitados() {
+    public List<Tecnico> findHabiliitados() {
         return tecnicoRepository.findByEstadoIsTrue();
     }
 
@@ -47,6 +42,11 @@ public class TecnicoService {
         return tecnicoRepository.findAll();
     }
 
+    public List<Tecnico> findPaginado(int page, int size) {
+        Pageable paging = PageRequest.of(page, size);
+        List<Tecnico> pagedResult = tecnicoRepository.findByEstadoIsTrue(paging);
+        return pagedResult;
+    }
     // public boolean esUnico(Tecnico tecnico) {
     // return tecnicoRepository.existsByNombre(tecnico);
     // }

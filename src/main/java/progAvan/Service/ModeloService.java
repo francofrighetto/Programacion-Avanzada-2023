@@ -48,8 +48,8 @@ public class ModeloService {
         return modeloRepository.findByEstadoIsTrue();
     }
 
-    public List<Modelo> findModelosXMarca(int id){
-                return modeloRepository.findByMarca(id);
+    public List<Modelo> findModelosXMarca(int id) {
+        return modeloRepository.findByMarca(id);
 
     }
 
@@ -63,8 +63,8 @@ public class ModeloService {
 
     public List<Modelo> findPaginado(int page, int size) {
         Pageable paging = PageRequest.of(page, size);
-        Page<Modelo> pagedResult = modeloRepository.findAll(paging);
-        return pagedResult.toList();
+        List<Modelo> pagedResult = modeloRepository.findByEstadoIsTrue(paging);
+        return pagedResult;
     }
 
     @Transactional
@@ -74,4 +74,3 @@ public class ModeloService {
     }
 
 }
-
