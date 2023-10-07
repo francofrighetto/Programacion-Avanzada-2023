@@ -55,6 +55,12 @@ public class AutoController {
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/longitud")
+    public long longitud() {
+        return autoService.longitud();
+    }
+
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/guardar")
     @ApiOperation(value = "Traer auto")
     public ResponseEntity guardar(@Valid @RequestBody Auto model) {

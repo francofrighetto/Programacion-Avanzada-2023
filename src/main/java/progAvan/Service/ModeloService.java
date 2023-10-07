@@ -67,6 +67,10 @@ public class ModeloService {
         return pagedResult;
     }
 
+    public long longitud() {
+        return this.modeloRepository.count();
+    }
+
     @Transactional
     public void deshabilitarModeloYRelacionados(Integer modeloId) {
         modeloRepository.deshabilitarModelo(modeloId);

@@ -53,6 +53,10 @@ public class ServicioService {
         return pagedResult;
     }
 
+    public long longitud() {
+        return this.servicioRepository.count();
+    }
+
     @Transactional
     public void deshabilitarServicioYRelacionados(Integer servicioId) {
         // servicioRepository.deshabilitarServicio(servicioId);

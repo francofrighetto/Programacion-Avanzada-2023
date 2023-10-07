@@ -50,6 +50,10 @@ public class AutoService {
         return pagedResult;
     }
 
+    public long longitud() {
+        return this.autoRepository.count();
+    }
+
     @Transactional
     public void deshabilitarAuto(Integer autoId) {
         autoRepository.deshabilitarAuto(autoId);

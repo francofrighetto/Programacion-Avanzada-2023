@@ -55,7 +55,6 @@ public class TecnicoController {
         }
     }
 
-    
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrar")
     public List<Tecnico> mostrar() {
@@ -69,8 +68,13 @@ public class TecnicoController {
         return tecnicoService.findPaginado(page, size);
     }
 
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/longitud")
+    public long longitud() {
+        return tecnicoService.longitud();
+    }
 
-     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrarHabilitados")
     public List<Tecnico> mostrarHabilitados() {
         return tecnicoService.findHabiliitados();

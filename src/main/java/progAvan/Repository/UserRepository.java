@@ -14,5 +14,5 @@ import progAvan.Model.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> findByUsername(String username);
 
-    List<User> findByEstadoIsTrue(Pageable pageable);
+    // List<User> findByEstadoIsTrue(Pageable pageable);
 }

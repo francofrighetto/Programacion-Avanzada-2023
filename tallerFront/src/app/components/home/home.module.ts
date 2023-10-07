@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { OrdenComponent } from '../orden/orden.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { ServicioComponent } from '../servicio/servicio.component';
 
 
 const routes: Routes = [
@@ -53,6 +54,10 @@ const routes: Routes = [
       {path:
         'orden',
         component:OrdenComponent,
+      },
+      {path:
+        'servicio',
+        component:ServicioComponent,
       },
       { path: '**',
         redirectTo: '', pathMatch: 'full'

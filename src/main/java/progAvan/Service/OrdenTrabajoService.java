@@ -53,4 +53,8 @@ public class OrdenTrabajoService {
         List<OrdenTrabajo> pagedResult = ordenTrabajoRepository.findByEstadoIsTrue(paging);
         return pagedResult;
     }
+
+    public long longitud() {
+        return this.ordenTrabajoRepository.count();
+    }
 }

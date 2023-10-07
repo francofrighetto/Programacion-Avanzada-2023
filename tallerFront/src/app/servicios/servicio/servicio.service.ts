@@ -38,4 +38,8 @@ export class ServicioService {
     const params = { currentPage, pageSize };
     return this.http.get<Servicio[]>(environment.apiUrl + endpoints.servicio + endpoints.mostrarHabilitados, { params });
   }
+
+  getLongitud():Observable<number>{
+    return this.http.get<number>(environment.apiUrl + endpoints.servicio + endpoints.longitud);
+  }
 }

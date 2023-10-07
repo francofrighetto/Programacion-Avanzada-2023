@@ -47,6 +47,12 @@ public class ClienteController {
         return clienteService.findPaginado(page, size);
     }
 
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/longitud")
+    public long longitud() {
+        return clienteService.longitud();
+    }
+
     @Value("${path_general}")
     String path;
 
@@ -83,7 +89,7 @@ public class ClienteController {
         }
     }
 
-     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrarHabilitados")
     public List<Cliente> mostrarHabilitados() {
         return clienteService.findHabilitados();

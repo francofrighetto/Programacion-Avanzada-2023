@@ -24,8 +24,6 @@ public class ClienteService {
     // clienteRepository.
     // }
 
-    
-
     public void save(Cliente model) {
         clienteRepository.save(model);
     }
@@ -34,7 +32,7 @@ public class ClienteService {
         return clienteRepository.findById(id);
     }
 
-      public List<Cliente> findHabilitados() {
+    public List<Cliente> findHabilitados() {
         return clienteRepository.findByEstadoIsTrue();
     }
 
@@ -47,6 +45,10 @@ public class ClienteService {
         Pageable paging = PageRequest.of(page, size);
         List<Cliente> pagedResult = clienteRepository.findByEstadoIsTrue(paging);
         return pagedResult;
+    }
+
+    public long longitud() {
+        return this.clienteRepository.count();
     }
 
     // public boolean esUnico(Cliente cliente) {

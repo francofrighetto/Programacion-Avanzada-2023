@@ -75,6 +75,12 @@ public class ServicioController {
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/longitud")
+    public long longitud() {
+        return servicioService.longitud();
+    }
+
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/editar/{id}")
     public ResponseEntity actualizar(@PathVariable int id, @RequestBody Servicio model) {
         // Servicio servicio = servicioService.findById(id).orElse(null);

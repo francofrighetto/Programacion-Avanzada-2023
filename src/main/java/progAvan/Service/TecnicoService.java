@@ -47,6 +47,10 @@ public class TecnicoService {
         List<Tecnico> pagedResult = tecnicoRepository.findByEstadoIsTrue(paging);
         return pagedResult;
     }
+
+    public long longitud() {
+        return this.tecnicoRepository.count();
+    }
     // public boolean esUnico(Tecnico tecnico) {
     // return tecnicoRepository.existsByNombre(tecnico);
     // }
