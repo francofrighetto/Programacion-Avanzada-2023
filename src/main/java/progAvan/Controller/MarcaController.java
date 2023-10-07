@@ -70,12 +70,12 @@ public class MarcaController {
             @RequestParam(defaultValue = "10") int size) {
         return marcaService.findPaginado(page, size);
     }
-    // @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
-    // @GetMapping(value = "/mostrarpaginado/{page}/{size}")
-    // public List<Marca> mostrarPaginado(@PathVariable int page,
-    // @PathVariable int size) {
-    // return marcaService.findPaginado(page, size);
-    // }
+
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/longitud")
+    public long longitud() {
+        return marcaService.longitud();
+    }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/editar/{id}")

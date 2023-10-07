@@ -14,6 +14,11 @@ export class MarcaComponent implements OnInit {
   marca!: Marca;
   nuevo: boolean = true;
 
+  // paginado
+  pageNumber: number = 1; // Inicializa en la página 1
+  pageSize: number = 10;
+  totalItems?: number;
+
   alerta = {
     color: "",
     mensaje: "",
@@ -30,14 +35,21 @@ export class MarcaComponent implements OnInit {
   }
   ngOnInit(): void {
     this.resetMarca();
+    this.getLongitud();
   }
 
   getMarcas() {
     this.marcaService.getMarcasHabilitados().subscribe(data => {
-      console.log(data)
       this.marcas = data;
     })
   }
+
+  getLongitud() {
+    this.marcaService.getLongitud().subscribe(data => {
+      this.totalItems = data;
+    })
+  }
+
 
   nuevaMarca() {
     if (this.formRegister.valid) {
@@ -108,5 +120,15 @@ export class MarcaComponent implements OnInit {
     setTimeout(() => {
       this.alerta.activo = false;
     }, 3000);
+  }
+
+  onPageChange(event: any) {
+    console.log(event);
+    this.pageNumber = event.pageIndex + 1;
+
+    this.marcaService.getMarcasPag(this.pageNumber, this.pageSize)
+      .subscribe(data => {
+        this.marcas=data;
+      });
   }
 }

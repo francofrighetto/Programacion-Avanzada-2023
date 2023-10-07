@@ -19,6 +19,8 @@ export enum endpoints {
   eliminar='eliminar',
   login="login",
   register="register",
-  current="current"
+  current="current",
+  mostrarpaginado="mostrarpaginado",
+  longitud="longitud"
 
 }

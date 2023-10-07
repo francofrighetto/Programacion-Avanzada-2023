@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { OrdenComponent } from '../orden/orden.component';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 const routes: Routes = [
@@ -81,7 +82,8 @@ const routes: Routes = [
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatDividerModule
+    MatDividerModule,
+    MatPaginatorModule
   ],
   exports: [RouterModule],
 

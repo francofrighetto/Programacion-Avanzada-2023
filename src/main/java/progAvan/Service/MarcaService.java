@@ -61,4 +61,8 @@ public class MarcaService {
         autoRepository.deshabilitarAutosPorMarcaId(marcaId);
     }
 
+    public long longitud(){
+        return this.marcaRepository.count();
+    }
+
 }

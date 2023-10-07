@@ -29,14 +29,20 @@ export class MarcaService {
     return this.http.post(environment.apiUrl + endpoints.marca + endpoints.eliminar + "/" + id,{});
   }
 
-  
+
   getMarcasHabilitados(): Observable<Marca[]>{
     return this.http.get<Marca[]>(environment.apiUrl + endpoints.marca + endpoints.mostrarHabilitados);
   }
 
   getMarcasPag(currentPage:number,pageSize:number): Observable<Marca[]>{
     const params = { currentPage, pageSize };
-    return this.http.get<Marca[]>(environment.apiUrl + endpoints.marca + endpoints.mostrarHabilitados, { params });
+    return this.http.get<Marca[]>(environment.apiUrl + endpoints.marca + endpoints.mostrarpaginado, { params });
   }
+
+  getLongitud():Observable<number>{
+    return this.http.get<number>(environment.apiUrl + endpoints.marca + endpoints.longitud);
+  }
+
+
 
 }
