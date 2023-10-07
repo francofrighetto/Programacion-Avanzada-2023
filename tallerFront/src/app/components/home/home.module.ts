@@ -77,7 +77,8 @@ const routes: Routes = [
     TecnicoComponent,
     HeaderComponent,
     MarcaComponent,
-    OrdenComponent
+    OrdenComponent,
+    ServicioComponent
   ],
   imports: [
     RouterModule.forChild(routes),
