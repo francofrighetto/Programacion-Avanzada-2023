@@ -44,6 +44,15 @@ export class OrdenComponent implements OnInit {
     ),
     inputCantidad: new FormControl(
       "", Validators.compose([Validators.required])
+    ),
+    inputTotal: new FormControl(
+      "", Validators.compose([Validators.required])
+    ),
+    inputFecha: new FormControl(
+      "", Validators.compose([Validators.required])
+    ),
+    inputFechaFin: new FormControl(
+      "", Validators.compose([Validators.required])
     )
   });
 
