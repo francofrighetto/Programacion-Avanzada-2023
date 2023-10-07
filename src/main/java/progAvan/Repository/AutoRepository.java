@@ -1,10 +1,12 @@
 package progAvan.Repository;
 
 import progAvan.Model.Auto;
+import progAvan.Model.Marca;
 import progAvan.Model.Modelo;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,6 +18,8 @@ import jakarta.transaction.Transactional;
 public interface AutoRepository extends JpaRepository<Auto, Integer> {
 
     List<Auto> findByEstadoIsTrue();
+
+    List<Auto> findByEstadoIsTrue(Pageable pageable);
 
     @Transactional
     @Modifying

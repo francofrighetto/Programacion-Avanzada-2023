@@ -50,8 +50,8 @@ public class MarcaService {
 
     public List<Marca> findPaginado(int page, int size) {
         Pageable paging = PageRequest.of(page, size);
-        Page<Marca> pagedResult = marcaRepository.findAll(paging);
-        return pagedResult.toList();
+        List<Marca> pagedResult = marcaRepository.findByEstadoIsTrue(paging);
+        return pagedResult;
     }
 
     @Transactional
@@ -61,7 +61,7 @@ public class MarcaService {
         autoRepository.deshabilitarAutosPorMarcaId(marcaId);
     }
 
-    public long longitud(){
+    public long longitud() {
         return this.marcaRepository.count();
     }
 

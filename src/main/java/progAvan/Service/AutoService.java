@@ -25,7 +25,7 @@ public class AutoService {
     ModeloRepository modeloRepository;
 
     public Page<Auto> findPaginado(Pageable pageable) {
-    return autoRepository.findAll(pageable);
+        return autoRepository.findAll(pageable);
     }
 
     public void save(Auto auto) {
@@ -46,8 +46,8 @@ public class AutoService {
 
     public List<Auto> findPaginado(int page, int size) {
         Pageable paging = PageRequest.of(page, size);
-        Page<Auto> pagedResult = autoRepository.findAll(paging);
-        return pagedResult.toList();
+        List<Auto> pagedResult = autoRepository.findByEstadoIsTrue(paging);
+        return pagedResult;
     }
 
     @Transactional
