@@ -15,7 +15,7 @@ export class MarcaComponent implements OnInit {
   nuevo: boolean = true;
 
   // paginado
-  pageNumber: number = 1; // Inicializa en la página 1
+  pageNumber: number = 0;
   pageSize: number = 10;
   totalItems?: number;
 
@@ -39,7 +39,8 @@ export class MarcaComponent implements OnInit {
   }
 
   getMarcas() {
-    this.marcaService.getMarcasHabilitados().subscribe(data => {
+    // this.marcaService.getMarcasHabilitados().subscribe(data => {
+    this.marcaService.getMarcasPag(this.pageNumber, this.pageSize).subscribe(data=>{
       this.marcas = data;
     })
   }
@@ -124,7 +125,7 @@ export class MarcaComponent implements OnInit {
 
   onPageChange(event: any) {
     console.log(event);
-    this.pageNumber = event.pageIndex + 1;
+    this.pageNumber = event.pageIndex;
 
     this.marcaService.getMarcasPag(this.pageNumber, this.pageSize)
       .subscribe(data => {

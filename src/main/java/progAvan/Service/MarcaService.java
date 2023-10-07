@@ -49,6 +49,8 @@ public class MarcaService {
     }
 
     public List<Marca> findPaginado(int page, int size) {
+        System.out.println(page);
+                System.out.println(size);
         Pageable paging = PageRequest.of(page, size);
         Page<Marca> pagedResult = marcaRepository.findAll(paging);
         return pagedResult.toList();
