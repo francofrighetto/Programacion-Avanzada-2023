@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -51,8 +53,8 @@ public class ModeloController {
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrar")
-    public List<Modelo> mostrar() {
-        return modeloService.findAll();
+    public Page<Modelo> mostrar(Pageable pageable) {
+        return modeloService.findPaginado(pageable);
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)

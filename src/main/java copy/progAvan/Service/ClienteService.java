@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import progAvan.Model.Cliente;
 import progAvan.Model.Modelo;
 import progAvan.Repository.ClienteRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 @Service
 public class ClienteService {
@@ -21,8 +19,6 @@ public class ClienteService {
     // public void createCliente() {
     // clienteRepository.
     // }
-
-    
 
     public void save(Cliente model) {
         clienteRepository.save(model);
@@ -38,11 +34,6 @@ public class ClienteService {
 
     public List<Cliente> findAll() {
         return clienteRepository.findAll();
-    }
-
-    // paginación
-    public Page<Cliente> findPaginado(Pageable pageable) {
-        return clienteRepository.findAll(pageable);
     }
 
     // public boolean esUnico(Cliente cliente) {

@@ -1,13 +1,13 @@
 package progAvan.Controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -20,31 +20,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 
-import progAvan.Model.Servicio;
+import progAvan.Model.Auto;
+import progAvan.Model.Marca;
 import progAvan.Model.Modelo;
-import progAvan.Service.ServicioService;
+import progAvan.Service.AutoService;
 
 @RestController
-@RequestMapping(path = "/servicio")
-public class ServicioController {
+@RequestMapping(path = "/auto")
+@Api(tags = "AutoController", description = "ABM completo de auto")
+
+public class AutoController {
 
     @Autowired
-    private ServicioService servicioService;
+    AutoService autoService;
     Map<String, String> response = new HashMap<>();
-
-    @Value("${path_general}")
-    String path;
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/guardar")
-    public ResponseEntity guardar(@RequestBody Servicio model) {
+    @ApiOperation(value = "Traer auto")
+    public ResponseEntity guardar(@Valid @RequestBody Auto model) {
         try {
-            servicioService.save(model);
+            autoService.save(model);
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
         } catch (Exception e) {
@@ -55,28 +60,22 @@ public class ServicioController {
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrar")
-    public List<Servicio> mostrar() {
-        return servicioService.findAll();
+    public List<Auto> mostrar() {
+        return autoService.findAll();
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrarHabilitados")
-    public List<Servicio> mostrarHabilitados() {
-        return servicioService.findHabiliitados();
-    }
-
-    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
-    @GetMapping(value = "/mostrar")
-    public Page<Servicio> mostrar(Pageable pageable) {
-        return servicioService.findPaginado(pageable);
+    public List<Auto> mostrarHabilitados() {
+        return autoService.findHabiliitados();
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/editar/{id}")
-    public ResponseEntity actualizar(@PathVariable int id, @RequestBody Servicio model) {
-        // Servicio servicio = servicioService.findById(id).orElse(null);
+    public ResponseEntity actualizar(@PathVariable int id, @Valid @RequestBody Auto model) {
+        // Auto auto = autoService.findById(id).orElse(null);
         try {
-            servicioService.save(model);
+            autoService.save(model);
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
         } catch (Exception e) {
@@ -89,13 +88,13 @@ public class ServicioController {
     @PostMapping(value = "/eliminar/{id}")
     public ResponseEntity eliminar(@PathVariable int id) {
         try {
-            Optional<Servicio> optionalServicio = servicioService.findById(id);
+            Optional<Auto> optionalAuto = autoService.findById(id);
 
-            if (optionalServicio.isPresent()) {
-                Servicio servicio = optionalServicio.get();
-                // servicio.setEstado(!servicio.getEstado());
-                // servicioService.save(servicio);
-                servicioService.deshabilitarServicioYRelacionados(servicio.getId());
+            if (optionalAuto.isPresent()) {
+                Auto auto = optionalAuto.get();
+                // auto.setEstado(!auto.getEstado());
+                // autoService.save(auto);
+                autoService.deshabilitarAuto(auto.getId());
 
                 this.response.put("message", "success");
                 return new ResponseEntity<>(this.response, HttpStatus.OK);

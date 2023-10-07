@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -25,26 +23,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
-import progAvan.Model.Servicio;
+import progAvan.Model.Auto;
 import progAvan.Model.Modelo;
-import progAvan.Service.ServicioService;
+import progAvan.Service.ModeloService;
 
 @RestController
-@RequestMapping(path = "/servicio")
-public class ServicioController {
+@RequestMapping(path = "/modelo")
+public class ModeloController {
 
     @Autowired
-    private ServicioService servicioService;
-    Map<String, String> response = new HashMap<>();
+    private ModeloService modeloService;
 
-    @Value("${path_general}")
-    String path;
+    Map<String, String> response = new HashMap<>();
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/guardar")
-    public ResponseEntity guardar(@RequestBody Servicio model) {
+    public ResponseEntity guardar(@RequestBody Modelo model) {
         try {
-            servicioService.save(model);
+            modeloService.save(model);
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
         } catch (Exception e) {
@@ -55,28 +51,29 @@ public class ServicioController {
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrar")
-    public List<Servicio> mostrar() {
-        return servicioService.findAll();
+    public List<Modelo> mostrar() {
+        return modeloService.findAll();
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrarHabilitados")
-    public List<Servicio> mostrarHabilitados() {
-        return servicioService.findHabiliitados();
+    public List<Modelo> mostrarHabilitados() {
+        return modeloService.findHabiliitados();
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
-    @GetMapping(value = "/mostrar")
-    public Page<Servicio> mostrar(Pageable pageable) {
-        return servicioService.findPaginado(pageable);
+    @GetMapping(value = "/mostrarXMarca/{id}")
+    public List<Modelo> mostrarXMarca(@PathVariable int id) {
+        System.out.println(id);
+        return modeloService.findModelosXMarca(id);
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/editar/{id}")
-    public ResponseEntity actualizar(@PathVariable int id, @RequestBody Servicio model) {
-        // Servicio servicio = servicioService.findById(id).orElse(null);
+    public ResponseEntity actualizar(@PathVariable int id, @RequestBody Modelo model) {
+        // Modelo modelo = modeloService.findById(id).orElse(null);
         try {
-            servicioService.save(model);
+            modeloService.save(model);
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
         } catch (Exception e) {
@@ -89,13 +86,13 @@ public class ServicioController {
     @PostMapping(value = "/eliminar/{id}")
     public ResponseEntity eliminar(@PathVariable int id) {
         try {
-            Optional<Servicio> optionalServicio = servicioService.findById(id);
+            Optional<Modelo> optionalModelo = modeloService.findById(id);
 
-            if (optionalServicio.isPresent()) {
-                Servicio servicio = optionalServicio.get();
-                // servicio.setEstado(!servicio.getEstado());
-                // servicioService.save(servicio);
-                servicioService.deshabilitarServicioYRelacionados(servicio.getId());
+            if (optionalModelo.isPresent()) {
+                Modelo modelo = optionalModelo.get();
+                // modelo.setEstado(!modelo.getEstado());
+                // modeloService.save(modelo);
+                modeloService.deshabilitarModeloYRelacionados(modelo.getId());
 
                 this.response.put("message", "success");
                 return new ResponseEntity<>(this.response, HttpStatus.OK);
@@ -108,5 +105,4 @@ public class ServicioController {
             return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 }

@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -25,16 +23,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
-import progAvan.Model.Servicio;
+import progAvan.Model.Cliente;
 import progAvan.Model.Modelo;
-import progAvan.Service.ServicioService;
+import progAvan.Service.ClienteService;
 
 @RestController
-@RequestMapping(path = "/servicio")
-public class ServicioController {
+@RequestMapping(path = "/cliente")
+public class ClienteController {
 
     @Autowired
-    private ServicioService servicioService;
+    private ClienteService clienteService;
     Map<String, String> response = new HashMap<>();
 
     @Value("${path_general}")
@@ -42,9 +40,9 @@ public class ServicioController {
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/guardar")
-    public ResponseEntity guardar(@RequestBody Servicio model) {
+    public ResponseEntity guardar(@RequestBody Cliente model) {
         try {
-            servicioService.save(model);
+            clienteService.save(model);
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
         } catch (Exception e) {
@@ -55,47 +53,40 @@ public class ServicioController {
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrar")
-    public List<Servicio> mostrar() {
-        return servicioService.findAll();
-    }
-
-    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
-    @GetMapping(value = "/mostrarHabilitados")
-    public List<Servicio> mostrarHabilitados() {
-        return servicioService.findHabiliitados();
-    }
-
-    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
-    @GetMapping(value = "/mostrar")
-    public Page<Servicio> mostrar(Pageable pageable) {
-        return servicioService.findPaginado(pageable);
+    public List<Cliente> mostrar() {
+        return clienteService.findAll();
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/editar/{id}")
-    public ResponseEntity actualizar(@PathVariable int id, @RequestBody Servicio model) {
-        // Servicio servicio = servicioService.findById(id).orElse(null);
+    public ResponseEntity actualizar(@PathVariable int id, @RequestBody Cliente model) {
+        // Cliente cliente = clienteService.findById(id).orElse(null);
         try {
-            servicioService.save(model);
+            clienteService.save(model);
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
         } catch (Exception e) {
             this.response.put("message", "error interno");
             return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/mostrarHabilitados")
+    public List<Cliente> mostrarHabilitados() {
+        return clienteService.findHabilitados();
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/eliminar/{id}")
     public ResponseEntity eliminar(@PathVariable int id) {
         try {
-            Optional<Servicio> optionalServicio = servicioService.findById(id);
+            Optional<Cliente> optionalCliente = clienteService.findById(id);
 
-            if (optionalServicio.isPresent()) {
-                Servicio servicio = optionalServicio.get();
-                // servicio.setEstado(!servicio.getEstado());
-                // servicioService.save(servicio);
-                servicioService.deshabilitarServicioYRelacionados(servicio.getId());
+            if (optionalCliente.isPresent()) {
+                Cliente cliente = optionalCliente.get();
+                cliente.setEstado(!cliente.getEstado());
+                clienteService.save(cliente);
 
                 this.response.put("message", "success");
                 return new ResponseEntity<>(this.response, HttpStatus.OK);
@@ -108,5 +99,4 @@ public class ServicioController {
             return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 }

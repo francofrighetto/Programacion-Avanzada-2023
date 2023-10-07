@@ -6,9 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import jakarta.transaction.Transactional;
 import progAvan.Model.Servicio;
 import progAvan.Model.Modelo;
@@ -30,9 +27,6 @@ public class ServicioService {
         servicioRepository.save(model);
     }
 
-    public Page<Servicio> findPaginado(Pageable pageable) {
-        return servicioRepository.findAll(pageable);
-    }
     public Optional<Servicio> findById(long id) {
         return servicioRepository.findById(id);
     }

@@ -4,9 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -52,14 +49,8 @@ public class ModeloService {
 
     }
 
-    public Page<Modelo> mostrar(Pageable pageable) {
-        return findPaginado(pageable); // Utiliza el método local findPaginado
-    }
 
-    public Page<Modelo> findPaginado(Pageable pageable) {
-        return modeloRepository.findAll(pageable);
-    }
-
+    
 
     @Transactional
     public void deshabilitarModeloYRelacionados(Integer modeloId) {
@@ -68,4 +59,3 @@ public class ModeloService {
     }
 
 }
-

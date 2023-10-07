@@ -53,7 +53,7 @@ public class OrdenTrabajoController {
     @GetMapping(value = "/mostrar")
     public List<OrdenTrabajo> mostrar() {
         return ordenTrabajoService.findAll();
-    }
+    }  
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrarHabilitados")

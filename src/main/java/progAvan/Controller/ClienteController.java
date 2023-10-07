@@ -6,11 +6,15 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +38,18 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
     Map<String, String> response = new HashMap<>();
+
+    // ClienteService.java
+    public interface ClienteService {
+    Page<Cliente> findPaginado(Pageable pageable);
+    // Otros métodos de servicio para Cliente
+    }
+
+    @GetMapping(value = "/mostrarpaginado")
+    public Page<Cliente> mostrarPaginado(@RequestParam(defaultValue = "0") int page,
+                                         @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return clienteService.findPaginado(pageable);
 
     @Value("${path_general}")
     String path;

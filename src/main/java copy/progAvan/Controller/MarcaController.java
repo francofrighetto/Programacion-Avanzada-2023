@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -25,16 +23,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
-import progAvan.Model.Servicio;
+import progAvan.Model.Marca;
 import progAvan.Model.Modelo;
-import progAvan.Service.ServicioService;
+import progAvan.Service.MarcaService;
 
 @RestController
-@RequestMapping(path = "/servicio")
-public class ServicioController {
+@RequestMapping(path = "/marca")
+public class MarcaController {
 
     @Autowired
-    private ServicioService servicioService;
+    private MarcaService marcaService;
     Map<String, String> response = new HashMap<>();
 
     @Value("${path_general}")
@@ -42,9 +40,9 @@ public class ServicioController {
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/guardar")
-    public ResponseEntity guardar(@RequestBody Servicio model) {
+    public ResponseEntity guardar(@RequestBody Marca model) {
         try {
-            servicioService.save(model);
+            marcaService.save(model);
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
         } catch (Exception e) {
@@ -55,28 +53,22 @@ public class ServicioController {
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrar")
-    public List<Servicio> mostrar() {
-        return servicioService.findAll();
+    public List<Marca> mostrar() {
+        return marcaService.findAll();
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrarHabilitados")
-    public List<Servicio> mostrarHabilitados() {
-        return servicioService.findHabiliitados();
-    }
-
-    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
-    @GetMapping(value = "/mostrar")
-    public Page<Servicio> mostrar(Pageable pageable) {
-        return servicioService.findPaginado(pageable);
+    public List<Marca> mostrarHabilitados() {
+        return marcaService.findHabiliitados();
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/editar/{id}")
-    public ResponseEntity actualizar(@PathVariable int id, @RequestBody Servicio model) {
-        // Servicio servicio = servicioService.findById(id).orElse(null);
+    public ResponseEntity actualizar(@PathVariable int id, @RequestBody Marca model) {
+        // Marca marca = marcaService.findById(id).orElse(null);
         try {
-            servicioService.save(model);
+            marcaService.save(model);
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
         } catch (Exception e) {
@@ -89,13 +81,13 @@ public class ServicioController {
     @PostMapping(value = "/eliminar/{id}")
     public ResponseEntity eliminar(@PathVariable int id) {
         try {
-            Optional<Servicio> optionalServicio = servicioService.findById(id);
+            Optional<Marca> optionalMarca = marcaService.findById(id);
 
-            if (optionalServicio.isPresent()) {
-                Servicio servicio = optionalServicio.get();
-                // servicio.setEstado(!servicio.getEstado());
-                // servicioService.save(servicio);
-                servicioService.deshabilitarServicioYRelacionados(servicio.getId());
+            if (optionalMarca.isPresent()) {
+                Marca marca = optionalMarca.get();
+                // marca.setEstado(!marca.getEstado());
+                // marcaService.save(marca);
+                marcaService.deshabilitarMarcaYRelacionados(marca.getId());
 
                 this.response.put("message", "success");
                 return new ResponseEntity<>(this.response, HttpStatus.OK);
