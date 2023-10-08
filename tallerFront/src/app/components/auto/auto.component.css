@@ -51,3 +51,7 @@
 .btns{
     text-align: right;
 }
+
+.actions-table button{
+    margin-right: 5px !important;
+}

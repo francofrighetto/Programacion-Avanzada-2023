@@ -1,4 +1,5 @@
 import { Modelo } from "./Modelo";
+import { Cliente } from "./Cliente";
 
 export class Auto {
     id?:number;
@@ -6,5 +7,5 @@ export class Auto {
     estado?:boolean;
     anio?:number;
     modelo?:any;
-    idCliente?:number;
+    cliente?:any;
   }

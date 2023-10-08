@@ -8,6 +8,7 @@ import { AutoService } from 'src/app/servicios/auto/auto.service';
 import { ClienteService } from 'src/app/servicios/cliente/cliente.service';
 import { MarcaService } from 'src/app/servicios/marca/marca.service';
 import { ModeloService } from 'src/app/servicios/modelo/modelo.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auto',
@@ -41,6 +42,9 @@ export class AutoComponent implements OnInit {
   pageSize: number = 10;
   totalItems?: number;
 
+  // esta variable la uso para ver el cliente cuando aprieto el btn "Ver" en la lista de autos.
+  verCliente:Cliente = {}
+
   alerta = {
     color: "",
     mensaje: "",
@@ -60,7 +64,7 @@ export class AutoComponent implements OnInit {
   });
 
   constructor(private autoService: AutoService, private modeloService:ModeloService,
-    private marcaService:MarcaService, private clienteService: ClienteService) {
+    private marcaService:MarcaService, private clienteService: ClienteService,private router: Router) {
   }
   ngOnInit(): void {
     this.resetAuto();
@@ -69,8 +73,13 @@ export class AutoComponent implements OnInit {
   }
 
   //Abrir modal para ver cliente y servicios del auto.
-  openModal(){
+  openModal(auto:any){
+    // Guardo las variables para mostrarlas en el modal.
+    this.verCliente.nombre = auto.cliente.nombre
+    this.verCliente.estado = auto.cliente.estado
+    this.verCliente.dni = auto.cliente.dni
     this.modal = true;
+
   }
 
   closeModal(){
@@ -80,11 +89,15 @@ export class AutoComponent implements OnInit {
   getAutos() {
     this.autoService.getAutosPag(this.pageNumber, this.pageSize).subscribe(data=>{
       this.autos = data;
+      console.log("autos")
+      console.log(data)
     })
   }
   getModelosXMarca(id:number) {
     this.modeloService.getModelosXMarca(id).subscribe(data => {
       this.modelos = data;
+      console.log("modelos")
+      console.log(data)
     })
   }
   getMarcas() {
@@ -101,9 +114,16 @@ export class AutoComponent implements OnInit {
     })
   }
 
+  redirigirHaciaOrden(){
+    this.router.navigate(['/home/orden']);
+  }
+
   nuevoAuto() {
-    console.log("asd")
-    console.log(this.auto);
+    // Agarro el id del cliente que viene del formulario y se lo sobreescribo en el atributo "cliente"
+    //  como un objeto para que sea aceptado por el Backend.
+    var cliente = this.auto.cliente
+    this.auto.cliente = {id:cliente}
+  /*   this.auto.cliente = {Cliente: {id: this.auto.cliente}}; */
     if (this.formRegister.valid) {
       this.autoService.nuevoAuto(this.auto).subscribe((data: any) => {
         if (data.message == "success") {
