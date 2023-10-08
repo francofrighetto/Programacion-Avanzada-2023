@@ -35,7 +35,16 @@ export class ClienteComponent implements OnInit {
     ),
     inputDni: new FormControl(
       "", Validators.compose([Validators.required, Validators.pattern(this.dniPatron)])
-    )
+    ),
+    inputTelefono: new FormControl(
+      "", Validators.compose([Validators.required])
+    ),
+    inputEmail: new FormControl(
+      "", Validators.compose([Validators.required])
+    ),
+    inputDireccion: new FormControl(
+      "", Validators.compose([Validators.required])
+    ),
   });
 
   constructor(private clienteService: ClienteService) {
