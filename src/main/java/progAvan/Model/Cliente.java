@@ -18,6 +18,11 @@ public class Cliente {
     @Column(unique = true)
     private int dni;
     private String nombre;
+    private String direccion;
+    @Column(unique = true)
+    private String telefono;
+    @Column(unique = true)
+    private String email;
     @Column(columnDefinition = "boolean default true")
     private boolean estado;
 
