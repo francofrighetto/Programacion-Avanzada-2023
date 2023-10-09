@@ -34,6 +34,8 @@ export class ClienteComponent implements OnInit {
   }
 
   dniPatron: string = "\\d{8}";
+  dniTelefono: string = "\\d{10}";
+
 
 
   public formRegister = new FormGroup({
@@ -44,10 +46,10 @@ export class ClienteComponent implements OnInit {
       "", Validators.compose([Validators.required, Validators.pattern(this.dniPatron)])
     ),
     inputTelefono: new FormControl(
-      "", Validators.compose([Validators.required])
+      "", Validators.compose([Validators.required, Validators.pattern(this.dniPatron)])
     ),
     inputEmail: new FormControl(
-      "", Validators.compose([Validators.required])
+      "", Validators.compose([Validators.required, Validators.email])
     ),
     inputDireccion: new FormControl(
       "", Validators.compose([Validators.required])

@@ -8,7 +8,7 @@
         <br>
         <input type="number" id="inputDni" class="form-control" name="inputDni" placeholder="DNI" [(ngModel)]="cliente.dni" formControlName="inputDni" [class.is-invalid]="formRegister.get('inputDni')?.touched && formRegister.get('inputDni')?.invalid" [class.is-valid]="formRegister.get('inputDni')?.valid">
         <br>
-        <input type="number" id="inputTelefono" class="form-control" name="inputTelefono" placeholder="Telefono" [(ngModel)]="cliente.telefono" formControlName="inputTelefono" [class.is-invalid]="formRegister.get('inputTelefono')?.touched && formRegister.get('inputTelefono')?.invalid"
+        <input type="number" id="inputTelefono" class="form-control" name="inputTelefono" placeholder="Teléfono (caract sin 0 y sin 15)" [(ngModel)]="cliente.telefono" formControlName="inputTelefono" [class.is-invalid]="formRegister.get('inputTelefono')?.touched && formRegister.get('inputTelefono')?.invalid"
             [class.is-valid]="formRegister.get('inputTelefono')?.valid">
         <br>
         <input type="email" id="inputEmail" class="form-control" name="inputEmail" placeholder="Email" [(ngModel)]="cliente.email" formControlName="inputEmail" [class.is-invalid]="formRegister.get('inputEmail')?.touched && formRegister.get('inputEmail')?.invalid"
