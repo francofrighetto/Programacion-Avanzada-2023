@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Auto } from 'src/app/modelos/Auto';
 import { Orden } from 'src/app/modelos/Orden';
@@ -21,6 +21,8 @@ export class OrdenComponent implements OnInit {
   ordenes?: Orden[];
   orden!: Orden;
   nuevo: boolean = true;
+
+  nuevoDetalle: DetalleOrden = new DetalleOrden();
 
 
   autos!: Auto[];
@@ -47,12 +49,7 @@ export class OrdenComponent implements OnInit {
     inputDescripcion: new FormControl(
       "", Validators.compose([Validators.required])
     ),
-    inputCantidad: new FormControl(
-      "", Validators.compose([Validators.required])
-    ),
-    inputTotal: new FormControl(
-      "", Validators.compose([Validators.required])
-    ),
+
     inputFecha: new FormControl(
       "", Validators.compose([Validators.required])
     ),
@@ -62,7 +59,7 @@ export class OrdenComponent implements OnInit {
   });
 
   constructor(private ordenService: OrdenService, private autoService: AutoService,private tecnicoService: TecnicoService,
-    private servicioService:ServicioService) {
+    private servicioService:ServicioService, private cdr: ChangeDetectorRef) {
   }
   ngOnInit(): void {
     this.resetOrden();
@@ -70,6 +67,7 @@ export class OrdenComponent implements OnInit {
     this.getTecnicos();
     this.getServicios();
   }
+
 
   getOrdenes() {
     this.ordenService.getOrdenesPag(this.pageNumber, this.pageSize).subscribe(data=>{
@@ -132,7 +130,6 @@ export class OrdenComponent implements OnInit {
   }
 
   eliminar(orden: Orden) {
-    console.log(orden);
     if (orden.id != undefined) {
       this.ordenService.eliminarOrden(orden.id).subscribe((data: any) => {
         if (data.message == "success") {
@@ -147,14 +144,14 @@ export class OrdenComponent implements OnInit {
   }
 
   agregarFila(){
-    console.log(this.orden);
-    this.orden.detalle?.push(new DetalleOrden);
-    console.log(this.orden);
-
+    this.orden.detalle?.push(this.nuevoDetalle);
+    this.nuevoDetalle = new DetalleOrden();
+    this.cdr.detectChanges();
   }
 
   cancelar() {
     this.orden = new Orden;
+    this.orden.total=0;
     this.orden.estado = true;
     this.orden.auto = new Auto;
     this.orden.tecnico = new Tecnico;
@@ -187,7 +184,6 @@ export class OrdenComponent implements OnInit {
     }
   }
   onPageChange(event: any) {
-    console.log(event);
     this.pageNumber = event.pageIndex;
 
     this.ordenService.getOrdenesPag(this.pageNumber, this.pageSize)
@@ -195,4 +191,26 @@ export class OrdenComponent implements OnInit {
         this.ordenes=data;
       });
   }
+
+  calcularTotal(){
+    this.orden.detalle.forEach(e => {
+      console.log(e.cantidad);
+      console.log(e.servicio.precio);
+      e.subtotal = e.cantidad! * e.servicio.precio!;
+      this.orden.total +=e.cantidad! * e.servicio.precio!;
+    });
+    let total=0;
+    this.orden.detalle.forEach(e => {
+      total += e.subtotal!;
+    });
+    this.orden.total=total;
+
+  }
+
+cambioCantidad(i:number, event:any){
+  let valorInput = parseFloat((event.target as HTMLInputElement).value);
+  this.orden.detalle[i].cantidad=valorInput;
+  this.calcularTotal();
+}
+
 }

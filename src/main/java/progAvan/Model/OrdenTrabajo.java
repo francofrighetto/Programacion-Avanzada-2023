@@ -19,7 +19,7 @@ public class OrdenTrabajo {
     private String descripcion;
     private Date fechaInicio;
     private Date fechaFin;
-    public Integer total;
+    public float total;
     @ManyToOne
     @JoinColumn(name = "tecnico_id", referencedColumnName = "id")
     private Tecnico tecnico;

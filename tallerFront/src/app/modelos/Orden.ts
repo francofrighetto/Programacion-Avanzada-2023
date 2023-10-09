@@ -9,7 +9,7 @@ export class Orden {
   estado?: boolean;
   fechaInicio?: Date;
   fechaFin?: Date;
-  total?: number;
+  total: number=0;
   id?: number;
   detalle:DetalleOrden[]=[];
 }

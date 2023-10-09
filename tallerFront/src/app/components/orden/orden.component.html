@@ -3,20 +3,22 @@
 
 
 <div class="row d-flex">
-    <form class="col-4 " [formGroup]="formRegister">
+    <form class="col-5 " [formGroup]="formRegister">
         <label for="inputTotal">Descripcion</label>
         <input type="text" id="inputDescripcion" class="form-control" name="inputDescripcion" placeholder="Breve descripcion" [(ngModel)]="orden.descripcion" formControlName="inputDescripcion" [class.is-invalid]="formRegister.get('inputDescripcion')?.touched && formRegister.get('inputDescripcion')?.invalid"
             [class.is-valid]="formRegister.get('inputDescripcion')?.valid">
-
         <br>
-        <label for="inputFecha">Fecha Creada</label>
-        <input type="date" id="inputFecha" class="form-control" name="inputFecha" placeholder="" [(ngModel)]="orden.fechaInicio" formControlName="inputFecha" [class.is-invalid]="formRegister.get('inputFecha')?.touched && formRegister.get('inputFecha')?.invalid"
-            [class.is-valid]="formRegister.get('inputFecha')?.valid">
-        <br>
+        <div class="d-flex">
 
-        <label for="inputFechaFin">Fecha Finalizada</label>
-        <input type="date" id="inputFechaFin" class="form-control" name="inputFechaFin" placeholder="" [(ngModel)]="orden.fechaFin" formControlName="inputFechaFin" [class.is-invalid]="formRegister.get('inputFechaFin')?.touched && formRegister.get('inputFechaFin')?.invalid"
-            [class.is-valid]="formRegister.get('inputFechaFin')?.valid">
+            <label for="inputFecha">Fecha Creada</label>
+            <input type="date" id="inputFecha" class="form-control" name="inputFecha" placeholder="" [(ngModel)]="orden.fechaInicio" formControlName="inputFecha" [class.is-invalid]="formRegister.get('inputFecha')?.touched && formRegister.get('inputFecha')?.invalid"
+                [class.is-valid]="formRegister.get('inputFecha')?.valid">
+            <br>
+            <label for="inputFechaFin">Fecha Finalizada</label>
+            <input type="date" id="inputFechaFin" class="form-control" name="inputFechaFin" placeholder="" [(ngModel)]="orden.fechaFin" formControlName="inputFechaFin" [class.is-invalid]="formRegister.get('inputFechaFin')?.touched && formRegister.get('inputFechaFin')?.invalid"
+                [class.is-valid]="formRegister.get('inputFechaFin')?.valid">
+            <br>
+        </div>
         <br>
 
         <label for="inputAuto">Auto</label>
@@ -44,19 +46,20 @@
             <h5>Detalles servicios</h5>
             <button type="button" class="btn btn-success ms-2" (click)="agregarFila()">Agregar fila</button>
         </div>
-
         <div class="d-flex" *ngFor="let detalle of orden.detalle;let i = index">
             <mat-form-field>
                 <mat-label>Servicio</mat-label>
-                <mat-select [(value)]="orden.detalle[i].servicio.id">
-                    <mat-option [value]="s.id" *ngFor="let s of servicios">{{s.nombre}}</mat-option>
+                <mat-select [(value)]="orden.detalle[i].servicio" (valueChange)="calcularTotal()">
+                    <mat-option [value]="s" *ngFor="let s of servicios">{{s.nombre}}</mat-option>
                 </mat-select>
             </mat-form-field>
 
-            <input type="number" id="inputCantidad" class="form-control" name="inputCantidad" placeholder="" [(ngModel)]="orden.detalle[i].cantidad" formControlName="inputCantidad" [class.is-invalid]="formRegister.get('inputCantidad')?.touched && formRegister.get('inputCantidad')?.invalid"
-                [class.is-valid]="formRegister.get('inputCantidad')?.valid">
+            <input type="number" id="inputCantidad" class="form-control" name="inputCantidad" placeholder="" (change)="cambioCantidad(i,$event)">
+
+            <span *ngIf="orden.detalle[i].subtotal!=undefined">Subtotal: ${{orden.detalle[i].subtotal | number : "1.2"}}</span>
+
         </div>
-        <label for="inputTotal">Total</label>
+        <label for="inputTotal">Total {{orden.total| number :"1.2"}}</label>
         <!-- fin detalle -->
 
         <br>
@@ -70,7 +73,7 @@
         </div>
 
     </form>
-    <div class="col-8">
+    <div class="col-7">
         <table class="table" *ngIf="ordenes != undefined && ordenes.length != 0">
             <thead>
                 <tr>
