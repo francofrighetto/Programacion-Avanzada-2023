@@ -71,7 +71,7 @@ public class ClienteController {
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
         } catch (Exception e) {
-            this.response.put("message", "error interno");
+            this.response.put("message", e.getMessage());
             return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
