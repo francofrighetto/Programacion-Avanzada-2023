@@ -9,6 +9,7 @@
     align-items: center;
     justify-content: center;
     z-index: 100;
+    text-align: center;
 }
 .buscador{
     display: flex;
@@ -29,10 +30,15 @@
 
 .content-modal{
     width: 100%;
-    max-width: 400px;
+    max-width: 800px;
     padding: 20px;
     background-color: white;
     border-radius: 5px;
+}
+
+
+.colum-table-cliente th{
+    margin-right: 10px;
 }
 
 .content-modal h2{
@@ -54,4 +60,42 @@
 
 .actions-table button{
     margin-right: 5px !important;
+}
+
+.datos-cliente{
+    display: flex;
+}
+
+.columna-datos-cliente{
+    width: 50%;
+}
+
+/* Estilos para la tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px; /* Espaciado superior para separar la tabla de otros elementos */
+}
+
+/* Estilos para las filas de encabezado */
+.colum-table-cliente th {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Estilos para las filas de datos */
+tr {
+  border-bottom: 1px solid #ccc; /* Borde inferior para separar las filas de datos */
+}
+
+/* Estilos para las celdas de datos */
+td {
+  padding: 8px;
+}
+
+/* Estilos para resaltar filas alternas (opcional) */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }

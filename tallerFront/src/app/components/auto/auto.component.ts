@@ -9,6 +9,8 @@ import { ClienteService } from 'src/app/servicios/cliente/cliente.service';
 import { MarcaService } from 'src/app/servicios/marca/marca.service';
 import { ModeloService } from 'src/app/servicios/modelo/modelo.service';
 import { Router } from '@angular/router';
+import { Orden } from 'src/app/modelos/Orden';
+import { OrdenService } from 'src/app/servicios/orden/orden.service';
 
 @Component({
   selector: 'app-auto',
@@ -37,6 +39,9 @@ export class AutoComponent implements OnInit {
   cliente:Cliente = new Cliente;
   clientes?:Cliente[];
 
+  ordenesParaMostrar:any = []
+  ordenes?:Orden[];
+
   // paginado
   pageNumber: number = 0;
   pageSize: number = 10;
@@ -63,13 +68,23 @@ export class AutoComponent implements OnInit {
     )
   });
 
+  getOrdenes(){
+    this.ordenService.getOrdenesHabilitados().subscribe(data=>{
+      this.ordenes = data;
+      console.log("ordenes")
+      console.log(data)
+    })
+  }
+
   constructor(private autoService: AutoService, private modeloService:ModeloService,
-    private marcaService:MarcaService, private clienteService: ClienteService,private router: Router) {
+    private marcaService:MarcaService, private clienteService: ClienteService,private router: Router,
+    private ordenService: OrdenService) {
   }
   ngOnInit(): void {
     this.resetAuto();
     this.getMarcas();
     this.getClientes();
+    this.getOrdenes();
   }
 
   //Abrir modal para ver cliente y servicios del auto.
@@ -78,8 +93,30 @@ export class AutoComponent implements OnInit {
     this.verCliente.nombre = auto.cliente.nombre
     this.verCliente.estado = auto.cliente.estado
     this.verCliente.dni = auto.cliente.dni
-    this.modal = true;
+    this.verCliente.telefono = auto.cliente.telefono
+    this.verCliente.email = auto.cliente.email
+    this.verCliente.id = auto.cliente.id
 
+    this.modal = true;
+    this.calcularOrdenXCliente(this.verCliente.id)
+
+  }
+
+  calcularOrdenXCliente(id:any){
+    // Guardo las ordenes que coinciden con el id del cliente para mostrarlas luego.
+    if(this.ordenes!=undefined)
+    for(let i=0;this.ordenes.length>0;i++){
+      if(this.ordenes[i].auto.cliente.id === id ){
+        var orden = {
+          id: this.ordenes[i].id,
+          tecnico: this.ordenes[i].tecnico.nombre,
+          descripcion: this.ordenes[i].descripcion,
+          fechaInicio: this.ordenes[i].fechaInicio,
+          total: this.ordenes[i].total
+        }
+        this.ordenesParaMostrar.push(orden)
+      }
+    }
   }
 
   closeModal(){

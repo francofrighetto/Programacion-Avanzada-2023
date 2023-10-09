@@ -98,10 +98,42 @@
             <div *ngIf="modal == true">
                 <div class="container-modal-auto">
                     <div class="content-modal">
-                        <h2>Cliente</h2>
-                        <p><b>Nombre: </b>{{verCliente.nombre}}</p> <b></b>
-                        <p><b>DNI: </b> {{verCliente.dni}}</p>
-                        <h2>Ordenes</h2>
+                        <h3>Cliente</h3>
+                            <div class="ordenes-cliente" >
+                                  <table>
+                                    <tr class="colum-table-cliente"> 
+                                      <th>Nombre</th>
+                                      <th>DNI</th>
+                                      <th>Contacto</th>
+                                      <th>Email</th>
+                                    </tr>
+                                    <tr>
+                                      <td>{{ verCliente.nombre}}</td>
+                                      <td>{{ verCliente.dni }}</td>
+                                      <td>{{ verCliente.telefono }}</td>
+                                      <td>{{ verCliente.email }}</td>
+                                    </tr>
+                                  </table>
+                              </div>
+                        <h3>Ordenes</h3>
+                        <div class="ordenes-cliente" *ngFor="let orden of ordenes; let index = index">
+                            <ng-container *ngIf="verCliente.id === orden.auto.cliente.id">
+                              <table>
+                                <tr class="colum-table-cliente"> 
+                                  <th>Técnico</th>
+                                  <th>Descripción</th>
+                                  <th>Fecha de Inicio</th>
+                                  <th>Monto Total</th>
+                                </tr>
+                                <tr *ngFor="let ordenMostrar of ordenesParaMostrar">
+                                  <td>{{ ordenMostrar.tecnico }}</td>
+                                  <td>{{ ordenMostrar.descripcion }}</td>
+                                  <td>{{ ordenMostrar.fechaInicio.slice(0, 10) }}</td>
+                                  <td>{{ ordenMostrar.total }}</td>
+                                </tr>
+                              </table>
+                            </ng-container>
+                          </div>
                         <div class="btns">
                             <button (click)="closeModal()" class="bnt-cerrar">Cerrar</button>
                         </div>
