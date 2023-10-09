@@ -96,15 +96,21 @@ public class OrdenTrabajoController {
         try {
 
             ordenTrabajoService.save(model);
-            for (DetalleOrdenTrabajo detalle : model.getDetalle()) {
+            Optional<OrdenTrabajo> ordenOptional = ordenTrabajoService.findById(id);
+            if (ordenOptional.isPresent()){
+                OrdenTrabajo orden = ordenOptional.get();
+            for (DetalleOrdenTrabajo detalle : orden.getDetalle()) {
                 // detalle.setOrden(orden);
                 detalle.setOrden(model);
                 System.out.println(detalle.toString());
                 if (detalle.getId() != null) {
 
                     ordenTrabajoService.setOrdenId(id, detalle.getId());
+                }else{
+                    ordenTrabajoService.setOrdenId(id,0);
                 }
             }
+        }
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
         } catch (Exception e) {

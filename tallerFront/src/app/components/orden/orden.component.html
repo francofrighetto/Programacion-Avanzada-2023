@@ -3,7 +3,7 @@
 
 
 <div class="row d-flex">
-    <form class="col-3 ms-3" [formGroup]="formRegister">
+    <form class="col-4 ms-3" [formGroup]="formRegister">
         <label for="inputTotal">Descripcion</label>
         <input type="text" id="inputDescripcion" class="form-control" name="inputDescripcion" placeholder="Breve descripcion" [(ngModel)]="orden.descripcion" formControlName="inputDescripcion" [class.is-invalid]="formRegister.get('inputDescripcion')?.touched && formRegister.get('inputDescripcion')?.invalid"
             [class.is-valid]="formRegister.get('inputDescripcion')?.valid">
@@ -68,9 +68,9 @@
             </mat-form-field>
 
             <!-- <input type="number" id="inputCantidad" class="form-control" name="inputCantidad" placeholder="" [(ngModel)]="orden.detalle[i].cantidad" (change)="cambioCantidad(i,$event)" style="width: 70px; height: 50px;margin-left: 20px;"> -->
-            <input type="number" id="inputCantidad" class="form-control" name="inputCantidad" placeholder="" [(ngModel)]="orden.detalle[i].cantidad" (change)="cambioCantidad(i,$event)" formControlName="inputCantidad" style="width: 70px; height: 50px;margin-left: 20px;">
+            <input type="number" class="form-control" name="inputCantidad" placeholder="" [(ngModel)]="orden.detalle[i].cantidad" (change)="cambioCantidad(i,$event)" formControlName="inputCantidad{{i+1}}" style="width: 70px; height: 50px;margin-left: 20px;">
 
-            <span *ngIf="orden.detalle[i].subtotal!=undefined" class="ms-3">Subtotal: ${{orden.detalle[i].subtotal | number : "1.2"}}</span>
+            <span *ngIf="orden.detalle[i].subtotal!=undefined" class="col-2 ms-3">Subtotal: ${{orden.detalle[i].subtotal | number : "1.2"}}</span>
 
             <button type="button" class="btn btn-danger ms-2 " (click)="quitarFila(i)" style="width: 70px; height: 50px;margin-left: 20px;">Quitar</button>
             <mat-divider></mat-divider>
@@ -96,7 +96,7 @@
         </div>
 
     </form>
-    <div class="col-8">
+    <div class="col-7">
         <table class="table" *ngIf="ordenes != undefined && ordenes.length != 0">
             <thead>
                 <tr>
@@ -143,5 +143,23 @@
         <div *ngIf="ordenes == undefined || ordenes.length==0">
             No hay ordenes
         </div>
+        <table class="table" *ngIf="ordenes != undefined && ordenes.length != 0">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Auto</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let m of ordenes">
+                    <td>{{m.id}}</td>
+                    <td>{{m.descripcion}}</td>
+                    <td>{{m.auto?.patente || 'Sin Auto'}}</td>
+                    <td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

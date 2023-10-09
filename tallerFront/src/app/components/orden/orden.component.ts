@@ -26,6 +26,7 @@ export class OrdenComponent implements OnInit {
 
   nuevoDetalle: DetalleOrden = new DetalleOrden();
 
+  mostrarDetalle:any;
 
   autos!: Auto[];
   auto: Auto = new Auto;
@@ -56,7 +57,23 @@ export class OrdenComponent implements OnInit {
       "", Validators.compose([Validators.required])
     ),
     inputFechaFin: new FormControl(""),
-    inputCantidad: new FormControl("")
+    inputCantidad1: new FormControl(""),
+    inputCantidad2: new FormControl(""),
+    inputCantidad3: new FormControl(""),
+    inputCantidad4: new FormControl(""),
+    inputCantidad5: new FormControl(""),
+    inputCantidad6: new FormControl(""),
+    inputCantidad7: new FormControl(""),
+    inputCantidad8: new FormControl(""),
+    inputCantidad9: new FormControl(""),
+    inputCantidad10: new FormControl(""),
+    inputCantidad11: new FormControl(""),
+    inputCantidad12: new FormControl(""),
+    inputCantidad13: new FormControl(""),
+    inputCantidad14: new FormControl(""),
+    inputCantidad15: new FormControl(""),
+
+
 
 
   });
@@ -129,11 +146,11 @@ export class OrdenComponent implements OnInit {
 
   editar(orden: Orden) {
     this.nuevo = false;
-    console.log(orden);
     this.detalleOrdenService.getDetalleOrden(orden.id!).subscribe((data: any) => {
       console.log(data);
       if (data!=undefined && data.length!=0){
       this.orden = data[0].orden;
+      this.calcularTotal();
       if (this.orden.fechaInicio!=undefined && this.orden.fechaInicio!=null){
         this.orden.fechaInicio = this.formatearFecha(this.orden.fechaInicio)!;
       }
@@ -160,12 +177,15 @@ export class OrdenComponent implements OnInit {
     this.orden.detalle?.splice(i, 1);
     console.log(this.orden.detalle)
     this.cdr.detectChanges();
+    this.calcularTotal();
+
   }
 
   agregarFila() {
     this.orden.detalle?.push(this.nuevoDetalle);
     this.nuevoDetalle = new DetalleOrden();
     this.cdr.detectChanges();
+    this.calcularTotal();
   }
 
   cancelar() {
@@ -233,8 +253,11 @@ export class OrdenComponent implements OnInit {
   }
 
   cambioCantidad(i: number, event: any) {
+    console.log(this.orden.detalle[i].cantidad);
     let valorInput = parseFloat((event.target as HTMLInputElement).value);
     this.orden.detalle[i].cantidad = valorInput;
+    console.log(this.orden.detalle[i].cantidad);
+
     this.calcularTotal();
   }
 
