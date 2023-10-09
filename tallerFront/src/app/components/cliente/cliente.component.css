@@ -1,0 +1,57 @@
+.container-modal-auto{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(144,148,150,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+.buscador{
+    display: flex;
+    margin-bottom: 10px;
+   
+}
+
+.buscador p {
+    margin-right: 15px;
+    margin-top: 12px;
+}  
+
+.buscador input {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+}   
+
+.content-modal{
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.content-modal h2{
+    text-align: center;
+}
+
+.bnt-cerrar{
+    margin-top: 20px;
+    background-color: gray;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid gray;
+}
+
+.btns{
+    text-align: right;
+}
+
+.actions-table button{
+    margin-right: 5px !important;
+}
