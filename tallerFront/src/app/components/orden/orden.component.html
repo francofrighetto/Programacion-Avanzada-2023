@@ -17,9 +17,7 @@
             </div>
             <div class="col-5 ms-5">
                 <label for="inputFechaFin">Fecha Finalizada</label>
-                <input type="date" id="inputFechaFin" class="form-control" name="inputFechaFin" placeholder="" [(ngModel)]="orden.fechaFin" formControlName="inputFechaFin" 
-                    
-                    >
+                <input type="date" id="inputFechaFin" class="form-control" name="inputFechaFin" placeholder="" [(ngModel)]="orden.fechaFin" formControlName="inputFechaFin">
                 <br>
             </div>
         </div>
@@ -27,38 +25,38 @@
         <div class="d-flex ">
             <div class="col-6">
                 <label for="inputAuto">Auto</label>
-            <br>
-            <mat-form-field>
-                <mat-label>Autos</mat-label>
-                <mat-select [(value)]="orden.auto.id">
-                    <mat-option [value]="m.id" *ngFor="let m of autos">{{m.patente}}</mat-option>
-                </mat-select>
-            </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-label>Autos</mat-label>
+                    <mat-select [(value)]="orden.auto">
+                        <mat-option [value]="m" *ngFor="let m of autos">{{m.patente}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
-            
-            
+
+
             <div class="col-6 ms-2">
-                <label for="inputTecnico" >Tecnico</label>
-            <br>
-            <mat-form-field>
-                <mat-label>Tecnicos</mat-label>
-                <mat-select [(value)]="orden.tecnico.id">
-                    <mat-option [value]="m.id" *ngFor="let m of tecnicos">{{m.nombre}}</mat-option>
-                </mat-select>
-            </mat-form-field>
+                <label for="inputTecnico">Tecnico</label>
+                <br>
+                <mat-form-field>
+                    <mat-label>Tecnicos</mat-label>
+                    <mat-select [(value)]="orden.tecnico.id">
+                        <mat-option [value]="m.id" *ngFor="let m of tecnicos">{{m.nombre}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
-            
+
 
         </div>
-        
-        
+
+
 
         <!-- Detalle servicios -->
         <mat-divider></mat-divider>
         <div class="d-flex mt-2 ">
             <h5>Detalles servicios</h5>
             <button type="button" class="btn btn-success ms-2" (click)="agregarFila()">Agregar fila</button>
-            
+
         </div>
         <mat-divider class="mt-2 "></mat-divider>
         <div class="d-flex mt-2" *ngFor="let detalle of orden.detalle;let i = index">
@@ -80,17 +78,17 @@
         <div class=" mt-4 ">
             <mat-divider></mat-divider>
             <label for="inputTotal" class="mt-2">Total {{orden.total| number :"1.2"}}</label>
-            
+
             <mat-divider class="mt-2"></mat-divider>
         </div>
-        
+
         <br>
         <div class="d-flex mt-4 ">
             <button type="button" class="btn btn-success ms-2" (click)="nuevaOrden()" *ngIf="nuevo">Crear</button>
             <button type="button" class="btn btn-success" (click)="actualizarOrden()" *ngIf="!nuevo">Modificar</button>
             <button type="button" class="btn btn-danger ms-4" (click)="cancelar()">Cancelar</button>
         </div>
-        
+
         <br>
         <div class="alert alert-{{alerta.color}} px-3 mx-5" role="alert" *ngIf="alerta.activo">
             {{alerta.mensaje}}

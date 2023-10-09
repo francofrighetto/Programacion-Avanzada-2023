@@ -15,15 +15,17 @@ public class DetalleOrdenTrabajo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(unique = true)
-    private String descripcion;
-    private Date fecha;
+    private String descripcion;    
     public Integer cantidad;
     @ManyToOne
     @JoinColumn(name = "servicio_id", referencedColumnName = "id")
     private Servicio servicio;
-    private double precio;
+    private double subtotal;
     private boolean estado;
+
+    @ManyToOne
+    @JoinColumn(name = "orden_id", referencedColumnName = "id")
+    private OrdenTrabajo orden;
 
     public boolean getEstado() {
         return estado;

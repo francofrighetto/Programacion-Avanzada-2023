@@ -66,4 +66,12 @@ public class OrdenTrabajoService {
     public List<Object> ultimaOrdenCliente(int idCliente) {
         return ordenTrabajoRepository.ultimaOrdenCliente(idCliente);
     }
+
+    public OrdenTrabajo getLastId(){
+      return ordenTrabajoRepository.findFirstByOrderByIdDesc();
+    }
+
+    public void setOrdenId(int idOrden, int idDetalle){
+      ordenTrabajoRepository.setOdenId(idOrden, idDetalle);
+    }
 }

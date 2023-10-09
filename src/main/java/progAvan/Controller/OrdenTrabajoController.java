@@ -25,6 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import progAvan.Model.Auto;
+import progAvan.Model.DetalleOrdenTrabajo;
 import progAvan.Model.Marca;
 import progAvan.Model.OrdenTrabajo;
 import progAvan.Service.OrdenTrabajoService;
@@ -43,9 +44,20 @@ public class OrdenTrabajoController {
     public ResponseEntity guardar(@RequestBody OrdenTrabajo model) {
         try {
             ordenTrabajoService.save(model);
+
+            int id = ordenTrabajoService.getLastId().getId();
+            List<DetalleOrdenTrabajo> detalles = model.getDetalle();
+            model.setId(id);
+            for (DetalleOrdenTrabajo detalle : detalles){
+                //detalle.setOrden(orden);
+                detalle.setOrden(model);
+                ordenTrabajoService.setOrdenId(id, detalle.getId());
+            }
+            
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
         } catch (Exception e) {
+            System.out.println(e);
             this.response.put("message", "error interno");
             return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -56,6 +68,12 @@ public class OrdenTrabajoController {
     public List<OrdenTrabajo> mostrarPaginado(@RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         return ordenTrabajoService.findPaginado(page, size);
+    }
+
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/mostrar")
+    public List<OrdenTrabajo> mostrar() {
+        return ordenTrabajoService.findAll();
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
