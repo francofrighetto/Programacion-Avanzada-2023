@@ -46,7 +46,7 @@ export class ClienteComponent implements OnInit {
       "", Validators.compose([Validators.required, Validators.pattern(this.dniPatron)])
     ),
     inputTelefono: new FormControl(
-      "", Validators.compose([Validators.required, Validators.pattern(this.dniPatron)])
+      "", Validators.compose([Validators.required, Validators.pattern(this.dniTelefono)])
     ),
     inputEmail: new FormControl(
       "", Validators.compose([Validators.required, Validators.email])

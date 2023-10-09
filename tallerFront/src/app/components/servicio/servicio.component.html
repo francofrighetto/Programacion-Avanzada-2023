@@ -1,12 +1,17 @@
 <app-header></app-header>
 
 <div class="row d-flex">
-  <form class="col-4" [formGroup]="formRegister">
+    <form class="col-4" [formGroup]="formRegister">
         <!-- <input type="text" placeholder="Nombre" name="nombre" [(ngModel)]="servicio.nombre"> -->
         <input type="text" id="inputNombre" class="form-control" name="inputNombre" placeholder="Nombre" [(ngModel)]="servicio.nombre" formControlName="inputNombre" [class.is-invalid]="
         formRegister.get('inputNombre')?.touched &&
         formRegister.get('inputNombre')?.invalid
       " [class.is-valid]="formRegister.get('inputNombre')?.valid" />
+
+        <input type="number" id="inputPrecio" class="form-control" name="inputPrecio" placeholder="Precio" [(ngModel)]="servicio.precio" formControlName="inputPrecio" [class.is-invalid]="
+        formRegister.get('inputPrecio')?.touched &&
+        formRegister.get('inputPrecio')?.invalid
+      " [class.is-valid]="formRegister.get('inputPrecio')?.valid" />
         <br />
         <button type="button" class="btn btn-success ms-2" (click)="nuevaServicio()" *ngIf="nuevo">
       Crear
@@ -26,15 +31,15 @@
         <table class="table" *ngIf="servicios != undefined && servicios != []">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Nombre</th>
+                    <th scope="col">Precio</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let m of servicios">
-                    <td>{{ m.id }}</td>
                     <td>{{ m.nombre }}</td>
+                    <td>{{ m.precio }}</td>
                     <td>
                         <button type="button" class="btn btn-primary" (click)="editar(m)">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

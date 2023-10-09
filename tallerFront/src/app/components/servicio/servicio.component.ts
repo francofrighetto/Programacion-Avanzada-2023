@@ -28,6 +28,9 @@ export class ServicioComponent implements OnInit {
   public formRegister = new FormGroup({
     inputNombre: new FormControl(
       "", Validators.compose([Validators.required])
+    ),
+    inputPrecio: new FormControl(
+      "", Validators.compose([Validators.required])
     )
   });
 

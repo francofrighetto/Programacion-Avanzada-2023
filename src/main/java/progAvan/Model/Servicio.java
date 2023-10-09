@@ -18,6 +18,7 @@ public class Servicio {
     private Integer id;
     @Column(unique = true)
     private String nombre;
+    private float precio;
     @Column(columnDefinition = "boolean default true")
     private boolean estado;
 
