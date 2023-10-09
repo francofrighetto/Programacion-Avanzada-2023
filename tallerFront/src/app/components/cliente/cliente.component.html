@@ -37,6 +37,8 @@
         </div>
     </form>
     <div class="col-8">
+        <input type="text" id="inputBuscar" class="form-control" name="inputBuscar" placeholder="Buscar"
+            [(ngModel)]="nombrebuscar" onchange="buscar()">
         <table class="table" *ngIf="clientes != undefined && clientes.length!=0">
             <thead>
                 <tr>

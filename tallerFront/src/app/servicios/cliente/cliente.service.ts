@@ -33,4 +33,8 @@ export class ClienteService {
     const params = { page, size };
     return this.http.get<Cliente[]>(environment.apiUrl + endpoints.cliente + endpoints.mostrarpaginado, { params });
   }
+  getClientesFiltrar(page:number, size:number, nombre:string): Observable<Cliente[]>{
+    const params = { page, size };
+    return this.http.get<Cliente[]>(environment.apiUrl + endpoints.cliente + '/' + nombre, { params });
+  }
 }

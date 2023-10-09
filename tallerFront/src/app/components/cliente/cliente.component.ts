@@ -19,7 +19,7 @@ export class ClienteComponent implements OnInit {
     pageSize: number = 10;
     totalItems?: number;
 
-    
+    nombrebuscar: string = "";
   alerta = {
     color: "",
     mensaje: "",
@@ -137,5 +137,15 @@ export class ClienteComponent implements OnInit {
       .subscribe(data => {
         this.clientes=data;
       });
+  }
+  buscar(){
+    if(this.nombrebuscar!=""){
+      this.clienteService.getClientesFiltrar(this.pageNumber, this.pageSize, this.nombrebuscar)
+      .subscribe(data => {
+        this.clientes=data;
+      });
+    }else{
+      this.getClientes();
+    }
   }
 }
