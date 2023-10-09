@@ -9,10 +9,6 @@
             [class.is-valid]="formRegister.get('inputDescripcion')?.valid">
 
         <br>
-        <label for="inputTotal">Total</label>
-        <input type="number" id="inputTotal" class="form-control" name="inputTotal" placeholder="2023" [(ngModel)]="orden.total" formControlName="inputTotal" [class.is-invalid]="formRegister.get('inputTotal')?.touched && formRegister.get('inputTotal')?.invalid"
-            [class.is-valid]="formRegister.get('inputTotal')?.valid">
-        <br>
         <label for="inputFecha">Fecha Creada</label>
         <input type="date" id="inputFecha" class="form-control" name="inputFecha" placeholder="" [(ngModel)]="orden.fechaInicio" formControlName="inputFecha" [class.is-invalid]="formRegister.get('inputFecha')?.touched && formRegister.get('inputFecha')?.invalid"
             [class.is-valid]="formRegister.get('inputFecha')?.valid">
@@ -60,7 +56,7 @@
             <input type="number" id="inputCantidad" class="form-control" name="inputCantidad" placeholder="" [(ngModel)]="orden.detalle[i].cantidad" formControlName="inputCantidad" [class.is-invalid]="formRegister.get('inputCantidad')?.touched && formRegister.get('inputCantidad')?.invalid"
                 [class.is-valid]="formRegister.get('inputCantidad')?.valid">
         </div>
-
+        <label for="inputTotal">Total</label>
         <!-- fin detalle -->
 
         <br>
