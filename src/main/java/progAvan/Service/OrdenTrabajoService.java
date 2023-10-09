@@ -28,12 +28,16 @@ public class OrdenTrabajoService {
     @Autowired
     AutoRepository autoRepository;
 
+    @Autowired
+    ClienteService clienteService;
+
     // public void createordenTrabajo() {
     // ordenTrabajoRepository.
     // }
 
     public void save(OrdenTrabajo ordenTrabajo) {
         ordenTrabajoRepository.save(ordenTrabajo);
+        clienteService.actualizarUltimaFechaVisita(ordenTrabajo.getAuto().getCliente().getId());
     }
 
     public Optional<OrdenTrabajo> findById(int id) {

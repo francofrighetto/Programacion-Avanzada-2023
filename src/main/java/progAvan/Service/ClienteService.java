@@ -16,6 +16,7 @@ import progAvan.Repository.ClienteRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import java.time.LocalDateTime;
 
 @Service
 public class ClienteService {
@@ -58,7 +59,17 @@ public class ClienteService {
         return clienteRepository.buscarPorAtributo(nombre);
     }
 
-   
+    public void actualizarUltimaFechaVisita(long id) {
+        Cliente cliente = clienteRepository.findById(id).orElse(null);
+
+        if (cliente != null) {
+            // Actualiza la fecha_ultima_visita con la fecha y hora actual
+            cliente.setFecha_ultima_actualizacion(LocalDateTime.now());
+
+            // Guarda los cambios en el repositorio
+            cliente = clienteRepository.save(cliente);
+        }
+    }
 
     // public boolean esUnico(Cliente cliente) {
     // return clienteRepository.existsByNombre(cliente);

@@ -12,7 +12,6 @@ export class OrdenService {
 
   constructor(private http:HttpClient) { }
 
-
   getOrdenes(): Observable<Orden[]>{
     return this.http.get<Orden[]>(environment.apiUrl + endpoints.orden + endpoints.mostrar);
   }
