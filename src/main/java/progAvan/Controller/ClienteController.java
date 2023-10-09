@@ -52,6 +52,13 @@ public class ClienteController {
     public long longitud() {
         return clienteService.longitud();
     }
+    
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/mostrar/{nombre}")
+    public List<Cliente> buscarPorAtributo(@PathVariable String nombre) {
+        return clienteService.buscarPorAtributo(nombre);
+    }
+
 
     @Value("${path_general}")
     String path;

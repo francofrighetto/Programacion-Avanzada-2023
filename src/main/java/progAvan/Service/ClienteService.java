@@ -51,6 +51,10 @@ public class ClienteService {
         return this.clienteRepository.count();
     }
 
+    public List<Cliente> buscarPorAtributo(String nombre) {
+        return clienteRepository.buscarPorAtributo(nombre);
+    }
+
     // public boolean esUnico(Cliente cliente) {
     // return clienteRepository.existsByNombre(cliente);
     // }
