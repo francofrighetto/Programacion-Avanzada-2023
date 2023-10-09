@@ -1,6 +1,7 @@
 package progAvan.Repository;
 
 import progAvan.Model.Auto;
+import progAvan.Model.Cliente;
 import progAvan.Model.Marca;
 import progAvan.Model.Modelo;
 

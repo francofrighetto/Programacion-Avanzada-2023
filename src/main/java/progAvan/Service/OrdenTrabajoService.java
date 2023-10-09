@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+import progAvan.Model.Auto;
 import progAvan.Model.OrdenTrabajo;
 import progAvan.Model.Tecnico;
 import progAvan.Repository.AutoRepository;
@@ -31,13 +32,20 @@ public class OrdenTrabajoService {
     @Autowired
     ClienteService clienteService;
 
+    @Autowired
+    AutoService autoService;
+
     // public void createordenTrabajo() {
     // ordenTrabajoRepository.
     // }
 
     public void save(OrdenTrabajo ordenTrabajo) {
         ordenTrabajoRepository.save(ordenTrabajo);
-        clienteService.actualizarUltimaFechaVisita(ordenTrabajo.getAuto().getCliente().getId());
+        Optional<Auto> autOptional = autoService.findById(ordenTrabajo.getAuto().getId());
+        if (autOptional.isPresent() ){
+            Auto auto = autOptional.get();
+            clienteService.actualizarUltimaFechaVisita(auto.getCliente().getId());
+        }
     }
 
     public Optional<OrdenTrabajo> findById(int id) {

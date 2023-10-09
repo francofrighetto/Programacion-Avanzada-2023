@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import progAvan.Model.Auto;
+import progAvan.Model.Cliente;
 import progAvan.Model.Marca;
 import progAvan.Model.Modelo;
 import progAvan.Repository.AutoRepository;
@@ -58,4 +59,5 @@ public class AutoService {
     public void deshabilitarAuto(Integer autoId) {
         autoRepository.deshabilitarAuto(autoId);
     }
+
 }

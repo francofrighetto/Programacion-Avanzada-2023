@@ -28,8 +28,8 @@
                 <br>
                 <mat-form-field>
                     <mat-label>Autos</mat-label>
-                    <mat-select [(value)]="orden.auto">
-                        <mat-option [value]="m" *ngFor="let m of autos">{{m.patente}}</mat-option>
+                    <mat-select [(value)]="orden.auto.id">
+                        <mat-option [value]="a.id" *ngFor="let a of autos">{{a.patente}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -62,12 +62,13 @@
         <div class="d-flex mt-2" *ngFor="let detalle of orden.detalle;let i = index">
             <mat-form-field>
                 <mat-label>Servicio</mat-label>
-                <mat-select [(value)]="orden.detalle[i].servicio" (valueChange)="calcularTotal()">
-                    <mat-option [value]="s" *ngFor="let s of servicios">{{s.nombre}}</mat-option>
+                <mat-select [(value)]="orden.detalle[i].servicio.id" (valueChange)="calcularTotal()">
+                    <mat-option [value]="s.id" *ngFor="let s of servicios">{{s.nombre}}</mat-option>
                 </mat-select>
             </mat-form-field>
 
-            <input type="number" id="inputCantidad" class="form-control" name="inputCantidad" placeholder="" (change)="cambioCantidad(i,$event)" style="width: 70px; height: 50px;margin-left: 20px;">
+            <!-- <input type="number" id="inputCantidad" class="form-control" name="inputCantidad" placeholder="" [(ngModel)]="orden.detalle[i].cantidad" (change)="cambioCantidad(i,$event)" style="width: 70px; height: 50px;margin-left: 20px;"> -->
+            <input type="number" id="inputCantidad" class="form-control" name="inputCantidad" placeholder="" [(ngModel)]="orden.detalle[i].cantidad" (change)="cambioCantidad(i,$event)" formControlName="inputCantidad" style="width: 70px; height: 50px;margin-left: 20px;">
 
             <span *ngIf="orden.detalle[i].subtotal!=undefined" class="ms-3">Subtotal: ${{orden.detalle[i].subtotal | number : "1.2"}}</span>
 

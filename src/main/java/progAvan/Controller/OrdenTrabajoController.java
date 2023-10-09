@@ -25,6 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import progAvan.Model.Auto;
+import progAvan.Model.Cliente;
 import progAvan.Model.DetalleOrdenTrabajo;
 import progAvan.Model.Marca;
 import progAvan.Model.OrdenTrabajo;
@@ -106,5 +107,29 @@ public class OrdenTrabajoController {
     @GetMapping(value = "/mostrar/ultima/{idCliente}")
     public List<Object> ultimaOrdenCliente(@PathVariable int  idCliente) {
         return ordenTrabajoService.ultimaOrdenCliente(idCliente);
+    }
+
+    
+      @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @PostMapping(value = "/eliminar/{id}")
+    public ResponseEntity eliminar(@PathVariable int id) {
+        try {
+            Optional<OrdenTrabajo> optionalOrden = ordenTrabajoService.findById(id);
+
+            if (optionalOrden.isPresent()) {
+                OrdenTrabajo orden = optionalOrden.get();
+                orden.setEstado(!orden.getEstado());
+                ordenTrabajoService.save(orden);
+
+                this.response.put("message", "success");
+                return new ResponseEntity<>(this.response, HttpStatus.OK);
+            } else {
+                this.response.put("message", "error");
+                return new ResponseEntity<>(this.response, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            this.response.put("message", "error interno");
+            return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

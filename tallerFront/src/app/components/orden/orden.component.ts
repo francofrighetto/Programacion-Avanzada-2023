@@ -9,6 +9,8 @@ import { TecnicoService } from 'src/app/servicios/tecnico/tecnico.service';
 import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
 import { Servicio } from 'src/app/modelos/Servicio';
 import { DetalleOrden } from 'src/app/modelos/DetalleOrden';
+import { DetalleOrdenService } from 'src/app/servicios/detalleOrden/detalle-orden.service';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -31,8 +33,8 @@ export class OrdenComponent implements OnInit {
   tecnicos!: Tecnico[];
   tecnico: Tecnico = new Tecnico;
 
-  servicios!:Servicio[];
-  servicio:Servicio = new Servicio;
+  servicios!: Servicio[];
+  servicio: Servicio = new Servicio;
 
   // paginado
   pageNumber: number = 0;
@@ -53,10 +55,14 @@ export class OrdenComponent implements OnInit {
     inputFecha: new FormControl(
       "", Validators.compose([Validators.required])
     ),
+    inputFechaFin: new FormControl(""),
+    inputCantidad: new FormControl("")
+
+
   });
 
-  constructor(private ordenService: OrdenService, private autoService: AutoService,private tecnicoService: TecnicoService,
-    private servicioService:ServicioService, private cdr: ChangeDetectorRef) {
+  constructor(private ordenService: OrdenService, private autoService: AutoService, private tecnicoService: TecnicoService,
+    private servicioService: ServicioService, private cdr: ChangeDetectorRef, private detalleOrdenService: DetalleOrdenService) {
   }
   ngOnInit(): void {
     this.resetOrden();
@@ -67,7 +73,7 @@ export class OrdenComponent implements OnInit {
 
 
   getOrdenes() {
-    this.ordenService.getOrdenesPag(this.pageNumber, this.pageSize).subscribe(data=>{
+    this.ordenService.getOrdenesPag(this.pageNumber, this.pageSize).subscribe(data => {
       this.ordenes = data;
     })
   }
@@ -123,7 +129,14 @@ export class OrdenComponent implements OnInit {
 
   editar(orden: Orden) {
     this.nuevo = false;
-    this.orden = orden;
+    this.detalleOrdenService.getDetalleOrden(orden.id!).subscribe((data: any) => {
+      if (data!=undefined && data.length!=0){
+      this.orden = data[0].orden;
+      if (this.orden.fechaInicio!=undefined && this.orden.fechaInicio!=null){
+        this.orden.fechaInicio = this.formatearFecha(this.orden.fechaInicio)!;
+      }
+    }
+    })
   }
 
   eliminar(orden: Orden) {
@@ -140,14 +153,14 @@ export class OrdenComponent implements OnInit {
     }
   }
 
-  quitarFila(i:number){
+  quitarFila(i: number) {
     console.log(this.orden.detalle)
-    this.orden.detalle?.splice(i,1);
+    this.orden.detalle?.splice(i, 1);
     console.log(this.orden.detalle)
     this.cdr.detectChanges();
   }
 
-  agregarFila(){
+  agregarFila() {
     this.orden.detalle?.push(this.nuevoDetalle);
     this.nuevoDetalle = new DetalleOrden();
     this.cdr.detectChanges();
@@ -155,7 +168,7 @@ export class OrdenComponent implements OnInit {
 
   cancelar() {
     this.orden = new Orden;
-    this.orden.total=0;
+    this.orden.total = 0;
     this.orden.estado = true;
     this.orden.auto = new Auto;
     this.orden.tecnico = new Tecnico;
@@ -192,29 +205,43 @@ export class OrdenComponent implements OnInit {
 
     this.ordenService.getOrdenesPag(this.pageNumber, this.pageSize)
       .subscribe(data => {
-        this.ordenes=data;
+        this.ordenes = data;
       });
   }
 
-  calcularTotal(){
+  calcularTotal() {
     this.orden.detalle.forEach(e => {
-      console.log(e.cantidad);
-      console.log(e.servicio.precio);
-      e.subtotal = e.cantidad! * e.servicio.precio!;
-      this.orden.total +=e.cantidad! * e.servicio.precio!;
+      let precio_servicio =0;
+      this.servicios.forEach(s=>{
+        if (s.id==e.servicio.id){
+          console.log(s);
+          precio_servicio=s.precio!;
+        e.subtotal = e.cantidad! * precio_servicio!;
+        console.log(e.subtotal);
+        }
+      })
+
     });
-    let total=0;
+    let total = 0;
     this.orden.detalle.forEach(e => {
       total += e.subtotal!;
     });
-    this.orden.total=total;
+    this.orden.total = total;
 
   }
 
-cambioCantidad(i:number, event:any){
-  let valorInput = parseFloat((event.target as HTMLInputElement).value);
-  this.orden.detalle[i].cantidad=valorInput;
-  this.calcularTotal();
-}
+  cambioCantidad(i: number, event: any) {
+    let valorInput = parseFloat((event.target as HTMLInputElement).value);
+    this.orden.detalle[i].cantidad = valorInput;
+    this.calcularTotal();
+  }
+
+  formatearFecha(fechaModel: any) {
+      const fecha = new Date(fechaModel);
+      const datePipe = new DatePipe('en-US');
+      const fechaFormateada = datePipe.transform(fecha, 'yyyy-MM-dd');
+
+    return fechaFormateada;
+  }
 
 }
