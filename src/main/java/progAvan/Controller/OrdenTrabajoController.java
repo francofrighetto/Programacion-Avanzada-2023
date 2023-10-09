@@ -83,4 +83,10 @@ public class OrdenTrabajoController {
             return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/mostrar/ultima/{idCliente}")
+    public List<Object> ultimaOrdenCliente(@PathVariable int  idCliente) {
+        return ordenTrabajoService.ultimaOrdenCliente(idCliente);
+    }
 }

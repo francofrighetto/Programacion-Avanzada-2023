@@ -20,10 +20,10 @@ public class OrdenTrabajo {
     private Date fechaInicio;
     private Date fechaFin;
     public Integer total;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "tecnico_id", referencedColumnName = "id")
     private Tecnico tecnico;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "vehiculo_id", referencedColumnName = "id")
     private Auto auto;
     private boolean estado;
