@@ -104,6 +104,7 @@ export class AutoComponent implements OnInit {
 
   calcularOrdenXCliente(id:any){
     // Guardo las ordenes que coinciden con el id del cliente para mostrarlas luego.
+    this.ordenesParaMostrar = []
     if(this.ordenes!=undefined)
     for(let i=0;this.ordenes.length>0;i++){
       if(this.ordenes[i].auto.cliente.id === id ){
@@ -114,7 +115,13 @@ export class AutoComponent implements OnInit {
           fechaInicio: this.ordenes[i].fechaInicio,
           total: this.ordenes[i].total
         }
-        this.ordenesParaMostrar.push(orden)
+        if(this.ordenesParaMostrar>0){
+          for(let j=0;this.ordenesParaMostrar.length>0; j++){
+            if(this.ordenesParaMostrar[j].id != orden.id){
+              this.ordenesParaMostrar.push(orden)
+            }
+          }
+        } else this.ordenesParaMostrar.push(orden)
       }
     }
   }
