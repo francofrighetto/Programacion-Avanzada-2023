@@ -129,7 +129,9 @@ export class OrdenComponent implements OnInit {
 
   editar(orden: Orden) {
     this.nuevo = false;
+    console.log(orden);
     this.detalleOrdenService.getDetalleOrden(orden.id!).subscribe((data: any) => {
+      console.log(data);
       if (data!=undefined && data.length!=0){
       this.orden = data[0].orden;
       if (this.orden.fechaInicio!=undefined && this.orden.fechaInicio!=null){
