@@ -19,7 +19,7 @@
         <br>
         <label id="labelObservaciones">Observaciones</label>
         <br>
-        <textarea id="inputObservaciones" name="inputObservaciones" class="form-control" [(ngModel)]="cliente.observaciones" formControlName="inputObservaciones"></textarea>
+        <textarea id="inputObservaciones" name="inputObservaciones" class="form-control" [(ngModel)]="this.cliente.observaciones" (change)="actualizarObservaciones()" formControlName="inputObservaciones"></textarea>
         <br>
         <button type="button" class="btn btn-success ms-2" (click)="nuevoCliente()" *ngIf="nuevo">Crear</button>
         <button type="button" class="btn btn-success" (click)="actualizarCliente()" *ngIf="!nuevo">Modificar</button>

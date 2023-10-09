@@ -54,6 +54,7 @@ export class ClienteComponent implements OnInit {
     inputDireccion: new FormControl(
       "", Validators.compose([Validators.required])
     ),
+    inputObservaciones: new FormControl(""),
   });
 
   constructor(private clienteService: ClienteService, private ordenService:OrdenService) {
@@ -172,5 +173,9 @@ export class ClienteComponent implements OnInit {
     }else{
       this.getClientes();
     }
+  }
+
+  actualizarObservaciones(){
+    console.log(this.cliente);
   }
 }
