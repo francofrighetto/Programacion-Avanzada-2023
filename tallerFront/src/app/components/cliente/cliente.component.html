@@ -38,7 +38,7 @@
     </form>
     <div class="col-8">
         <input type="text" id="inputBuscar" class="form-control" name="inputBuscar" placeholder="Buscar"
-            [(ngModel)]="nombrebuscar" onchange="buscar()">
+            [(ngModel)]="nombrebuscar" (input)="buscar()">
         <table class="table" *ngIf="clientes != undefined && clientes.length!=0">
             <thead>
                 <tr>
@@ -82,10 +82,26 @@
                             </svg>
 
                         </button>
+                        <button type="button" class="btn btn-warning" (click)="openModal(m)">VER</button>
                     </td>
                 </tr>
             </tbody>
+            <div *ngIf="modal == true">
+                <div class="container-modal-auto">
+                    <div class="content-modal">
+                        <h2>Cliente</h2>
+                        <p><b>Nombre: </b>{{verCliente.nombre}}</p> <b></b>
+                        <p><b>DNI: </b> {{verCliente.dni}}</p>
+                        <h2>Ordenes</h2>
+                        <div class="btns">
+                            <button (click)="closeModal()" class="bnt-cerrar">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </table>
+
+
         <mat-paginator [length]="totalItems" [pageSize]="10" [pageSizeOptions]="[10]" aria-label="Select page" (page)="onPageChange($event)">
         </mat-paginator>
         <div *ngIf="clientes == undefined || clientes.length==0">

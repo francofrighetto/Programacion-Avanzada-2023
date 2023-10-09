@@ -9,11 +9,11 @@ import { ClienteService } from 'src/app/servicios/cliente/cliente.service';
   styleUrls: ['./cliente.component.css']
 })
 export class ClienteComponent implements OnInit {
-
+  modal: boolean = false;
   clientes?: Cliente[];
   cliente!: Cliente;
   nuevo: boolean = true;
-
+  verCliente:Cliente = {}
     // paginado
     pageNumber: number = 0;
     pageSize: number = 10;
@@ -137,6 +137,16 @@ export class ClienteComponent implements OnInit {
       .subscribe(data => {
         this.clientes=data;
       });
+  }
+  openModal(cliente:any){
+    // Guardo las variables para mostrarlas en el modal.
+    this.verCliente.nombre = cliente.nombre
+    this.verCliente.estado = cliente.estado
+    this.verCliente.dni = cliente.dni
+    this.modal = true;
+  }
+  closeModal(){
+    this.modal = false;
   }
   buscar(){
     if(this.nombrebuscar!=""){
