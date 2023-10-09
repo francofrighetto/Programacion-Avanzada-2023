@@ -2,7 +2,7 @@
 <h2 class="text-center pt-2 py-5">Cliente</h2>
 
 <div class="row d-flex">
-    <form class="col-4 " [formGroup]="formRegister">
+    <form class="col-3 ms-3" [formGroup]="formRegister">
         <input type="text" id="inputNombre" class="form-control" name="inputNombre" placeholder="Nombre" [(ngModel)]="cliente.nombre" formControlName="inputNombre" [class.is-invalid]="formRegister.get('inputNombre')?.touched && formRegister.get('inputNombre')?.invalid"
             [class.is-valid]="formRegister.get('inputNombre')?.valid">
         <br>
@@ -16,6 +16,10 @@
         <br>
         <input type="text" id="inputDireccion" class="form-control" name="inputDireccion" placeholder="Direccion" [(ngModel)]="cliente.direccion" formControlName="inputDireccion" [class.is-invalid]="formRegister.get('inputDireccion')?.touched && formRegister.get('inputDireccion')?.invalid"
             [class.is-valid]="formRegister.get('inputDireccion')?.valid">
+        <br>
+        <label id="labelObservaciones">Observaciones</label>
+        <br>
+        <textarea id="inputObservaciones" name="inputObservaciones" class="form-control" [(ngModel)]="cliente.observaciones" formControlName="inputObservaciones"></textarea>
         <br>
         <button type="button" class="btn btn-success ms-2" (click)="nuevoCliente()" *ngIf="nuevo">Crear</button>
         <button type="button" class="btn btn-success" (click)="actualizarCliente()" *ngIf="!nuevo">Modificar</button>
@@ -80,6 +84,7 @@
                         <h2>Cliente</h2>
                         <p><b>Nombre: </b>{{verCliente.nombre}}</p> <b></b>
                         <p><b>DNI: </b> {{verCliente.dni}}</p>
+                        <p><b>Observaciones: </b> {{verCliente.observaciones}}</p>
                         <h2>Última orden</h2>
                         <p><b>Fecha: </b> {{ultimaOrden.fecha | date }}</p>
                         <p><b>Auto: </b> {{ultimaOrden.patente}}</p>

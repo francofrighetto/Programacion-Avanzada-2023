@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -29,10 +30,10 @@ public class Cliente {
     private String email;
     @Column(columnDefinition = "boolean default true")
     private boolean estado;
-
-    @OneToMany(mappedBy = "cliente",fetch = FetchType.EAGER)
-    @JsonIgnore 
-    private List<Auto> autos;
+    @Column(nullable = true)
+    private LocalDateTime fecha_ultima_actualizacion;
+    @Column()
+    private String observaciones;
 
     public boolean getEstado() {
         return estado;

@@ -17,8 +17,9 @@
             </div>
             <div class="col-5 ms-5">
                 <label for="inputFechaFin">Fecha Finalizada</label>
-                <input type="date" id="inputFechaFin" class="form-control" name="inputFechaFin" placeholder="" [(ngModel)]="orden.fechaFin" formControlName="inputFechaFin" [class.is-invalid]="formRegister.get('inputFechaFin')?.touched && formRegister.get('inputFechaFin')?.invalid"
-                    [class.is-valid]="formRegister.get('inputFechaFin')?.valid">
+                <input type="date" id="inputFechaFin" class="form-control" name="inputFechaFin" placeholder="" [(ngModel)]="orden.fechaFin" formControlName="inputFechaFin" 
+                    
+                    >
                 <br>
             </div>
         </div>

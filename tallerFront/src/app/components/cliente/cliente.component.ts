@@ -152,6 +152,7 @@ export class ClienteComponent implements OnInit {
     this.verCliente.nombre = cliente.nombre
     this.verCliente.estado = cliente.estado
     this.verCliente.dni = cliente.dni
+    this.verCliente.observaciones = cliente.observaciones
     this.modal = true;
     this.ordenService.getUltimaCliente(cliente.id).subscribe((data:any)=>{
       this.ultimaOrden.fecha=data[0][0];
