@@ -49,12 +49,12 @@ public class OrdenTrabajoController {
             int id = ordenTrabajoService.getLastId().getId();
             List<DetalleOrdenTrabajo> detalles = model.getDetalle();
             model.setId(id);
-            for (DetalleOrdenTrabajo detalle : detalles){
-                //detalle.setOrden(orden);
+            for (DetalleOrdenTrabajo detalle : detalles) {
+                // detalle.setOrden(orden);
                 detalle.setOrden(model);
                 ordenTrabajoService.setOrdenId(id, detalle.getId());
             }
-            
+
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
         } catch (Exception e) {
@@ -94,23 +94,32 @@ public class OrdenTrabajoController {
     public ResponseEntity actualizar(@PathVariable int id, @RequestBody OrdenTrabajo model) {
         // OrdenTrabajo ordenTrabajo = ordenTrabajoService.findById(id).orElse(null);
         try {
+
             ordenTrabajoService.save(model);
+            for (DetalleOrdenTrabajo detalle : model.getDetalle()) {
+                // detalle.setOrden(orden);
+                detalle.setOrden(model);
+                System.out.println(detalle.toString());
+                if (detalle.getId() != null) {
+
+                    ordenTrabajoService.setOrdenId(id, detalle.getId());
+                }
+            }
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
         } catch (Exception e) {
-            this.response.put("message", "error interno");
+            this.response.put("message", e.toString());
             return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrar/ultima/{idCliente}")
-    public List<Object> ultimaOrdenCliente(@PathVariable int  idCliente) {
+    public List<Object> ultimaOrdenCliente(@PathVariable int idCliente) {
         return ordenTrabajoService.ultimaOrdenCliente(idCliente);
     }
 
-    
-      @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @PostMapping(value = "/eliminar/{id}")
     public ResponseEntity eliminar(@PathVariable int id) {
         try {
