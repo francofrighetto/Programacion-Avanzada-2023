@@ -6,9 +6,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
+import progAvan.Model.Auto;
 import progAvan.Model.Cliente;
 import progAvan.Model.Marca;
 import progAvan.Model.Modelo;
+import progAvan.Model.OrdenTrabajo;
 import progAvan.Repository.ClienteRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -54,6 +57,8 @@ public class ClienteService {
     public List<Cliente> buscarPorAtributo(String nombre) {
         return clienteRepository.buscarPorAtributo(nombre);
     }
+
+   
 
     // public boolean esUnico(Cliente cliente) {
     // return clienteRepository.existsByNombre(cliente);

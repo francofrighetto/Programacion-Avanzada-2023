@@ -57,4 +57,9 @@ public class OrdenTrabajoService {
     public long longitud() {
         return this.ordenTrabajoRepository.count();
     }
+
+    @Transactional
+    public List<Object> ultimaOrdenCliente(int idCliente) {
+        return ordenTrabajoRepository.ultimaOrdenCliente(idCliente);
+    }
 }

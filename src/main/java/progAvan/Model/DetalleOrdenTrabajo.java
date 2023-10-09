@@ -18,8 +18,8 @@ public class DetalleOrdenTrabajo {
     @Column(unique = true)
     private String descripcion;
     private Date fecha;
-    public Integer total;
-    @OneToOne
+    public Integer cantidad;
+    @ManyToOne
     @JoinColumn(name = "servicio_id", referencedColumnName = "id")
     private Servicio servicio;
     private double precio;

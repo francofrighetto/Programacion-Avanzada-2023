@@ -1,5 +1,9 @@
 package progAvan.Model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -25,6 +29,10 @@ public class Cliente {
     private String email;
     @Column(columnDefinition = "boolean default true")
     private boolean estado;
+
+    @OneToMany(mappedBy = "cliente",fetch = FetchType.EAGER)
+    @JsonIgnore 
+    private List<Auto> autos;
 
     public boolean getEstado() {
         return estado;

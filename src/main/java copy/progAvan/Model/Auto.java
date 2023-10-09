@@ -17,7 +17,7 @@ public class Auto {
     @ManyToOne
     @JoinColumn(name = "modelo_id", referencedColumnName = "id")
     private Modelo modelo;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private Cliente cliente;
     @Column(unique = true)

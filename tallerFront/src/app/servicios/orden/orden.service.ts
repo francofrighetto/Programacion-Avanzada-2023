@@ -25,6 +25,10 @@ export class OrdenService {
     return this.http.get<Orden[]>(environment.apiUrl + endpoints.orden + endpoints.mostrarXMarca +"/"+idMarca);
   }
 
+  getUltimaCliente(idCliente:number){
+    return this.http.get(environment.apiUrl + endpoints.orden + endpoints.mostrar+"/"+endpoints.ultima +"/"+idCliente);
+  }
+
   nuevaOrden(orden:Orden){
     return this.http.post(environment.apiUrl + endpoints.orden + endpoints.nuevo, orden);
   }

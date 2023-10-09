@@ -21,6 +21,7 @@ export enum endpoints {
   register="register",
   current="current",
   mostrarpaginado="mostrarpaginado",
-  longitud="longitud"
+  longitud="longitud",
+  ultima="ultima"
 
 }

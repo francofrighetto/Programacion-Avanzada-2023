@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Cliente } from 'src/app/modelos/Cliente';
 import { ClienteService } from 'src/app/servicios/cliente/cliente.service';
+import { OrdenService } from 'src/app/servicios/orden/orden.service';
 
 @Component({
   selector: 'app-cliente',
@@ -14,6 +15,12 @@ export class ClienteComponent implements OnInit {
   cliente!: Cliente;
   nuevo: boolean = true;
   verCliente:Cliente = {}
+
+  ultimaOrden = {
+    "fecha":"",
+    "patente":""
+  }
+
     // paginado
     pageNumber: number = 0;
     pageSize: number = 10;
@@ -27,6 +34,8 @@ export class ClienteComponent implements OnInit {
   }
 
   dniPatron: string = "\\d{8}";
+  dniTelefono: string = "\\d{10}";
+
 
 
   public formRegister = new FormGroup({
@@ -37,17 +46,17 @@ export class ClienteComponent implements OnInit {
       "", Validators.compose([Validators.required, Validators.pattern(this.dniPatron)])
     ),
     inputTelefono: new FormControl(
-      "", Validators.compose([Validators.required])
+      "", Validators.compose([Validators.required, Validators.pattern(this.dniPatron)])
     ),
     inputEmail: new FormControl(
-      "", Validators.compose([Validators.required])
+      "", Validators.compose([Validators.required, Validators.email])
     ),
     inputDireccion: new FormControl(
       "", Validators.compose([Validators.required])
     ),
   });
 
-  constructor(private clienteService: ClienteService) {
+  constructor(private clienteService: ClienteService, private ordenService:OrdenService) {
   }
   ngOnInit(): void {
     this.resetCliente();
@@ -144,6 +153,11 @@ export class ClienteComponent implements OnInit {
     this.verCliente.estado = cliente.estado
     this.verCliente.dni = cliente.dni
     this.modal = true;
+    this.ordenService.getUltimaCliente(cliente.id).subscribe((data:any)=>{
+      this.ultimaOrden.fecha=data[0][0];
+      this.ultimaOrden.patente=data[0][1];
+    })
+
   }
   closeModal(){
     this.modal = false;
