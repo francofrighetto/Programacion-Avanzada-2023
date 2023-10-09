@@ -53,9 +53,6 @@ export class OrdenComponent implements OnInit {
     inputFecha: new FormControl(
       "", Validators.compose([Validators.required])
     ),
-    inputFechaFin: new FormControl(
-      "", Validators.compose([Validators.required])
-    )
   });
 
   constructor(private ordenService: OrdenService, private autoService: AutoService,private tecnicoService: TecnicoService,
@@ -141,6 +138,13 @@ export class OrdenComponent implements OnInit {
         this.mostrarAlerta("danger", "Error al eliminar orden");
       })
     }
+  }
+
+  quitarFila(i:number){
+    console.log(this.orden.detalle)
+    this.orden.detalle?.splice(i,1);
+    console.log(this.orden.detalle)
+    this.cdr.detectChanges();
   }
 
   agregarFila(){

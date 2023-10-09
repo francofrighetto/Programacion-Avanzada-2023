@@ -3,50 +3,64 @@
 
 
 <div class="row d-flex">
-    <form class="col-5 " [formGroup]="formRegister">
+    <form class="col-3 ms-3" [formGroup]="formRegister">
         <label for="inputTotal">Descripcion</label>
         <input type="text" id="inputDescripcion" class="form-control" name="inputDescripcion" placeholder="Breve descripcion" [(ngModel)]="orden.descripcion" formControlName="inputDescripcion" [class.is-invalid]="formRegister.get('inputDescripcion')?.touched && formRegister.get('inputDescripcion')?.invalid"
             [class.is-valid]="formRegister.get('inputDescripcion')?.valid">
         <br>
         <div class="d-flex">
-
-            <label for="inputFecha">Fecha Creada</label>
-            <input type="date" id="inputFecha" class="form-control" name="inputFecha" placeholder="" [(ngModel)]="orden.fechaInicio" formControlName="inputFecha" [class.is-invalid]="formRegister.get('inputFecha')?.touched && formRegister.get('inputFecha')?.invalid"
-                [class.is-valid]="formRegister.get('inputFecha')?.valid">
-            <br>
-            <label for="inputFechaFin">Fecha Finalizada</label>
-            <input type="date" id="inputFechaFin" class="form-control" name="inputFechaFin" placeholder="" [(ngModel)]="orden.fechaFin" formControlName="inputFechaFin" [class.is-invalid]="formRegister.get('inputFechaFin')?.touched && formRegister.get('inputFechaFin')?.invalid"
-                [class.is-valid]="formRegister.get('inputFechaFin')?.valid">
-            <br>
+            <div class="col-5 ">
+                <label for="inputFecha">Fecha Creada</label>
+                <input type="date" id="inputFecha" class="form-control" name="inputFecha" placeholder="" [(ngModel)]="orden.fechaInicio" formControlName="inputFecha" [class.is-invalid]="formRegister.get('inputFecha')?.touched && formRegister.get('inputFecha')?.invalid"
+                    [class.is-valid]="formRegister.get('inputFecha')?.valid">
+                <br>
+            </div>
+            <div class="col-5 ms-5">
+                <label for="inputFechaFin">Fecha Finalizada</label>
+                <input type="date" id="inputFechaFin" class="form-control" name="inputFechaFin" placeholder="" [(ngModel)]="orden.fechaFin" formControlName="inputFechaFin" [class.is-invalid]="formRegister.get('inputFechaFin')?.touched && formRegister.get('inputFechaFin')?.invalid"
+                    [class.is-valid]="formRegister.get('inputFechaFin')?.valid">
+                <br>
+            </div>
         </div>
         <br>
+        <div class="d-flex ">
+            <div class="col-6">
+                <label for="inputAuto">Auto</label>
+            <br>
+            <mat-form-field>
+                <mat-label>Autos</mat-label>
+                <mat-select [(value)]="orden.auto.id">
+                    <mat-option [value]="m.id" *ngFor="let m of autos">{{m.patente}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            </div>
+            
+            
+            <div class="col-6 ms-2">
+                <label for="inputTecnico" >Tecnico</label>
+            <br>
+            <mat-form-field>
+                <mat-label>Tecnicos</mat-label>
+                <mat-select [(value)]="orden.tecnico.id">
+                    <mat-option [value]="m.id" *ngFor="let m of tecnicos">{{m.nombre}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            </div>
+            
 
-        <label for="inputAuto">Auto</label>
-        <br>
-        <mat-form-field>
-            <mat-label>Autos</mat-label>
-            <mat-select [(value)]="orden.auto.id">
-                <mat-option [value]="m.id" *ngFor="let m of autos">{{m.patente}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <br>
-        <label for="inputAuto">Tecnico</label>
-        <br>
-        <mat-form-field>
-            <mat-label>Tecnicos</mat-label>
-            <mat-select [(value)]="orden.tecnico.id">
-                <mat-option [value]="m.id" *ngFor="let m of tecnicos">{{m.nombre}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+        </div>
+        
+        
 
         <!-- Detalle servicios -->
         <mat-divider></mat-divider>
-        <div class="d-flex">
+        <div class="d-flex mt-2 ">
             <h5>Detalles servicios</h5>
             <button type="button" class="btn btn-success ms-2" (click)="agregarFila()">Agregar fila</button>
+            
         </div>
-        <div class="d-flex" *ngFor="let detalle of orden.detalle;let i = index">
+        <mat-divider class="mt-2 "></mat-divider>
+        <div class="d-flex mt-2" *ngFor="let detalle of orden.detalle;let i = index">
             <mat-form-field>
                 <mat-label>Servicio</mat-label>
                 <mat-select [(value)]="orden.detalle[i].servicio" (valueChange)="calcularTotal()">
@@ -54,26 +68,35 @@
                 </mat-select>
             </mat-form-field>
 
-            <input type="number" id="inputCantidad" class="form-control" name="inputCantidad" placeholder="" (change)="cambioCantidad(i,$event)">
+            <input type="number" id="inputCantidad" class="form-control" name="inputCantidad" placeholder="" (change)="cambioCantidad(i,$event)" style="width: 70px; height: 50px;margin-left: 20px;">
 
-            <span *ngIf="orden.detalle[i].subtotal!=undefined">Subtotal: ${{orden.detalle[i].subtotal | number : "1.2"}}</span>
+            <span *ngIf="orden.detalle[i].subtotal!=undefined" class="ms-3">Subtotal: ${{orden.detalle[i].subtotal | number : "1.2"}}</span>
+
+            <button type="button" class="btn btn-danger ms-2 " (click)="quitarFila(i)" style="width: 70px; height: 50px;margin-left: 20px;">Quitar</button>
+            <mat-divider></mat-divider>
 
         </div>
-        <label for="inputTotal">Total {{orden.total| number :"1.2"}}</label>
-        <!-- fin detalle -->
-
+        <div class=" mt-4 ">
+            <mat-divider></mat-divider>
+            <label for="inputTotal" class="mt-2">Total {{orden.total| number :"1.2"}}</label>
+            
+            <mat-divider class="mt-2"></mat-divider>
+        </div>
+        
         <br>
-
-        <button type="button" class="btn btn-success ms-2" (click)="nuevaOrden()" *ngIf="nuevo">Crear</button>
-        <button type="button" class="btn btn-success" (click)="actualizarOrden()" *ngIf="!nuevo">Modificar</button>
-        <button type="button" class="btn btn-danger ms-4" (click)="cancelar()">Cancelar</button>
+        <div class="d-flex mt-4 ">
+            <button type="button" class="btn btn-success ms-2" (click)="nuevaOrden()" *ngIf="nuevo">Crear</button>
+            <button type="button" class="btn btn-success" (click)="actualizarOrden()" *ngIf="!nuevo">Modificar</button>
+            <button type="button" class="btn btn-danger ms-4" (click)="cancelar()">Cancelar</button>
+        </div>
+        
         <br>
         <div class="alert alert-{{alerta.color}} px-3 mx-5" role="alert" *ngIf="alerta.activo">
             {{alerta.mensaje}}
         </div>
 
     </form>
-    <div class="col-7">
+    <div class="col-8">
         <table class="table" *ngIf="ordenes != undefined && ordenes.length != 0">
             <thead>
                 <tr>
