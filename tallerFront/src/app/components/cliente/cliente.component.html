@@ -40,6 +40,7 @@
                     <th scope="col">Telefono</th>
                     <th scope="col">Email</th>
                     <th scope="col">Direccion</th>
+                    <th scope="col">Última orden</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -51,6 +52,7 @@
                     <td>{{m.telefono}}</td>
                     <td>{{m.email}}</td>
                     <td>{{m.direccion}}</td>
+                    <td>{{formatearFecha(m.fecha_ultima_actualizacion)}}</td>
                     <td>
                         <button type="button" class="btn btn-primary" (click)="editar(m)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -86,7 +88,7 @@
                         <p><b>DNI: </b> {{verCliente.dni}}</p>
                         <p><b>Observaciones: </b> {{verCliente.observaciones}}</p>
                         <h2>Última orden</h2>
-                        <p><b>Fecha: </b> {{ultimaOrden.fecha | date }}</p>
+                        <p><b>Fecha: </b> {{formatearFecha(ultimaOrden.fecha)}}</p>
                         <p><b>Auto: </b> {{ultimaOrden.patente}}</p>
 
                         <div class="btns">

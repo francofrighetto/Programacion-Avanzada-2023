@@ -19,11 +19,14 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./orden.component.css']
 })
 export class OrdenComponent implements OnInit {
-
+  modal: boolean = false;
   ordenes?: Orden[];
   orden!: Orden;
   nuevo: boolean = true;
-
+  verOrden:Orden = {
+    total: 0,
+    detalle: []
+  };
   nuevoDetalle: DetalleOrden = new DetalleOrden();
 
   mostrarDetalle:any;
@@ -88,6 +91,17 @@ export class OrdenComponent implements OnInit {
     this.getServicios();
   }
 
+  openModal(orden:any){
+    // Guardo las variables para mostrarlas en el modal.
+    this.verOrden.descripcion = orden.descripcion
+    this.verOrden.detalle = orden.detalle
+    this.modal = true;
+
+  }
+
+  closeModal(){
+    this.modal = false;
+  }
 
   getOrdenes() {
     this.ordenService.getOrdenesPag(this.pageNumber, this.pageSize).subscribe(data => {
@@ -267,6 +281,16 @@ export class OrdenComponent implements OnInit {
       const fechaFormateada = datePipe.transform(fecha, 'yyyy-MM-dd');
 
     return fechaFormateada;
+  }
+
+  ver(orden:any){
+    this.detalleOrdenService.getDetalleOrden(orden.id!).subscribe((data: any) => {
+      if (data!=undefined && data.length!=0){
+      this.mostrarDetalle = data[0].orden;
+      console.log(this.mostrarDetalle);
+    }
+    })
+
   }
 
 }

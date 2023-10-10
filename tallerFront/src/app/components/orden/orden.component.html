@@ -103,6 +103,8 @@
                     <th scope="col">ID</th>
                     <th scope="col">Descripcion</th>
                     <th scope="col">Auto</th>
+                    <th scope="col">Tecnico</th>
+                    <th scope="col">Fecha Inicio</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -111,6 +113,8 @@
                     <td>{{m.id}}</td>
                     <td>{{m.descripcion}}</td>
                     <td>{{m.auto?.patente || 'Sin Auto'}}</td>
+                    <td>{{m.tecnico.nombre}}</td>
+                    <td>{{formatearFecha(m.fechaInicio)}}</td>
                     <td>
                         <button type="button" class="btn btn-primary" (click)="editar(m)">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -134,6 +138,8 @@
                           </svg>
 
                       </button>
+                        <button type="button" class="btn btn-warning" (click)="openModal(m)">VER
+                      </button>
                     </td>
                 </tr>
             </tbody>
@@ -143,23 +149,24 @@
         <div *ngIf="ordenes == undefined || ordenes.length==0">
             No hay ordenes
         </div>
-        <table class="table" *ngIf="ordenes != undefined && ordenes.length != 0">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Descripcion</th>
-                    <th scope="col">Auto</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let m of ordenes">
-                    <td>{{m.id}}</td>
-                    <td>{{m.descripcion}}</td>
-                    <td>{{m.auto?.patente || 'Sin Auto'}}</td>
-                    <td>
-                </tr>
-            </tbody>
-        </table>
+
+        <div *ngIf="modal == true">
+            <div class="container-modal-auto">
+                <div class="content-modal">
+                    <h2>Orden</h2>
+                    <h6><b>Descripcion: </b>{{verOrden.descripcion}}</h6> <b></b>
+                    <div *ngFor="let detalle of verOrden.detalle; let i = index ">
+                        <h5 class="mx-auto text-center">Servicio {{i+1}}</h5>
+                        <p><b>Nombre: </b>{{detalle.servicio.nombre}}</p> <b></b>
+                        <p><b>Cantidad: </b>{{detalle.cantidad}}</p> <b></b>
+                        <p><b>Precio: </b>{{detalle.subtotal}}</p> <b></b>
+                    </div>
+                    <div class="btns">
+                        <button (click)="closeModal()" class="bnt-cerrar">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
