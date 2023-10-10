@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Cliente } from 'src/app/modelos/Cliente';
@@ -174,6 +175,14 @@ export class ClienteComponent implements OnInit {
       this.getClientes();
     }
   }
+
+  formatearFecha(fechaModel: any) {
+    /*const fecha = new Date(fechaModel);
+    const datePipe = new DatePipe('en-US');
+    const fechaFormateada = datePipe.transform(fecha, 'yyyy-MM-dd');*/
+    const fechaFormateada = fechaModel.substring(0,10)
+  return fechaFormateada;
+}
 
   actualizarObservaciones(){
     console.log(this.cliente);

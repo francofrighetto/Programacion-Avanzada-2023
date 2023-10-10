@@ -15,7 +15,7 @@ public class DetalleOrdenTrabajo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String descripcion;    
+    private String descripcion;
     public Integer cantidad;
     @ManyToOne
     @JoinColumn(name = "servicio_id", referencedColumnName = "id")
@@ -33,5 +33,11 @@ public class DetalleOrdenTrabajo {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "DetalleOrdenTrabajo [id=" + id + ", cantidad=" + cantidad + ", servicio=" + servicio + ", subtotal="
+                + subtotal + ", estado=" + estado + ", orden=" + orden + "]";
     }
 }

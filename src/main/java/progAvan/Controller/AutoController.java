@@ -33,6 +33,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.http.ResponseEntity;
 
 import progAvan.Model.Auto;
+import progAvan.Model.Cliente;
 import progAvan.Model.Marca;
 import progAvan.Model.Modelo;
 import progAvan.Service.AutoService;

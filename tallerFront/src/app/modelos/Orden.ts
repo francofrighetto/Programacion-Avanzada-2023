@@ -7,8 +7,8 @@ export class Orden {
   auto?: any;
   tecnico?: any;
   estado?: boolean;
-  fechaInicio?: Date;
-  fechaFin?: Date;
+  fechaInicio?: string;
+  fechaFin?: string;
   total: number=0;
   id?: number;
   detalle:DetalleOrden[]=[];
