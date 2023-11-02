@@ -16,6 +16,7 @@ import { OrdenComponent } from '../orden/orden.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ServicioComponent } from '../servicio/servicio.component';
+import { InformesComponent } from '../informes/informes.component';
 
 
 const routes: Routes = [
@@ -59,6 +60,10 @@ const routes: Routes = [
         'servicio',
         component:ServicioComponent,
       },
+      {path:
+        'informe',
+        component:InformesComponent,
+      },
       { path: '**',
         redirectTo: '', pathMatch: 'full'
       },
@@ -78,7 +83,8 @@ const routes: Routes = [
     HeaderComponent,
     MarcaComponent,
     OrdenComponent,
-    ServicioComponent
+    ServicioComponent,
+    InformesComponent
   ],
   imports: [
     RouterModule.forChild(routes),

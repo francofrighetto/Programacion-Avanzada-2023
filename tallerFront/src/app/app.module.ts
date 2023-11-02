@@ -39,7 +39,7 @@ registerLocaleData(localeEs, 'es-AR');
 @NgModule({
   declarations: [
     AppComponent
-    ],
+      ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
