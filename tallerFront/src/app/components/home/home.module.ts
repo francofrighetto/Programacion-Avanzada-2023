@@ -17,6 +17,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ServicioComponent } from '../servicio/servicio.component';
 import { InformesComponent } from '../informes/informes.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 const routes: Routes = [
@@ -95,7 +96,8 @@ const routes: Routes = [
     MatFormFieldModule,
     MatSelectModule,
     MatDividerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgChartsModule
   ],
   exports: [RouterModule],
 
