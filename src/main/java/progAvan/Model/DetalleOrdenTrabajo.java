@@ -35,6 +35,14 @@ public class DetalleOrdenTrabajo {
         this.estado = estado;
     }
 
+    public boolean cantidadValida(int cantidad) {
+        if (cantidad < 0) {
+            return false;
+        }
+
+        return true;
+    }
+
     @Override
     public String toString() {
         return "DetalleOrdenTrabajo [id=" + id + ", cantidad=" + cantidad + ", servicio=" + servicio + ", subtotal="
