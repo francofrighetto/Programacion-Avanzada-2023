@@ -19,7 +19,6 @@ import { ServicioComponent } from '../servicio/servicio.component';
 import { InformesComponent } from '../informes/informes.component';
 import { NgChartsModule } from 'ng2-charts';
 
-
 const routes: Routes = [
  { path: '',
     children: [
@@ -86,6 +85,7 @@ const routes: Routes = [
     OrdenComponent,
     ServicioComponent,
     InformesComponent
+
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -97,7 +97,7 @@ const routes: Routes = [
     MatSelectModule,
     MatDividerModule,
     MatPaginatorModule,
-    NgChartsModule
+    NgChartsModule,
   ],
   exports: [RouterModule],
 

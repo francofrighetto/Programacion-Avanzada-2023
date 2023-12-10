@@ -22,6 +22,9 @@ public class DetalleOrdenTrabajo {
     private Servicio servicio;
     private double subtotal;
     private boolean estado;
+    
+    @Column(nullable = true)
+    private int minutosRealizados;
 
     @ManyToOne
     @JoinColumn(name = "orden_id", referencedColumnName = "id")

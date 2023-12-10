@@ -22,6 +22,9 @@ public class Servicio {
     @Column(columnDefinition = "boolean default true")
     private boolean estado;
 
+    @Column(nullable = true)
+    private int minutosestimados;
+
     public boolean getEstado() {
         return estado;
     }

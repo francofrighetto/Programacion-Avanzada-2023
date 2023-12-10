@@ -19,13 +19,15 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./orden.component.css']
 })
 export class OrdenComponent implements OnInit {
-  modal: boolean = false;
+  modalVer: boolean = false;
+  modalFin: boolean = false;
+
   ordenes?: Orden[];
   orden!: Orden;
   nuevo: boolean = true;
   verOrden:Orden = {
     total: 0,
-    detalle: []
+    detalle: [],
   };
   nuevoDetalle: DetalleOrden = new DetalleOrden();
 
@@ -95,12 +97,22 @@ export class OrdenComponent implements OnInit {
     // Guardo las variables para mostrarlas en el modal.
     this.verOrden.descripcion = orden.descripcion
     this.verOrden.detalle = orden.detalle
-    this.modal = true;
+    this.modalVer = true;
+
+  }
+
+  openModalFin(orden:any){
+    this.verOrden=orden;
+    // this.verOrden.descripcion = orden.descripcion;
+    // this.verOrden.detalle = orden.detalle;
+    this.modalFin = true;
 
   }
 
   closeModal(){
-    this.modal = false;
+    this.modalVer = false;
+    this.modalFin = false;
+
   }
 
   getOrdenes() {
@@ -289,6 +301,15 @@ export class OrdenComponent implements OnInit {
       this.mostrarDetalle = data[0].orden;
       console.log(this.mostrarDetalle);
     }
+    })
+
+  }
+
+  finalizar(){
+    console.log(this.verOrden);
+    this.verOrden.estado=false;
+    this.ordenService.actualizarOrden(this.verOrden).subscribe(data=>{
+      console.log(data);
     })
 
   }

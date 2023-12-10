@@ -1,5 +1,27 @@
-<p>informes works!</p>
-<div style="display: block;">
+<div style="display: block; width: 80%;" class="text-center" *ngIf="mostrarHistograma">
     <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend">
-  </canvas>
+        </canvas>
+</div>
+
+<div style="display: block; width: 80%;" class="text-center" *ngIf="mostrarCirculo">
+    <canvas baseChart class="chart" [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins">
+</canvas>
+</div>
+
+<div class="row" style="width: 80%;">
+    <div class="col-12">
+        <span class="col-6 bg-danger">Sin terminar: {{estadisticaOrden.noTerminado}}</span>
+        <span class="col-6 bg-success">Terminadas: {{estadisticaOrden.terminado}}</span>
+    </div>
+    <div>
+        <span class="bg-info">Total ordenes: {{estadisticaOrden.noTerminado + estadisticaOrden.terminado}}</span>
+    </div>
+    <div>
+        <span class="bg-primary">Total recaudado: ${{estadisticaOrden.total}}</span>
+    </div>
+</div>
+
+
+<div class="row bg-black">
+    <span class="bg-secondary"></span>
 </div>

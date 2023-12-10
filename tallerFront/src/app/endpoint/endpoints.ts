@@ -9,6 +9,7 @@ export enum endpoints {
   auth="auth/",
   servicio="servicio/",
   detalleOrden="detalleOrden/",
+  estadistica="estadistica/",
 
 
  // metodos
@@ -23,6 +24,12 @@ export enum endpoints {
   current="current",
   mostrarpaginado="mostrarpaginado",
   longitud="longitud",
-  ultima="ultima"
+  ultima="ultima",
+
+  //estadistica
+  comparacionMinutos="comparacionMinutos",
+  estadisticaOrden="estadisticaOrden",
+  cantidadServiciosDetalle="cantidadServiciosDetalle"
+
 
 }

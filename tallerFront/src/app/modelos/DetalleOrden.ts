@@ -7,4 +7,5 @@ export class DetalleOrden{
   subtotal?:number;
   descripcion?:string;
   estado:boolean=true;
+  minutosRealizados?:number;
 }

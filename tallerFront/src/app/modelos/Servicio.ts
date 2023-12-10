@@ -3,4 +3,5 @@ export class Servicio {
   nombre?:string;
   estado?:boolean;
   precio?:number;
+  minutosestimados?:number;
 }
