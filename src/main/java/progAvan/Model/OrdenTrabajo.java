@@ -34,8 +34,7 @@ public class OrdenTrabajo {
 
     @OneToMany(mappedBy = "orden", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
     @JsonIgnoreProperties("orden")
-    private List<DetalleOrdenTrabajo> detalle=new ArrayList<>();    
-
+    private List<DetalleOrdenTrabajo> detalle = new ArrayList<>();
 
     public boolean getEstado() {
         return estado;
@@ -43,5 +42,9 @@ public class OrdenTrabajo {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public boolean validarRangoFechas() {
+        return fechaInicio != null && fechaFin != null && fechaFin.after(fechaInicio);
     }
 }
