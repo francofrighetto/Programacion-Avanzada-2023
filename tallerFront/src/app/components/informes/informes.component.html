@@ -1,27 +1,35 @@
-<div style="display: block; width: 80%;" class="text-center" *ngIf="mostrarHistograma">
-    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend">
+<app-header></app-header>
+
+<h2 class="text-center pt-3">Tiempos estimados y reales por cada servicio</h2>
+<div style=" display: block; width: 70%; " class="text-center mx-auto " *ngIf="mostrarHistograma ">
+    <canvas baseChart [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions " [legend]="barChartLegend ">
         </canvas>
 </div>
-
-<div style="display: block; width: 80%;" class="text-center" *ngIf="mostrarCirculo">
-    <canvas baseChart class="chart" [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins">
+<div *ngIf="serviciosLentos.length!=0" class="text-center">
+    <h5>El/los siguiente/s servicio/s tienen un retardo de 20 minutos como minimo: </h5>
+    <span *ngFor=" let servicio of serviciosLentos ">- {{servicio}}<br></span>
+</div>
+<div *ngIf="serviciosLentos.length==0" class="text-center">
+    <h5>Ningun servicio tiene un retardo de 20 minutos como minimo</h5>
+</div>
+<mat-divider class="my-5"></mat-divider>
+<h2 class="text-center ">Porcentaje de servicios utilizados</h2>
+<h5 class="text-center ">Total {{totalPrcentaje}} detalles con servicio</h5>
+<div style="display: block; width: 30%; " class="text-center mx-auto " *ngIf="mostrarCirculo ">
+    <canvas baseChart class="chart " [data]="pieChartData " [type]="pieChartType " [options]="pieChartOptions " [plugins]="pieChartPlugins ">
 </canvas>
 </div>
 
-<div class="row" style="width: 80%;">
-    <div class="col-12">
-        <span class="col-6 bg-danger">Sin terminar: {{estadisticaOrden.noTerminado}}</span>
-        <span class="col-6 bg-success">Terminadas: {{estadisticaOrden.terminado}}</span>
-    </div>
-    <div>
-        <span class="bg-info">Total ordenes: {{estadisticaOrden.noTerminado + estadisticaOrden.terminado}}</span>
-    </div>
-    <div>
-        <span class="bg-primary">Total recaudado: ${{estadisticaOrden.total}}</span>
-    </div>
+<mat-divider class="my-5"></mat-divider>
+
+<h3 class="text-center pt-3 ">Números sobre ordenes de trabajo</h3>
+<div class="row w-100 justify-content-around ">
+    <span class="col-4 bg-danger py-4 ">Sin terminar: {{estadisticaOrden.noTerminado}}</span>
+    <span class="col-4 bg-success py-4 ">Terminadas: {{estadisticaOrden.terminado}}</span>
 </div>
+<div class="row container justify-content-around mt-2 ">
 
+    <span class="col-4 bg-info py-4 ">Total ordenes: {{estadisticaOrden.noTerminado + estadisticaOrden.terminado}}</span>
 
-<div class="row bg-black">
-    <span class="bg-secondary"></span>
+    <span class="col-4 bg-primary py-4 ">Total recaudado: ${{estadisticaOrden.total}}</span>
 </div>

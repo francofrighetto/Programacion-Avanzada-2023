@@ -34,6 +34,8 @@ export class InformesComponent implements OnInit {
 
   mostrarHistograma:boolean=false;
   mostrarCirculo:boolean=false;
+  totalPrcentaje:number=0;
+  serviciosLentos:any=[];
 
 
   public barChartOptions = {
@@ -43,15 +45,32 @@ export class InformesComponent implements OnInit {
 
 
 
-  public barChartLabels = [''];
+  public barChartLabels:any = [];
   public barChartType = 'bar';
   public barChartLegend = true;
 
-  public barChartData = [
-    { data: [0], label: 'Real' },
-    { data: [0], label: 'Estimado' }
+  public barChartData:any = [
+    { data: [], label: 'Real' },
+    { data: [], label: 'Estimado' }
   ];
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
+  // Pie
+  public pieChartOptions: ChartConfiguration['options'] = {
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top',
+      },
+      datalabels: {
+        formatter: (value: any, ctx: any) => {
+          if (ctx.chart.data.labels) {
+            return ctx.chart.data.labels[ctx.dataIndex];
+          }
+        },
+      },
+    },
+  };
 
 
 
@@ -75,46 +94,29 @@ export class InformesComponent implements OnInit {
       data.forEach((servicio:any) => {
         this.barChartLabels.push(servicio[0]);
         // real
-        this.barChartData[0].data.push(servicio[1]);
+        this.barChartData[0].data.push(servicio[1].toFixed(2) );
         // estimado
-        this.barChartData[1].data.push(servicio[2]);
-
+        this.barChartData[1].data.push(servicio[2].toFixed(2));
       });
-      console.log(this.barChartLabels);
-      // this.barChartLabels.shift();
-      // this.barChartData[0].data.shift();
-      // this.barChartData[1].data.shift();
 
-      this.barChartLabels.splice(0,1);
-      this.barChartData[0].data.splice(0,1);
-      this.barChartData[1].data.splice(0,1);
       this.mostrarHistograma=true;
-      console.log(this.barChartLabels);
-
-
-    })
-  }
-
-  getCantidadServiciosEnDetalleOrden(){
-    this.estadisticaService.cantidadServiciosEnDetalleOrden().subscribe(data=>{
-      console.log(data);
-      console.log(data[0]);
-
-      data.forEach((element:any) => {
-        this.pieChartData.labels?.push(element[1]);
-        this.pieChartData.datasets[0].data.push(element[0])
-      });
-
-      this.pieChartData.labels?.shift();
-      this.pieChartData.datasets[0].data.shift();
-      this.mostrarCirculo=true;
+      this.calcularDiferenciaMinutos();
 
     })
   }
+
+  calcularDiferenciaMinutos(){
+    for (let i=0;i<this.barChartData[0].data.length;i++){
+      if (this.barChartData[0].data[i] - this.barChartData[1].data[i] >=20)  {
+        this.serviciosLentos.push(this.barChartLabels[i])
+      }
+    }
+  }
+
+
 
   getEstadsiticaOrden(){
     this.estadisticaService.estadisticaOrden().subscribe(data=>{
-      console.log(data)
       data=data[0];
       this.estadisticaOrden.noTerminado = data[0];
       this.estadisticaOrden.terminado = data[1];
@@ -127,24 +129,7 @@ export class InformesComponent implements OnInit {
 
 
 
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-  // Pie
-  public pieChartOptions: ChartConfiguration['options'] = {
-    plugins: {
-      legend: {
-        display: true,
-        position: 'top',
-      },
-      datalabels: {
-        formatter: (value: any, ctx: any) => {
-          if (ctx.chart.data.labels) {
-            return ctx.chart.data.labels[ctx.dataIndex];
-          }
-        },
-      },
-    },
-  };
 
   public pieChartData: ChartData<'pie', number[], string | string[]> = {
     labels: [''],
@@ -237,44 +222,32 @@ export class InformesComponent implements OnInit {
     this.chart?.update();
   }
 
-  addSlice(): void {
-    if (this.pieChartData.labels) {
-      this.pieChartData.labels.push(['Line 1', 'Line 2', 'Line 3']);
-    }
 
-    this.pieChartData.datasets[0].data.push(400);
 
-    this.chart?.update();
-  }
 
-  removeSlice(): void {
-    if (this.pieChartData.labels) {
-      this.pieChartData.labels.pop();
-    }
 
-    this.pieChartData.datasets[0].data.pop();
 
-    this.chart?.update();
-  }
 
-  changeLegendPosition(): void {
-    if (this.pieChartOptions?.plugins?.legend) {
-      this.pieChartOptions.plugins.legend.position =
-        this.pieChartOptions.plugins.legend.position === 'left'
-          ? 'top'
-          : 'left';
-    }
+  getCantidadServiciosEnDetalleOrden(){
+    this.estadisticaService.cantidadServiciosEnDetalleOrden().subscribe(data=>{
+      this.totalPrcentaje=0;
 
-    this.chart?.render();
-  }
+      data.forEach((element:any) => {
+        this.totalPrcentaje+=element[0];
+      })
+      data.forEach((element:any) => {
+        this.pieChartData.labels?.push(element[1] + " " + (element[0]*100/this.totalPrcentaje).toFixed(2) + "%");
+        this.pieChartData.datasets[0].data.push(element[0])
+      });
 
-  toggleLegend(): void {
-    if (this.pieChartOptions?.plugins?.legend) {
-      this.pieChartOptions.plugins.legend.display =
-        !this.pieChartOptions.plugins.legend.display;
-    }
+      this.pieChartData.labels?.shift();
 
-    this.chart?.render();
+      this.pieChartData.datasets[0].data.shift();
+      console.log(this.pieChartData.labels);
+
+      this.mostrarCirculo=true;
+    })
+
   }
 
 }

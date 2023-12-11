@@ -17,6 +17,7 @@ public interface EstadisticaRepository extends JpaRepository<Estadistica, Long> 
     @Query(value = "SELECT nombre, avg(minutos_realizados) as promedio_minutos_realizados, minutosestimados " +
             "FROM detalle_orden_trabajo as det " +
             "LEFT JOIN servicio as ser ON servicio_id = ser.id " +
+            " where servicio_id is not null "+
             "GROUP BY nombre, minutosestimados", nativeQuery = true)
     List<Object> comparacionMinutosServicios();
 
