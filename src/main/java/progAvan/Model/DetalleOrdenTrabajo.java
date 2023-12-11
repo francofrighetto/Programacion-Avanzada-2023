@@ -23,7 +23,6 @@ public class DetalleOrdenTrabajo {
     private double subtotal;
     private boolean estado;
     
-    @Column(nullable = true)
     private int minutosRealizados;
 
     @ManyToOne

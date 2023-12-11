@@ -13,6 +13,7 @@
                 <label for="inputFecha">Fecha Creada</label>
                 <input type="date" id="inputFecha" class="form-control" name="inputFecha" placeholder="" [(ngModel)]="orden.fechaInicio" formControlName="inputFecha" [class.is-invalid]="formRegister.get('inputFecha')?.touched && formRegister.get('inputFecha')?.invalid"
                     [class.is-valid]="formRegister.get('inputFecha')?.valid">
+                <span>{{orden.fechaInicio}}</span>
                 <br>
             </div>
             <div class="col-5 ms-5">
@@ -177,18 +178,21 @@
         <div *ngIf="modalFin == true">
             <div class="container-modal-auto">
                 <div class="content-modal">
-                    <h2>Orden</h2>
-                    <h6><b>Descripcion: </b>{{verOrden.descripcion}}</h6> <b></b>
-                    <div *ngFor="let detalle of verOrden.detalle; let i = index ">
-                        <h5 class="mx-auto text-center">Servicio {{i+1}}</h5>
-                        <p><b>Nombre: </b>{{detalle.servicio.nombre}}</p> <b></b>
-                        <p><b>Minutos de trabajo: </b>
-                            <input [(ngModel)]="detalle.minutosRealizados">
-                    </div>
-                    <div class="btns">
-                        <button (click)="finalizar()" class="btn btn-success">Finalizar</button>
-                        <button (click)="closeModal()" class="bnt-cerrar">Cerrar</button>
-                    </div>
+                    <form [formGroup]="formFin">
+                        <h2>Orden</h2>
+                        <h6><b>Descripcion: </b>{{verOrden.descripcion}}</h6> <b></b>
+                        <div *ngFor="let detalle of verOrden.detalle; let i = index ">
+                            <h5 class="mx-auto text-center">Servicio {{i+1}}</h5>
+                            <p><b>Nombre: </b>{{detalle.servicio.nombre}}</p> <b></b>
+                            <p><b>Minutos de trabajo: </b>
+                                <input [(ngModel)]="detalle.minutosRealizados" formControlName="inputMinRealizado">
+                                <span *ngIf="formFin.get('inputMinRealizado')?.hasError('required') || formFin.get('inputMinRealizado')?.hasError('min')" style="color: red;">Ingrese los minutos</span>
+                        </div>
+                        <div class="btns">
+                            <button (click)="finalizar()" class="btn btn-success">Finalizar</button>
+                            <button (click)="closeModal()" class="bnt-cerrar">Cerrar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

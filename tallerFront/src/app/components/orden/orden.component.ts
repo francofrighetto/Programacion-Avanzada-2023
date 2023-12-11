@@ -25,13 +25,13 @@ export class OrdenComponent implements OnInit {
   ordenes?: Orden[];
   orden!: Orden;
   nuevo: boolean = true;
-  verOrden:Orden = {
+  verOrden: Orden = {
     total: 0,
     detalle: [],
   };
   nuevoDetalle: DetalleOrden = new DetalleOrden();
 
-  mostrarDetalle:any;
+  mostrarDetalle: any;
 
   autos!: Auto[];
   auto: Auto = new Auto;
@@ -53,15 +53,20 @@ export class OrdenComponent implements OnInit {
     activo: false
   }
 
+  public formFin = new FormGroup({
+    inputMinRealizado: new FormControl("", [Validators.required, Validators.min(1)])
+  })
+
   public formRegister = new FormGroup({
     inputDescripcion: new FormControl(
       "", Validators.compose([Validators.required])
     ),
 
     inputFecha: new FormControl(
-      "", Validators.compose([Validators.required])
+      "05/05/2023", Validators.compose([Validators.required])
     ),
     inputFechaFin: new FormControl(""),
+
     inputCantidad1: new FormControl(""),
     inputCantidad2: new FormControl(""),
     inputCantidad3: new FormControl(""),
@@ -93,7 +98,7 @@ export class OrdenComponent implements OnInit {
     this.getServicios();
   }
 
-  openModal(orden:any){
+  openModal(orden: any) {
     // Guardo las variables para mostrarlas en el modal.
     this.verOrden.descripcion = orden.descripcion
     this.verOrden.detalle = orden.detalle
@@ -101,15 +106,15 @@ export class OrdenComponent implements OnInit {
 
   }
 
-  openModalFin(orden:any){
-    this.verOrden=orden;
+  openModalFin(orden: any) {
+    this.verOrden = orden;
     // this.verOrden.descripcion = orden.descripcion;
     // this.verOrden.detalle = orden.detalle;
     this.modalFin = true;
 
   }
 
-  closeModal(){
+  closeModal() {
     this.modalVer = false;
     this.modalFin = false;
 
@@ -174,13 +179,13 @@ export class OrdenComponent implements OnInit {
     this.nuevo = false;
     this.detalleOrdenService.getDetalleOrden(orden.id!).subscribe((data: any) => {
       console.log(data);
-      if (data!=undefined && data.length!=0){
-      this.orden = data[0].orden;
-      this.calcularTotal();
-      if (this.orden.fechaInicio!=undefined && this.orden.fechaInicio!=null){
-        this.orden.fechaInicio = this.formatearFecha(this.orden.fechaInicio)!;
+      if (data != undefined && data.length != 0) {
+        this.orden = data[0].orden;
+        this.calcularTotal();
+        if (this.orden.fechaInicio != undefined && this.orden.fechaInicio != null) {
+          this.orden.fechaInicio = this.formatearFecha(this.orden.fechaInicio)!;
+        }
       }
-    }
     })
   }
 
@@ -216,6 +221,8 @@ export class OrdenComponent implements OnInit {
 
   cancelar() {
     this.orden = new Orden;
+    // this.orden.fechaInicio=new Date().toLocaleDateString();
+    this.orden.fechaInicio = "2023/05/05";
     this.orden.total = 0;
     this.orden.estado = true;
     this.orden.auto = new Auto;
@@ -259,13 +266,13 @@ export class OrdenComponent implements OnInit {
 
   calcularTotal() {
     this.orden.detalle.forEach(e => {
-      let precio_servicio =0;
-      this.servicios.forEach(s=>{
-        if (s.id==e.servicio.id){
+      let precio_servicio = 0;
+      this.servicios.forEach(s => {
+        if (s.id == e.servicio.id) {
           console.log(s);
-          precio_servicio=s.precio!;
-        e.subtotal = e.cantidad! * precio_servicio!;
-        console.log(e.subtotal);
+          precio_servicio = s.precio!;
+          e.subtotal = e.cantidad! * precio_servicio!;
+          console.log(e.subtotal);
         }
       })
 
@@ -288,30 +295,31 @@ export class OrdenComponent implements OnInit {
   }
 
   formatearFecha(fechaModel: any) {
-      const fecha = new Date(fechaModel);
-      const datePipe = new DatePipe('en-US');
-      const fechaFormateada = datePipe.transform(fecha, 'yyyy-MM-dd');
+    console.log(fechaModel)
+    const fecha = new Date(fechaModel);
+    const datePipe = new DatePipe('en-US');
+    const fechaFormateada = datePipe.transform(fecha, 'yyyy-MM-dd');
 
     return fechaFormateada;
   }
 
-  ver(orden:any){
+  ver(orden: any) {
     this.detalleOrdenService.getDetalleOrden(orden.id!).subscribe((data: any) => {
-      if (data!=undefined && data.length!=0){
-      this.mostrarDetalle = data[0].orden;
-      console.log(this.mostrarDetalle);
-    }
+      if (data != undefined && data.length != 0) {
+        this.mostrarDetalle = data[0].orden;
+        console.log(this.mostrarDetalle);
+      }
     })
 
   }
 
-  finalizar(){
-    console.log(this.verOrden);
-    this.verOrden.estado=false;
-    this.ordenService.actualizarOrden(this.verOrden).subscribe(data=>{
-      console.log(data);
-    })
-
+  finalizar() {
+    if (this.formFin.valid) {
+      this.verOrden.estado = false;
+      this.ordenService.actualizarOrden(this.verOrden).subscribe(data => {
+        this.closeModal();
+      })
+    }
   }
 
 }
