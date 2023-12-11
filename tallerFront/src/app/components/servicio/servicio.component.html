@@ -12,7 +12,11 @@
         formRegister.get('inputPrecio')?.touched &&
         formRegister.get('inputPrecio')?.invalid
       " [class.is-valid]="formRegister.get('inputPrecio')?.valid" />
-        <br />
+        <input type="number" id="inputPrecio" class="form-control" name="inputPrecio" placeholder="Minutos" [(ngModel)]="servicio.minutosestimados" formControlName="inputMinutos" [class.is-invalid]="
+        formRegister.get('inputMinutos')?.touched &&
+        formRegister.get('inputMinutos')?.invalid
+      " [class.is-valid]="formRegister.get('inputMinutos')?.valid" />
+        <br>
         <button type="button" class="btn btn-success ms-2" (click)="nuevaServicio()" *ngIf="nuevo">
       Crear
     </button>
@@ -33,6 +37,7 @@
                 <tr>
                     <th scope="col">Nombre</th>
                     <th scope="col">Precio</th>
+                    <th scope="col">Minutos estimados</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -40,6 +45,7 @@
                 <tr *ngFor="let m of servicios">
                     <td>{{ m.nombre }}</td>
                     <td>{{ m.precio }}</td>
+                    <td>{{ m.minutosestimados }}</td>
                     <td>
                         <button type="button" class="btn btn-primary" (click)="editar(m)">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

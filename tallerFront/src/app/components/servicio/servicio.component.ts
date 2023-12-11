@@ -31,7 +31,10 @@ export class ServicioComponent implements OnInit {
     ),
     inputPrecio: new FormControl(
       "", Validators.compose([Validators.required])
-    )
+    ),
+    inputMinutos: new FormControl(
+      "", Validators.compose([Validators.required])
+    ),
   });
 
   constructor(private servicioService: ServicioService) {

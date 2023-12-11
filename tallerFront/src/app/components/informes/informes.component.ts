@@ -17,12 +17,12 @@ export class InformesComponent implements OnInit {
 
 
   estadisticaOrden = {
-    noTerminado:0,
-    terminado:0,
-    total:0
+    noTerminado: 0,
+    terminado: 0,
+    total: 0
   }
 
-// ejemplo base
+  // ejemplo base
   // public barChartLabels = ['Category 1', 'Category 2', 'Category 3', 'Category 4'];
   // public barChartType = 'bar';
   // public barChartLegend = true;
@@ -32,10 +32,10 @@ export class InformesComponent implements OnInit {
   //   { data: [28, 48, 40, 19], label: 'Series B' }
   // ];
 
-  mostrarHistograma:boolean=false;
-  mostrarCirculo:boolean=false;
-  totalPrcentaje:number=0;
-  serviciosLentos:any=[];
+  mostrarHistograma: boolean = false;
+  mostrarCirculo: boolean = false;
+  totalPrcentaje: number = 0;
+  serviciosLentos: any = [];
 
 
   public barChartOptions = {
@@ -45,11 +45,11 @@ export class InformesComponent implements OnInit {
 
 
 
-  public barChartLabels:any = [];
+  public barChartLabels: any = [];
   public barChartType = 'bar';
   public barChartLegend = true;
 
-  public barChartData:any = [
+  public barChartData: any = [
     { data: [], label: 'Real' },
     { data: [], label: 'Estimado' }
   ];
@@ -79,7 +79,7 @@ export class InformesComponent implements OnInit {
 
 
 
-  constructor(private estadisticaService:EstadisticaService,
+  constructor(private estadisticaService: EstadisticaService,
     private cdRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -89,25 +89,25 @@ export class InformesComponent implements OnInit {
     this.getEstadsiticaOrden();
   }
 
-  getComparacionMinutos(){
-    this.estadisticaService.comparacionMinutos().subscribe(data=>{
-      data.forEach((servicio:any) => {
+  getComparacionMinutos() {
+    this.estadisticaService.comparacionMinutos().subscribe(data => {
+      data.forEach((servicio: any) => {
         this.barChartLabels.push(servicio[0]);
         // real
-        this.barChartData[0].data.push(servicio[1].toFixed(2) );
+        this.barChartData[0].data.push(servicio[1].toFixed(2));
         // estimado
         this.barChartData[1].data.push(servicio[2].toFixed(2));
       });
 
-      this.mostrarHistograma=true;
+      this.mostrarHistograma = true;
       this.calcularDiferenciaMinutos();
 
     })
   }
 
-  calcularDiferenciaMinutos(){
-    for (let i=0;i<this.barChartData[0].data.length;i++){
-      if (this.barChartData[0].data[i] - this.barChartData[1].data[i] >=20)  {
+  calcularDiferenciaMinutos() {
+    for (let i = 0; i < this.barChartData[0].data.length; i++) {
+      if (this.barChartData[0].data[i] - this.barChartData[1].data[i] >= 20) {
         this.serviciosLentos.push(this.barChartLabels[i])
       }
     }
@@ -115,9 +115,9 @@ export class InformesComponent implements OnInit {
 
 
 
-  getEstadsiticaOrden(){
-    this.estadisticaService.estadisticaOrden().subscribe(data=>{
-      data=data[0];
+  getEstadsiticaOrden() {
+    this.estadisticaService.estadisticaOrden().subscribe(data => {
+      data = data[0];
       this.estadisticaOrden.noTerminado = data[0];
       this.estadisticaOrden.terminado = data[1];
       this.estadisticaOrden.total = data[2];
@@ -228,24 +228,23 @@ export class InformesComponent implements OnInit {
 
 
 
-  getCantidadServiciosEnDetalleOrden(){
-    this.estadisticaService.cantidadServiciosEnDetalleOrden().subscribe(data=>{
-      this.totalPrcentaje=0;
+  getCantidadServiciosEnDetalleOrden() {
+    this.estadisticaService.cantidadServiciosEnDetalleOrden().subscribe(data => {
+      this.totalPrcentaje = 0;
 
-      data.forEach((element:any) => {
-        this.totalPrcentaje+=element[0];
+      data.forEach((element: any) => {
+        this.totalPrcentaje += element[0];
       })
-      data.forEach((element:any) => {
-        this.pieChartData.labels?.push(element[1] + " " + (element[0]*100/this.totalPrcentaje).toFixed(2) + "%");
+      data.forEach((element: any) => {
+        this.pieChartData.labels?.push(element[1] + " " + (element[0] * 100 / this.totalPrcentaje).toFixed(2) + "%");
         this.pieChartData.datasets[0].data.push(element[0])
       });
 
       this.pieChartData.labels?.shift();
 
       this.pieChartData.datasets[0].data.shift();
-      console.log(this.pieChartData.labels);
 
-      this.mostrarCirculo=true;
+      this.mostrarCirculo = true;
     })
 
   }
