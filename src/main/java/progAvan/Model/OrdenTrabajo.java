@@ -8,6 +8,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,21 +31,30 @@ public class OrdenTrabajo {
     @ManyToOne
     @JoinColumn(name = "vehiculo_id", referencedColumnName = "id")
     private Auto auto;
-    private boolean estado;
+    @ManyToOne
+    @JoinColumn(name = "estado_id", referencedColumnName = "id")
+    private Estado estado;
+    @Nullable()
+    private boolean habilitado;
+
 
     @OneToMany(mappedBy = "orden", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
     @JsonIgnoreProperties("orden")
     private List<DetalleOrdenTrabajo> detalle = new ArrayList<>();
 
-    public boolean getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
     public boolean validarRangoFechas() {
         return fechaInicio != null && fechaFin != null && fechaFin.after(fechaInicio);
+    }
+
+    public boolean getHabilitado(){
+        return this.habilitado;
     }
 }

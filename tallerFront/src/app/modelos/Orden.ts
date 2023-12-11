@@ -6,7 +6,7 @@ export class Orden {
   descripcion?: string;
   auto?: any;
   tecnico?: any;
-  estado?: boolean;
+  habilitado?: boolean;
   fechaInicio?: string;
   fechaFin?: string;
   total: number=0;

@@ -133,7 +133,7 @@ public class OrdenTrabajoController {
 
             if (optionalOrden.isPresent()) {
                 OrdenTrabajo orden = optionalOrden.get();
-                orden.setEstado(!orden.getEstado());
+                orden.setHabilitado(!orden.getHabilitado());
                 ordenTrabajoService.save(orden);
 
                 this.response.put("message", "success");

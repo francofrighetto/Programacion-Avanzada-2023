@@ -224,7 +224,7 @@ export class OrdenComponent implements OnInit {
     // this.orden.fechaInicio=new Date().toLocaleDateString();
     this.orden.fechaInicio = "2023/05/05";
     this.orden.total = 0;
-    this.orden.estado = true;
+    this.orden.habilitado = true;
     this.orden.auto = new Auto;
     this.orden.tecnico = new Tecnico;
     this.nuevo = true;
@@ -315,7 +315,7 @@ export class OrdenComponent implements OnInit {
 
   finalizar() {
     if (this.formFin.valid) {
-      this.verOrden.estado = false;
+      this.verOrden.habilitado = false;
       this.ordenService.actualizarOrden(this.verOrden).subscribe(data => {
         this.closeModal();
       })

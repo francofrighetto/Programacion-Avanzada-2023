@@ -57,12 +57,12 @@ public class OrdenTrabajoService {
     }
 
     public List<OrdenTrabajo> findHabiliitados() {
-        return ordenTrabajoRepository.findByEstadoIsTrue();
+        return ordenTrabajoRepository.findByHabilitadoIsTrue();
     }
 
     public List<OrdenTrabajo> findPaginado(int page, int size) {
         Pageable paging = PageRequest.of(page, size);
-        List<OrdenTrabajo> pagedResult = ordenTrabajoRepository.findByEstadoIsTrue(paging);
+        List<OrdenTrabajo> pagedResult = ordenTrabajoRepository.findByHabilitadoIsTrue(paging);
         return pagedResult;
     }
 

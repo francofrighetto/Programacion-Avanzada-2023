@@ -16,13 +16,13 @@ import org.springframework.data.repository.query.Param;
 
 @Repository
 public interface OrdenTrabajoRepository extends JpaRepository<OrdenTrabajo, Integer> {
-    List<OrdenTrabajo> findByEstadoIsTrue();
+    List<OrdenTrabajo> findByHabilitadoIsTrue();
 
-    List<OrdenTrabajo> findByEstadoIsTrue(Pageable pageable);
+    List<OrdenTrabajo> findByHabilitadoIsTrue(Pageable pageable);
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE OrdenTrabajo SET estado = false WHERE id = :ordenTrabajoId", nativeQuery = true)
+    @Query(value = "UPDATE OrdenTrabajo SET habilitado = false WHERE id = :ordenTrabajoId", nativeQuery = true)
     void deshabilitarOrdenTrabajo(Integer ordenTrabajoId);
 
     @Transactional
