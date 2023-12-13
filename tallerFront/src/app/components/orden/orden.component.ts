@@ -11,6 +11,9 @@ import { Servicio } from 'src/app/modelos/Servicio';
 import { DetalleOrden } from 'src/app/modelos/DetalleOrden';
 import { DetalleOrdenService } from 'src/app/servicios/detalleOrden/detalle-orden.service';
 import { DatePipe } from '@angular/common';
+import { GeneradorPdfService } from 'src/app/servicios/generador-pdf/generador-pdf.service';
+import { EstadoService } from 'src/app/servicios/estado/estado.service';
+import { Estado } from 'src/app/modelos/Estado';
 
 
 @Component({
@@ -32,6 +35,8 @@ export class OrdenComponent implements OnInit {
   nuevoDetalle: DetalleOrden = new DetalleOrden();
 
   mostrarDetalle: any;
+
+  estados?: Estado[];
 
   autos!: Auto[];
   auto: Auto = new Auto;
@@ -89,13 +94,15 @@ export class OrdenComponent implements OnInit {
   });
 
   constructor(private ordenService: OrdenService, private autoService: AutoService, private tecnicoService: TecnicoService,
-    private servicioService: ServicioService, private cdr: ChangeDetectorRef, private detalleOrdenService: DetalleOrdenService) {
+    private servicioService: ServicioService, private cdr: ChangeDetectorRef, private detalleOrdenService: DetalleOrdenService, 
+    private generadorPdfService: GeneradorPdfService, private estadoService: EstadoService) {
   }
   ngOnInit(): void {
     this.resetOrden();
     this.getAutos();
     this.getTecnicos();
     this.getServicios();
+    this.getEstados();
   }
 
   openModal(orden: any) {
@@ -123,6 +130,7 @@ export class OrdenComponent implements OnInit {
   getOrdenes() {
     this.ordenService.getOrdenesPag(this.pageNumber, this.pageSize).subscribe(data => {
       this.ordenes = data;
+      console.log(this.ordenes)
     })
   }
   getAutos() {
@@ -136,6 +144,13 @@ export class OrdenComponent implements OnInit {
     })
   }
 
+  getEstados(){
+    this.estadoService.getEstados().subscribe(data => {
+      this.estados = data;
+      console.log(this.estados)
+    })
+  }
+
   getServicios() {
     this.servicioService.getServicios().subscribe(data => {
       this.servicios = data;
@@ -144,6 +159,7 @@ export class OrdenComponent implements OnInit {
 
   nuevaOrden() {
     console.log(this.orden);
+    this.orden.estado = this.estados![0];
     if (this.formRegister.valid) {
       this.ordenService.nuevaOrden(this.orden).subscribe((data: any) => {
         if (data.message == "success") {
@@ -295,7 +311,6 @@ export class OrdenComponent implements OnInit {
   }
 
   formatearFecha(fechaModel: any) {
-    console.log(fechaModel)
     const fecha = new Date(fechaModel);
     const datePipe = new DatePipe('en-US');
     const fechaFormateada = datePipe.transform(fecha, 'yyyy-MM-dd');
@@ -315,11 +330,21 @@ export class OrdenComponent implements OnInit {
 
   finalizar() {
     if (this.formFin.valid) {
-      this.verOrden.habilitado = false;
+      this.verOrden.estado = this.estados![2];
       this.ordenService.actualizarOrden(this.verOrden).subscribe(data => {
         this.closeModal();
       })
     }
+  }
+
+  generarFactura(orden: Orden){
+    const datos = {
+      servicios: orden.detalle,
+      cliente: orden.auto.cliente,
+      auto: orden.auto,
+    }
+    console.log(datos)
+    this.generadorPdfService.generarFactura(datos);
   }
 
 }
