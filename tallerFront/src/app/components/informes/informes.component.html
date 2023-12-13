@@ -1,17 +1,18 @@
 <app-header></app-header>
 
-<div class="d-flex">
+<form [formGroup]="formFechas" class="d-flex">
     <div class="col-5 ">
-        <label for="inputFecha">Fecha Creada</label>
-        <input type="date" id="inputFecha" class="form-control" name="inputFecha" placeholder="" formControlName="inputFecha" [class.is-invalid]="formRegister.get('inputFecha')?.touched && formRegister.get('inputFecha')?.invalid" [class.is-valid]="formRegister.get('inputFecha')?.valid">
+        <label for="fechaInicio">Fecha Creada</label>
+        <input type="date" id="fechaInicio" class="form-control" name="fechaInicio" placeholder="" formControlName="fechaInicio" [class.is-invalid]="formFechas.get('fechaInicio')?.touched && formFechas.get('fechaInicio')?.invalid" [class.is-valid]="formFechas.get('fechaInicio')?.valid">
         <br>
     </div>
     <div class="col-5 ms-5">
-        <label for="inputFechaFin">Fecha Finalizada</label>
-        <input type="date" id="inputFechaFin" class="form-control" name="inputFechaFin" placeholder="" formControlName="inputFechaFin">
+        <label for="fechaFin">Fecha Finalizada</label>
+        <input type="date" id="fechaFin" class="form-control" name="fechaFin" placeholder="" formControlName="fechaFin">
         <br>
     </div>
-</div>
+    <button (click)="buscarFecha()">Buscar</button>
+</form>
 <h2 class="text-center pt-3">Tiempos estimados y reales por cada servicio</h2>
 <div style=" display: block; width: 70%; " class="text-center mx-auto " *ngIf="mostrarHistograma ">
     <canvas baseChart [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions " [legend]="barChartLegend ">
