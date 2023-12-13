@@ -14,5 +14,5 @@ export class Orden {
   total: number=0;
   id?: number;
   detalle:DetalleOrden[]=[];
-  estado:Estado = new Estado;
+
 }
