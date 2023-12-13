@@ -14,8 +14,8 @@ public class EstadisticaService {
     @Autowired 
     private EstadisticaRepository estadisticaRepository;
 
-    public List<Object> comparacionMinutosServicios(){
-        return this.estadisticaRepository.comparacionMinutosServicios();
+    public List<Object> comparacionMinutosServicios(String fechaInferior, String fechaSuperior){
+        return this.estadisticaRepository.comparacionMinutosServicios(fechaInferior, fechaSuperior);
     }
 
     public List<Object> estadisticaOrden(){

@@ -12,8 +12,8 @@ export class EstadisticaService {
 
   constructor(private http:HttpClient) { }
 
-  comparacionMinutos(): Observable<any>{
-    return this.http.get<any>(environment.apiUrl + endpoints.estadistica + endpoints.comparacionMinutos);
+  comparacionMinutos(fechaInferior:string, fechaSuperior:string): Observable<any>{
+    return this.http.get<any>(environment.apiUrl + endpoints.estadistica + endpoints.comparacionMinutos+"/"+fechaInferior+"/"+fechaSuperior);
   }
 
   estadisticaOrden(): Observable<any>{

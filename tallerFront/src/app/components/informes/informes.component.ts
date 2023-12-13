@@ -17,13 +17,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class InformesComponent implements OnInit {
 
 
-  public formRegister = new FormGroup({
-    inputDescripcion: new FormControl(
-      "", Validators.compose([Validators.required])
+  public formFechas = new FormGroup({
+    fechaInicio: new FormControl(
+      this.formatoFechaGuion(new Date(1970, 4, 5).toLocaleDateString()), Validators.compose([Validators.required])
     ),
 
-    inputFecha: new FormControl(
-      "", Validators.compose([Validators.required])
+    fechaFin: new FormControl(
+      this.formatoFechaGuion(new Date().toLocaleDateString()), Validators.compose([Validators.required])
     )
   });
 
@@ -96,13 +96,16 @@ export class InformesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCantidadServiciosEnDetalleOrden();
-
     this.getComparacionMinutos();
-    this.getEstadsiticaOrden();
+    // this.getEstadsiticaOrden();
   }
 
   getComparacionMinutos() {
-    this.estadisticaService.comparacionMinutos().subscribe(data => {
+    this.mostrarHistograma = false;
+    this.barChartLabels = [];
+    this.barChartData[0].data=[];
+    this.barChartData[1].data=[];
+    this.estadisticaService.comparacionMinutos(this.formatearFechaSQL(this.formFechas.get('fechaInicio')?.value), this.formatearFechaSQL(this.formFechas.get('fechaFin')?.value)).subscribe(data => {
       data.forEach((servicio: any) => {
         this.barChartLabels.push(servicio[0]);
         // real
@@ -260,5 +263,42 @@ export class InformesComponent implements OnInit {
     })
 
   }
+
+
+  buscarFecha() {
+    console.log(this.formFechas.get('fechaInicio')?.value)
+    this.getComparacionMinutos();
+  }
+
+  formatoFechaGuion(fecha: string) {
+
+    let fechaVector = fecha.split("/");
+    for (let i = 0; i < fechaVector.length; i++) {
+      if (fechaVector[i].length == 1) {
+        fechaVector[i] = "0" + fechaVector[i];
+      }
+    }
+    return fechaVector.join("-");
+  }
+
+  formatearFechaSQL(fecha: string) {
+    if (fecha == "") {
+      return "no";
+    }
+
+    let fechaVector = fecha.split("-");
+    for (let i = 0; i < fechaVector.length; i++) {
+      if (fechaVector[i].length == 1) {
+        fechaVector[i] = "0" + fechaVector[i];
+      }
+    }
+
+    if (fechaVector[2].length==4){
+    fechaVector.unshift(fechaVector[2]);
+    fechaVector.pop()
+  }
+    return fechaVector.join("");
+  }
+
 
 }
