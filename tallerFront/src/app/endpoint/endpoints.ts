@@ -10,7 +10,7 @@ export enum endpoints {
   servicio="servicio/",
   detalleOrden="detalleOrden/",
   estadistica="estadistica/",
-
+  estado="estado/",
 
  // metodos
   mostrar = 'mostrar',
