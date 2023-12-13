@@ -7,6 +7,7 @@ import { EstadisticaService } from 'src/app/servicios/estadistica/estadistica.se
 import { ViewChild } from '@angular/core';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-informes',
@@ -14,6 +15,17 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
   styleUrls: ['./informes.component.css']
 })
 export class InformesComponent implements OnInit {
+
+
+  public formRegister = new FormGroup({
+    inputDescripcion: new FormControl(
+      "", Validators.compose([Validators.required])
+    ),
+
+    inputFecha: new FormControl(
+      "", Validators.compose([Validators.required])
+    )
+  });
 
 
   estadisticaOrden = {

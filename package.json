@@ -4,6 +4,7 @@
   },
   "dependencies": {
     "chart.js": "^4.4.1",
-    "ng2-charts": "^5.0.4"
+    "ng2-charts": "^5.0.4",
+    "pdfmake": "^0.2.8"
   }
 }

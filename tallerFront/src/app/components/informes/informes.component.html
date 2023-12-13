@@ -1,5 +1,17 @@
 <app-header></app-header>
 
+<div class="d-flex">
+    <div class="col-5 ">
+        <label for="inputFecha">Fecha Creada</label>
+        <input type="date" id="inputFecha" class="form-control" name="inputFecha" placeholder="" formControlName="inputFecha" [class.is-invalid]="formRegister.get('inputFecha')?.touched && formRegister.get('inputFecha')?.invalid" [class.is-valid]="formRegister.get('inputFecha')?.valid">
+        <br>
+    </div>
+    <div class="col-5 ms-5">
+        <label for="inputFechaFin">Fecha Finalizada</label>
+        <input type="date" id="inputFechaFin" class="form-control" name="inputFechaFin" placeholder="" formControlName="inputFechaFin">
+        <br>
+    </div>
+</div>
 <h2 class="text-center pt-3">Tiempos estimados y reales por cada servicio</h2>
 <div style=" display: block; width: 70%; " class="text-center mx-auto " *ngIf="mostrarHistograma ">
     <canvas baseChart [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions " [legend]="barChartLegend ">
