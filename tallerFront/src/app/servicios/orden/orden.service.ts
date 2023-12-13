@@ -42,4 +42,8 @@ export class OrdenService {
     const params = { page, size };
     return this.http.get<Orden[]>(environment.apiUrl + endpoints.orden + endpoints.mostrarpaginado, { params });
   }
+  getOrdenesFiltrar(page:number, size:number, nombre:string): Observable<Orden[]>{
+    const params = { page, size };
+    return this.http.get<Orden[]>(environment.apiUrl + endpoints.orden + endpoints.mostrar + '/' + nombre);
+  }
 }

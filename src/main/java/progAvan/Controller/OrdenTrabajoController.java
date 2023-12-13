@@ -97,20 +97,20 @@ public class OrdenTrabajoController {
 
             ordenTrabajoService.save(model);
             Optional<OrdenTrabajo> ordenOptional = ordenTrabajoService.findById(id);
-            if (ordenOptional.isPresent()){
+            if (ordenOptional.isPresent()) {
                 OrdenTrabajo orden = ordenOptional.get();
-            for (DetalleOrdenTrabajo detalle : orden.getDetalle()) {
-                // detalle.setOrden(orden);
-                detalle.setOrden(model);
-                System.out.println(detalle.toString());
-                if (detalle.getId() != null) {
+                for (DetalleOrdenTrabajo detalle : orden.getDetalle()) {
+                    // detalle.setOrden(orden);
+                    detalle.setOrden(model);
+                    System.out.println(detalle.toString());
+                    if (detalle.getId() != null) {
 
-                    ordenTrabajoService.setOrdenId(id, detalle.getId());
-                }else{
-                    ordenTrabajoService.setOrdenId(id,0);
+                        ordenTrabajoService.setOrdenId(id, detalle.getId());
+                    } else {
+                        ordenTrabajoService.setOrdenId(id, 0);
+                    }
                 }
             }
-        }
             this.response.put("message", "success");
             return new ResponseEntity<>(this.response, HttpStatus.OK);
         } catch (Exception e) {
@@ -146,5 +146,11 @@ public class OrdenTrabajoController {
             this.response.put("message", "error interno");
             return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/mostrar/{nombre}")
+    public List<OrdenTrabajo> buscarPorAtributo(@PathVariable String nombre) {
+        return ordenTrabajoService.buscarPorAtributo(nombre);
     }
 }

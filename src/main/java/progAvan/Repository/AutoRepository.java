@@ -36,4 +36,9 @@ public interface AutoRepository extends JpaRepository<Auto, Integer> {
     @Modifying
     @Query(value = "UPDATE Auto SET estado = false WHERE modelo_id = :modeloId", nativeQuery = true)
     void deshabilitarAutosPorModeloId(Integer modeloId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "SELECT * FROM Auto where patente ILIKE %:patente% ", nativeQuery = true)
+    List<Auto> findByPatente(String patente);
 }

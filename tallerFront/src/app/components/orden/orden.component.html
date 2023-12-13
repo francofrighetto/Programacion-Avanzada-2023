@@ -98,6 +98,7 @@
 
     </form>
     <div class="col-7">
+        <input type="text" id="inputBuscar" class="form-control" name="inputBuscar" placeholder="Buscar" [(ngModel)]="nombrebuscar" (input)="buscar()">
         <table class="table" *ngIf="ordenes != undefined && ordenes.length != 0">
             <thead>
                 <tr>

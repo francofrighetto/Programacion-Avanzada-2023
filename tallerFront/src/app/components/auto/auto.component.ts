@@ -30,6 +30,8 @@ export class AutoComponent implements OnInit {
   auto!: Auto;
   nuevo: boolean = true;
 
+  patentebuscar: string = "";
+
   modelo:Modelo=new Modelo;
   modelos?:Modelo[];
 
@@ -123,6 +125,17 @@ export class AutoComponent implements OnInit {
           }
         } else this.ordenesParaMostrar.push(orden)
       }
+    }
+  }
+
+  buscar(){
+    if(this.patentebuscar!=""){
+      this.autoService.buscarPorPatente(this.pageNumber, this.pageSize, this.patentebuscar)
+      .subscribe(data => {
+        this.autos=data;
+      });
+    }else{
+      this.getAutos();
     }
   }
 
