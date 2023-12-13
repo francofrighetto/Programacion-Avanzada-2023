@@ -48,6 +48,7 @@
     </form>
 
     <div class="col-8">
+      <input type="text" id="inputBuscar" class="form-control" name="inputBuscar" placeholder="Buscar" [(ngModel)]="patentebuscar" (input)="buscar()">
         <table class="table" *ngIf="autos != undefined && autos.length>0">
             <thead>
                 <tr>

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import progAvan.Model.Auto;
+import progAvan.Model.Cliente;
 import progAvan.Model.OrdenTrabajo;
 import progAvan.Model.Tecnico;
 import progAvan.Repository.AutoRepository;
@@ -42,7 +43,7 @@ public class OrdenTrabajoService {
     public void save(OrdenTrabajo ordenTrabajo) {
         ordenTrabajoRepository.save(ordenTrabajo);
         Optional<Auto> autOptional = autoService.findById(ordenTrabajo.getAuto().getId());
-        if (autOptional.isPresent() ){
+        if (autOptional.isPresent()) {
             Auto auto = autOptional.get();
             clienteService.actualizarUltimaFechaVisita(auto.getCliente().getId());
         }
@@ -75,11 +76,15 @@ public class OrdenTrabajoService {
         return ordenTrabajoRepository.ultimaOrdenCliente(idCliente);
     }
 
-    public OrdenTrabajo getLastId(){
-      return ordenTrabajoRepository.findFirstByOrderByIdDesc();
+    public OrdenTrabajo getLastId() {
+        return ordenTrabajoRepository.findFirstByOrderByIdDesc();
     }
 
-    public void setOrdenId(int idOrden, int idDetalle){
-      ordenTrabajoRepository.setOdenId(idOrden, idDetalle);
+    public void setOrdenId(int idOrden, int idDetalle) {
+        ordenTrabajoRepository.setOdenId(idOrden, idDetalle);
+    }
+
+    public List<OrdenTrabajo> buscarPorAtributo(String nombre) {
+        return ordenTrabajoRepository.buscarPorAtributo(nombre);
     }
 }

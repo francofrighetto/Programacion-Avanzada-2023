@@ -56,6 +56,12 @@ public class AutoController {
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
+    @GetMapping(value = "/mostrar/{patente}")
+    public List<Auto> buscarPorAtributo(@PathVariable String patente) {
+        return autoService.findByPatente(patente);
+    }
+
+    @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/longitud")
     public long longitud() {
         return autoService.longitud();

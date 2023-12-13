@@ -33,4 +33,11 @@ export class AutoService {
 
   eliminarAuto(id:number){
     return this.http.post(environment.apiUrl + endpoints.auto + endpoints.eliminar + "/" + id,{});
-  }}
+  }
+
+  buscarPorPatente(page:number, size:number, patente:string): Observable<Auto[]>{
+    const params = { page, size };
+    return this.http.get<Auto[]>(environment.apiUrl + endpoints.auto + endpoints.mostrar + '/' + patente, { params });
+  }
+
+}

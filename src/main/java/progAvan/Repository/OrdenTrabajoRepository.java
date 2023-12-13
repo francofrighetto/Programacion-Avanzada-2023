@@ -3,8 +3,11 @@ package progAvan.Repository;
 import org.springframework.stereotype.Repository;
 
 import jakarta.transaction.Transactional;
+import progAvan.Model.Auto;
+import progAvan.Model.Cliente;
 import progAvan.Model.Modelo;
 import progAvan.Model.OrdenTrabajo;
+import progAvan.Model.Tecnico;
 
 import java.util.List;
 
@@ -36,4 +39,9 @@ public interface OrdenTrabajoRepository extends JpaRepository<OrdenTrabajo, Inte
     @Modifying
     @Query(value = "UPDATE public.detalle_orden_trabajo SET orden_id=:idOrden WHERE id=:idDetalle", nativeQuery = true)
     void setOdenId(int idOrden, int idDetalle);
+
+    @Transactional
+    @Modifying
+    @Query(value = "SELECT orden_trabajo.*, auto.patente, tecnico.nombre FROM orden_trabajo left JOIN auto ON orden_trabajo.vehiculo_id=auto.id left JOIN tecnico ON orden_trabajo.tecnico_id=tecnico.id WHERE orden_trabajo.descripcion ILIKE %:descripcion% OR auto.patente ILIKE %:descripcion% OR tecnico.nombre ILIKE %:descripcion%;", nativeQuery = true)
+    List<OrdenTrabajo> buscarPorAtributo(String descripcion);
 }

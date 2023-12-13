@@ -60,4 +60,9 @@ public class AutoService {
         autoRepository.deshabilitarAuto(autoId);
     }
 
+    @Transactional
+    public List<Auto> findByPatente(String patente) {
+        return autoRepository.findByPatente(patente);
+    }
+
 }

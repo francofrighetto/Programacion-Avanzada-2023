@@ -51,6 +51,7 @@ export class OrdenComponent implements OnInit {
   pageNumber: number = 0;
   pageSize: number = 10;
   totalItems?: number;
+  nombrebuscar: string = "";
 
   alerta = {
     color: "",
@@ -216,6 +217,16 @@ export class OrdenComponent implements OnInit {
         console.log(error);
         this.mostrarAlerta("danger", "Error al eliminar orden");
       })
+    }
+  }
+  buscar(){
+    if(this.nombrebuscar!=""){
+      this.ordenService.getOrdenesFiltrar(this.pageNumber, this.pageSize, this.nombrebuscar)
+      .subscribe(data => {
+        this.ordenes=data;
+      });
+    }else{
+      this.getOrdenes();
     }
   }
 
