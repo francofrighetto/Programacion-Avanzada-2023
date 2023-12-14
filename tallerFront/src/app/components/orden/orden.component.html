@@ -9,16 +9,11 @@
             [class.is-valid]="formRegister.get('inputDescripcion')?.valid">
         <br>
         <div class="d-flex">
-            <div class="col-5 ">
-                <label for="inputFecha">Fecha Creada</label>
+            <div class="col-8 ">
+                <label for="inputFecha">Fecha Iniciada</label>
                 <input type="date" id="inputFecha" class="form-control" name="inputFecha" placeholder="" [(ngModel)]="orden.fechaInicio" formControlName="inputFecha" [class.is-invalid]="formRegister.get('inputFecha')?.touched && formRegister.get('inputFecha')?.invalid"
                     [class.is-valid]="formRegister.get('inputFecha')?.valid">
                 <span>{{orden.fechaInicio}}</span>
-                <br>
-            </div>
-            <div class="col-5 ms-5">
-                <label for="inputFechaFin">Fecha Finalizada</label>
-                <input type="date" id="inputFechaFin" class="form-control" name="inputFechaFin" placeholder="" [(ngModel)]="orden.fechaFin" formControlName="inputFechaFin">
                 <br>
             </div>
         </div>
@@ -98,7 +93,22 @@
 
     </form>
     <div class="col-7">
-        <input type="text" id="inputBuscar" class="form-control" name="inputBuscar" placeholder="Buscar" [(ngModel)]="nombrebuscar" (input)="buscar()">
+        <div class="col-12">
+            <input type="text" id="inputBuscar" class="form-control" name="inputBuscar" placeholder="Buscar" [(ngModel)]="nombrebuscar" (input)="buscar()">
+
+            <form [formGroup]="formFechas" class="d-flex">
+                <div class="col-5 ">
+                    <label for="fechaInicio">Fecha Desde</label>
+                    <input type="date" id="fechaInicio" class="form-control" name="fechaInicio" placeholder="" formControlName="fechaInicio" (change)="buscar()">
+                    <br>
+                </div>
+                <div class="col-5 ms-5">
+                    <label for="fechaFin">Fecha Hasta</label>
+                    <input type="date" id="fechaFin" class="form-control" name="fechaFin" placeholder="" formControlName="fechaFin" (change)="buscar()">
+                    <br>
+                </div>
+            </form>
+        </div>
         <table class="table" *ngIf="ordenes != undefined && ordenes.length != 0">
             <thead>
                 <tr>
@@ -144,7 +154,7 @@
                       </button>
                         <button type="button" class="btn btn-warning" (click)="openModal(m)">VER
                       </button>
-                      <button *ngIf="m.estado?.nombre === 'Finalizada'" type="button" class="btn btn-primary" (click)="generarFactura(m)">FACTURA</button>
+                        <button *ngIf="m.estado?.nombre === 'Finalizada'" type="button" class="btn btn-primary" (click)="generarFactura(m)">FACTURA</button>
                         <button type="button" class="btn btn-success" (click)="openModalFin(m)">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-square" viewBox="0 0 16 16">
                       <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>

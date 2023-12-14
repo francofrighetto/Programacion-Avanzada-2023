@@ -59,6 +59,17 @@ export class OrdenComponent implements OnInit {
     activo: false
   }
 
+  public formFechas = new FormGroup({
+    fechaInicio: new FormControl(
+      this.formatoFechaGuion(new Date(1970, 4, 5).toLocaleDateString()), Validators.compose([Validators.required])
+    ),
+
+    fechaFin: new FormControl(
+      this.formatoFechaGuion(new Date().toLocaleDateString()), Validators.compose([Validators.required])
+    )
+  });
+
+
   public formFin = new FormGroup({
     inputMinRealizado: new FormControl("", [Validators.required, Validators.min(1)])
   })
@@ -69,7 +80,7 @@ export class OrdenComponent implements OnInit {
     ),
 
     inputFecha: new FormControl(
-      "05/05/2023", Validators.compose([Validators.required])
+      "", Validators.compose([Validators.required])
     ),
     inputFechaFin: new FormControl(""),
 
@@ -95,10 +106,14 @@ export class OrdenComponent implements OnInit {
   });
 
   constructor(private ordenService: OrdenService, private autoService: AutoService, private tecnicoService: TecnicoService,
-    private servicioService: ServicioService, private cdr: ChangeDetectorRef, private detalleOrdenService: DetalleOrdenService, 
+    private servicioService: ServicioService, private cdr: ChangeDetectorRef, private detalleOrdenService: DetalleOrdenService,
     private generadorPdfService: GeneradorPdfService, private estadoService: EstadoService) {
   }
   ngOnInit(): void {
+    this.buscarDatos();
+  }
+
+  buscarDatos() {
     this.resetOrden();
     this.getAutos();
     this.getTecnicos();
@@ -145,7 +160,7 @@ export class OrdenComponent implements OnInit {
     })
   }
 
-  getEstados(){
+  getEstados() {
     this.estadoService.getEstados().subscribe(data => {
       this.estados = data;
       console.log(this.estados)
@@ -219,13 +234,13 @@ export class OrdenComponent implements OnInit {
       })
     }
   }
-  buscar(){
-    if(this.nombrebuscar!=""){
-      this.ordenService.getOrdenesFiltrar(this.pageNumber, this.pageSize, this.nombrebuscar)
-      .subscribe(data => {
-        this.ordenes=data;
-      });
-    }else{
+  buscar() {
+    if (this.nombrebuscar != "") {
+      this.ordenService.getOrdenesFiltrar(this.pageNumber, this.pageSize, this.nombrebuscar, this.formatearFechaSQL(this.formFechas.get('fechaInicio')?.value), this.formatearFechaSQL(this.formFechas.get('fechaFin')?.value))
+        .subscribe(data => {
+          this.ordenes = data;
+        });
+    } else {
       this.getOrdenes();
     }
   }
@@ -348,7 +363,7 @@ export class OrdenComponent implements OnInit {
     }
   }
 
-  generarFactura(orden: Orden){
+  generarFactura(orden: Orden) {
     const datos = {
       servicios: orden.detalle,
       cliente: orden.auto.cliente,
@@ -357,5 +372,39 @@ export class OrdenComponent implements OnInit {
     console.log(datos)
     this.generadorPdfService.generarFactura(datos);
   }
+
+
+
+  formatoFechaGuion(fecha: string) {
+
+    let fechaVector = fecha.split("/");
+    for (let i = 0; i < fechaVector.length; i++) {
+      if (fechaVector[i].length == 1) {
+        fechaVector[i] = "0" + fechaVector[i];
+      }
+    }
+    return fechaVector.join("-");
+  }
+
+  formatearFechaSQL(fecha: string) {
+    console.log(fecha);
+    if (fecha == "") {
+      return "no";
+    }
+
+    let fechaVector = fecha.split("-");
+    for (let i = 0; i < fechaVector.length; i++) {
+      if (fechaVector[i].length == 1) {
+        fechaVector[i] = "0" + fechaVector[i];
+      }
+    }
+
+    if (fechaVector[2].length == 4) {
+      fechaVector.unshift(fechaVector[2]);
+      fechaVector.pop()
+    }
+    return fechaVector.join("");
+  }
+
 
 }

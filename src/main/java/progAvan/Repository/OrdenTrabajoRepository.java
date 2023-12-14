@@ -42,6 +42,6 @@ public interface OrdenTrabajoRepository extends JpaRepository<OrdenTrabajo, Inte
 
     @Transactional
     @Modifying
-    @Query(value = "SELECT orden_trabajo.*, auto.patente, tecnico.nombre FROM orden_trabajo left JOIN auto ON orden_trabajo.vehiculo_id=auto.id left JOIN tecnico ON orden_trabajo.tecnico_id=tecnico.id WHERE orden_trabajo.descripcion ILIKE %:descripcion% OR auto.patente ILIKE %:descripcion% OR tecnico.nombre ILIKE %:descripcion%;", nativeQuery = true)
-    List<OrdenTrabajo> buscarPorAtributo(String descripcion);
+    @Query(value = "SELECT orden_trabajo.*, auto.patente, tecnico.nombre FROM orden_trabajo left JOIN auto ON orden_trabajo.vehiculo_id=auto.id left JOIN tecnico ON orden_trabajo.tecnico_id=tecnico.id WHERE ( orden_trabajo.descripcion ILIKE %:descripcion% OR auto.patente ILIKE %:descripcion% OR tecnico.nombre ILIKE %:descripcion% ) and fecha_inicio >= TO_TIMESTAMP(:fechaInferior, 'YYYYMMDD') and fecha_inicio <= TO_TIMESTAMP(:fechaSuperior, 'YYYYMMDD') ;", nativeQuery = true)
+    List<OrdenTrabajo> buscarPorAtributo(String descripcion, String fechaInferior, String fechaSuperior);
 }

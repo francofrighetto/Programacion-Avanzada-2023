@@ -149,8 +149,8 @@ public class OrdenTrabajoController {
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
-    @GetMapping(value = "/mostrar/{nombre}")
-    public List<OrdenTrabajo> buscarPorAtributo(@PathVariable String nombre) {
-        return ordenTrabajoService.buscarPorAtributo(nombre);
+    @GetMapping(value = "/mostrar/{nombre}/{fechaInferior}/{fechaSuperior}")
+    public List<OrdenTrabajo> buscarPorAtributo(@PathVariable String nombre, @PathVariable String fechaInferior, @PathVariable String fechaSuperior) {
+        return ordenTrabajoService.buscarPorAtributo(nombre,fechaInferior,fechaSuperior);
     }
 }

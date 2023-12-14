@@ -84,7 +84,7 @@ public class OrdenTrabajoService {
         ordenTrabajoRepository.setOdenId(idOrden, idDetalle);
     }
 
-    public List<OrdenTrabajo> buscarPorAtributo(String nombre) {
-        return ordenTrabajoRepository.buscarPorAtributo(nombre);
+    public List<OrdenTrabajo> buscarPorAtributo(String nombre, String fechaInferior, String fechaSuperior) {
+        return ordenTrabajoRepository.buscarPorAtributo(nombre,fechaInferior, fechaSuperior);
     }
 }
