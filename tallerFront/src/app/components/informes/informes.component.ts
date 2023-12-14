@@ -169,15 +169,6 @@ export class InformesComponent implements OnInit {
   }
 
 
-  buscarFecha() {
-    console.log(this.formFechas.get('fechaInicio')?.value)
-    this.buscarDatos();
-  }
-
-
-
-
-
   public pieChartData: ChartData<'pie', number[], string | string[]> = {
     labels: [''],
     datasets: [
@@ -268,11 +259,6 @@ export class InformesComponent implements OnInit {
 
     this.chart?.update();
   }
-
-
-
-
-
 
 
 

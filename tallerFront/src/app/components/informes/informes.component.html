@@ -3,15 +3,14 @@
 <form [formGroup]="formFechas" class="d-flex">
     <div class="col-5 ">
         <label for="fechaInicio">Fecha Creada</label>
-        <input type="date" id="fechaInicio" class="form-control" name="fechaInicio" placeholder="" formControlName="fechaInicio" [class.is-invalid]="formFechas.get('fechaInicio')?.touched && formFechas.get('fechaInicio')?.invalid" [class.is-valid]="formFechas.get('fechaInicio')?.valid">
+        <input type="date" id="fechaInicio" class="form-control" name="fechaInicio" placeholder="" formControlName="fechaInicio" (change)="buscarDatos()">
         <br>
     </div>
     <div class="col-5 ms-5">
         <label for="fechaFin">Fecha Finalizada</label>
-        <input type="date" id="fechaFin" class="form-control" name="fechaFin" placeholder="" formControlName="fechaFin">
+        <input type="date" id="fechaFin" class="form-control" name="fechaFin" placeholder="" formControlName="fechaFin" (change)="buscarDatos()">
         <br>
     </div>
-    <button (click)="buscarFecha()">Buscar</button>
 </form>
 <h2 class="text-center pt-3">Tiempos estimados y reales por cada servicio</h2>
 <div style=" display: block; width: 70%; " class="text-center mx-auto " *ngIf="mostrarHistograma ">
