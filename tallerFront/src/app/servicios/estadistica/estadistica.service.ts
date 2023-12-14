@@ -16,12 +16,12 @@ export class EstadisticaService {
     return this.http.get<any>(environment.apiUrl + endpoints.estadistica + endpoints.comparacionMinutos+"/"+fechaInferior+"/"+fechaSuperior);
   }
 
-  estadisticaOrden(): Observable<any>{
-    return this.http.get<any>(environment.apiUrl + endpoints.estadistica + endpoints.estadisticaOrden);
+  estadisticaOrden(fechaInferior:string, fechaSuperior:string): Observable<any>{
+    return this.http.get<any>(environment.apiUrl + endpoints.estadistica + endpoints.estadisticaOrden+"/"+fechaInferior+"/"+fechaSuperior);
   }
 
-  cantidadServiciosEnDetalleOrden(): Observable<any>{
-    return this.http.get<any>(environment.apiUrl + endpoints.estadistica + endpoints.cantidadServiciosDetalle);
+  cantidadServiciosEnDetalleOrden(fechaInferior:string, fechaSuperior:string): Observable<any>{
+    return this.http.get<any>(environment.apiUrl + endpoints.estadistica + endpoints.cantidadServiciosDetalle+"/"+fechaInferior+"/"+fechaSuperior);
 
   }
 

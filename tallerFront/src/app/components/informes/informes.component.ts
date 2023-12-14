@@ -95,9 +95,13 @@ export class InformesComponent implements OnInit {
     private cdRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.buscarDatos();
+  }
+
+  buscarDatos(){
     this.getCantidadServiciosEnDetalleOrden();
     this.getComparacionMinutos();
-    // this.getEstadsiticaOrden();
+    this.getEstadsiticaOrden();
   }
 
   getComparacionMinutos() {
@@ -120,6 +124,31 @@ export class InformesComponent implements OnInit {
     })
   }
 
+
+  getCantidadServiciosEnDetalleOrden() {
+    this.mostrarCirculo=false;
+    this.pieChartData.labels=[];
+    this.pieChartData.datasets[0].data=[];
+    this.estadisticaService.cantidadServiciosEnDetalleOrden(this.formatearFechaSQL(this.formFechas.get('fechaInicio')?.value), this.formatearFechaSQL(this.formFechas.get('fechaFin')?.value)).subscribe(data => {
+      this.totalPrcentaje = 0;
+
+      data.forEach((element: any) => {
+        this.totalPrcentaje += element[0];
+      })
+      data.forEach((element: any) => {
+        this.pieChartData.labels?.push(element[1] + " " + (element[0] * 100 / this.totalPrcentaje).toFixed(2) + "%");
+        this.pieChartData.datasets[0].data.push(element[0])
+      });
+
+      // this.pieChartData.labels?.shift();
+
+      // this.pieChartData.datasets[0].data.shift();
+
+      this.mostrarCirculo = true;
+    })
+
+  }
+
   calcularDiferenciaMinutos() {
     for (let i = 0; i < this.barChartData[0].data.length; i++) {
       if (this.barChartData[0].data[i] - this.barChartData[1].data[i] >= 20) {
@@ -131,7 +160,7 @@ export class InformesComponent implements OnInit {
 
 
   getEstadsiticaOrden() {
-    this.estadisticaService.estadisticaOrden().subscribe(data => {
+    this.estadisticaService.estadisticaOrden(this.formatearFechaSQL(this.formFechas.get('fechaInicio')?.value), this.formatearFechaSQL(this.formFechas.get('fechaFin')?.value)).subscribe(data => {
       data = data[0];
       this.estadisticaOrden.noTerminado = data[0];
       this.estadisticaOrden.terminado = data[1];
@@ -140,7 +169,10 @@ export class InformesComponent implements OnInit {
   }
 
 
-
+  buscarFecha() {
+    console.log(this.formFechas.get('fechaInicio')?.value)
+    this.buscarDatos();
+  }
 
 
 
@@ -243,32 +275,6 @@ export class InformesComponent implements OnInit {
 
 
 
-  getCantidadServiciosEnDetalleOrden() {
-    this.estadisticaService.cantidadServiciosEnDetalleOrden().subscribe(data => {
-      this.totalPrcentaje = 0;
-
-      data.forEach((element: any) => {
-        this.totalPrcentaje += element[0];
-      })
-      data.forEach((element: any) => {
-        this.pieChartData.labels?.push(element[1] + " " + (element[0] * 100 / this.totalPrcentaje).toFixed(2) + "%");
-        this.pieChartData.datasets[0].data.push(element[0])
-      });
-
-      this.pieChartData.labels?.shift();
-
-      this.pieChartData.datasets[0].data.shift();
-
-      this.mostrarCirculo = true;
-    })
-
-  }
-
-
-  buscarFecha() {
-    console.log(this.formFechas.get('fechaInicio')?.value)
-    this.getComparacionMinutos();
-  }
 
   formatoFechaGuion(fecha: string) {
 
