@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import progAvan.Model.Estadistica;
-import progAvan.Model.Marca;
 import progAvan.Service.EstadisticaService;
 
 @RestController
@@ -25,6 +23,7 @@ public class EstadisticaController {
 
     @Autowired
     private EstadisticaService estadisticaService;
+    
     Map<String, String> response = new HashMap<>();
 
     @Value("${path_general}")

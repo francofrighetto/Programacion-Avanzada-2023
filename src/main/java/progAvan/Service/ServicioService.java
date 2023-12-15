@@ -11,11 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import jakarta.transaction.Transactional;
 import progAvan.Model.Servicio;
-import progAvan.Model.Cliente;
-import progAvan.Model.Modelo;
-import progAvan.Repository.AutoRepository;
 import progAvan.Repository.ServicioRepository;
-import progAvan.Repository.ModeloRepository;
 
 @Service
 public class ServicioService {
@@ -23,9 +19,6 @@ public class ServicioService {
     @Autowired
     ServicioRepository servicioRepository;
 
-    // public void createServicio() {
-    // servicioRepository.
-    // }
 
     public void save(Servicio model) {
         servicioRepository.save(model);

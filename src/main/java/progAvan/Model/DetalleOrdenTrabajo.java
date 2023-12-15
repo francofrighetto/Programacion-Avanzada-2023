@@ -1,8 +1,5 @@
 package progAvan.Model;
 
-import java.util.Date;
-import java.util.List;
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,12 +12,17 @@ public class DetalleOrdenTrabajo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String descripcion;
+
     public Integer cantidad;
+
     @ManyToOne
     @JoinColumn(name = "servicio_id", referencedColumnName = "id")
     private Servicio servicio;
+
     private double subtotal;
+    
     private boolean estado;
     
     private int minutosRealizados;

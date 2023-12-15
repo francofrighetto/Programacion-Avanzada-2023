@@ -13,8 +13,10 @@ public class Pais implements Comparable {
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.AUTO)
     private long id;
+
     @Column(columnDefinition = "TEXT")
     private String nombre;
+    
     private int estado;
 
     public int getEstado() {

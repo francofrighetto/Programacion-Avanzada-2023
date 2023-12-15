@@ -1,9 +1,5 @@
 package progAvan.Model;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -20,18 +16,26 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(unique = true)
     private int dni;
+
     private String nombre;
+
     private String direccion;
+
     @Column(unique = true)
     private String telefono;
+
     @Column(unique = true)
     private String email;
+
     @Column(columnDefinition = "boolean default true")
     private boolean estado;
+
     @Column(nullable = true)
     private LocalDateTime fecha_ultima_actualizacion;
+    
     @Column()
     private String observaciones;
 

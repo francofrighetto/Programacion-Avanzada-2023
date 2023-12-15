@@ -1,5 +1,4 @@
 package progAvan.Model;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -15,7 +14,10 @@ public class Estadistica {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private int minutosestimados;
+
     private float promedio_minutos_realizados;
+    
     private String nombre;
 }

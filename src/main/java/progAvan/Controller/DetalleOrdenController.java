@@ -1,6 +1,5 @@
 package progAvan.Controller;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import progAvan.Model.Cliente;
 import progAvan.Model.DetalleOrdenTrabajo;
 import progAvan.Model.OrdenTrabajo;
 import progAvan.Service.DetalleOrdenService;
@@ -18,6 +16,7 @@ import progAvan.Service.DetalleOrdenService;
 @RestController
 @RequestMapping(path = "/detalleOrden")
 public class DetalleOrdenController {
+    
     @Autowired
     DetalleOrdenService detalleOrdenService;
 

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import progAvan.Model.Modelo;
-import progAvan.Model.OrdenTrabajo;
 import progAvan.Repository.AutoRepository;
 import progAvan.Repository.MarcaRepository;
 import progAvan.Repository.ModeloRepository;
@@ -27,10 +26,6 @@ public class ModeloService {
 
     @Autowired
     AutoRepository autoRepository;
-
-    // public void createmodelo() {
-    // modeloRepository.
-    // }
 
     public void save(Modelo modelo) {
         modeloRepository.save(modelo);

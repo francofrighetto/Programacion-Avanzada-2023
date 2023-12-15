@@ -1,6 +1,5 @@
 package progAvan.Model;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -16,9 +15,12 @@ public class Servicio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(unique = true)
     private String nombre;
+
     private float precio;
+
     @Column(columnDefinition = "boolean default true")
     private boolean estado;
 
@@ -32,5 +34,4 @@ public class Servicio {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-
 }

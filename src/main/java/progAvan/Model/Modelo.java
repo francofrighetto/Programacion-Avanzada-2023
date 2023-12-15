@@ -10,16 +10,22 @@ import lombok.Setter;
 @Table(name = "modelo")
 public class Modelo {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipo_objeto_id_seq")
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @SequenceGenerator(name = "tipo_objeto_id_seq", sequenceName = "tipo_objeto_id_seq", allocationSize = 1)
+    @GeneratedValue(
+        strategy = GenerationType.SEQUENCE,
+        generator = "tipo_objeto_id_seq")
+    @SequenceGenerator(
+        name = "tipo_objeto_id_seq",
+        sequenceName = "tipo_objeto_id_seq",
+        allocationSize = 1)
     private Integer id;
+
     @Column(unique = true)
     private String nombre;
+
     @ManyToOne
     @JoinColumn(name = "marca_id", referencedColumnName = "id")
     private Marca marca;
+
     private boolean estado;
 
     public boolean getEstado() {

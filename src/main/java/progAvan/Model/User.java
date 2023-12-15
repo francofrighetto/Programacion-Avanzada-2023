@@ -15,12 +15,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import progAvan.Enum.Role;
 
@@ -32,14 +27,20 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue
     Integer id;
+
     @Basic
     @Column(nullable = false)
     String username;
+
     @Column(nullable = false)
     String lastname;
+
     String firstname;
+
     String country;
+
     String password;
+
     @Enumerated(EnumType.STRING) 
     Role role;
 
@@ -63,8 +64,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-
-
 
 }

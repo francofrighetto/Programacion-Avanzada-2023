@@ -1,6 +1,5 @@
 package progAvan.Model;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -16,9 +15,12 @@ public class Tecnico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(unique = true)
     private int dni;
+
     private String nombre;
+    
     @Column(columnDefinition = "boolean default true")
     private boolean estado;
 

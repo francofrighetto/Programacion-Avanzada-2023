@@ -1,10 +1,6 @@
 package progAvan.Repository;
 
 import progAvan.Model.Auto;
-import progAvan.Model.Cliente;
-import progAvan.Model.Marca;
-import progAvan.Model.Modelo;
-
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
