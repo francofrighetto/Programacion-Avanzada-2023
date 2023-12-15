@@ -1,12 +1,12 @@
 # Programacion Avanzada 2023
 
 ## Tecnologías y versiones
-- Java version 20
-- Spring Boot 3.1
-- Angular CLI 12.2
-- Node 16.15
-- npm 8.8
-- Typescript 4.3
+  - Java version 20
+  - Spring Boot 3.1
+  - Angular CLI 12.2
+  - Node 16.15
+  - npm 8.8
+  - Typescript 4.3
 
 
 ## Ejecutar Angular
