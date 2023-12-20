@@ -17,10 +17,10 @@ INSERT INTO marca (nombre, estado) VALUES
 ('Chevrolet', true);
 
 -- Insertar datos en la tabla Modelo
-INSERT INTO modelo (nombre, marca_id, estado) VALUES 
-('Corolla', 1, true),
-('Fiesta', 2, true),
-('Cruze', 3, true);
+INSERT INTO modelo (id,nombre, marca_id, estado) VALUES 
+(default,'Corolla', 1, true),
+(default,'Fiesta', 2, true),
+(default,'Cruze', 3, true);
 
 -- Insertar datos en la tabla Auto
 INSERT INTO auto (modelo_id, cliente_id, patente, anio, estado) VALUES 
@@ -28,30 +28,24 @@ INSERT INTO auto (modelo_id, cliente_id, patente, anio, estado) VALUES
 (2, 2, 'XYZ987', '2018', true),
 (3, 3, 'DEF456', '2022', true);
 
--- Insertar datos en la tabla Pais
-INSERT INTO pais (nombre, estado) VALUES 
-('Argentina', 1),
-('Estados Unidos', 1),
-('España', 1);
-
 -- Insertar datos en la tabla Servicio
 INSERT INTO servicio (nombre, precio, estado, minutosestimados) VALUES 
 ('Limpieza', 50.0, true, null),
 ('Reparación', 100.0, true, null),
 ('Instalación', 80.0, true, null);
 
--- Insertar datos en la tabla OrdenTrabajo
-INSERT INTO orden_trabajo (descripcion, fechaInicio, fechaFin, total, tecnico_id, vehiculo_id, estado_id, habilitado) VALUES 
-('Reparación de motor', '2023-12-01', '2023-12-05', 500.0, 1, 1, 1, true),
-('Instalación de sistema de sonido', '2023-12-10', '2023-12-12', 300.0, 2, 2, 2, true);
-
--- Insertar datos en la tabla DetalleOrdenTrabajo
-INSERT INTO detalle_orden_trabajo (descripcion, cantidad, servicio_id, subtotal, estado, minutosRealizados, orden_id) VALUES 
-('Cambio de aceite', 1, 1, 100.0, true, 45, 1),
-('Instalación de parlantes', 2, 3, 150.0, true, 60, 2);
-
 -- Insertar datos en la tabla Estado
 INSERT INTO estado (descripcion, nombre) VALUES 
 ('Creacion de orden de trabajo', 'iniciado'),
 ('El cliente cancela la orden', 'cancelado'),
 ('Se termina el trabajo de la orden', 'terminado');
+
+-- Insertar datos en la tabla OrdenTrabajo
+INSERT INTO orden_trabajo (descripcion, fecha_inicio, fecha_fin, total, tecnico_id, vehiculo_id, estado_id, habilitado) VALUES 
+('Reparación de motor', '2023-12-01', '2023-12-05', 500.0, 1, 1, 1, true),
+('Instalación de sistema de sonido', '2023-12-10', '2023-12-12', 300.0, 2, 2, 2, true);
+
+-- Insertar datos en la tabla DetalleOrdenTrabajo
+INSERT INTO detalle_orden_trabajo (descripcion, cantidad, servicio_id, subtotal, estado, minutos_realizados, orden_id) VALUES 
+('Cambio de aceite', 1, 1, 100.0, true, 45, 1),
+('Instalación de parlantes', 2, 3, 150.0, true, 60, 2);

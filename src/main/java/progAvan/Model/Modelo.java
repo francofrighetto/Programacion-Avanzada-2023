@@ -9,14 +9,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "modelo")
 public class Modelo {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @GeneratedValue(
-        strategy = GenerationType.SEQUENCE,
-        generator = "tipo_objeto_id_seq")
-    @SequenceGenerator(
-        name = "tipo_objeto_id_seq",
-        sequenceName = "tipo_objeto_id_seq",
-        allocationSize = 1)
     private Integer id;
 
     @Column(unique = true)
