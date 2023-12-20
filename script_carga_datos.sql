@@ -24,21 +24,22 @@ INSERT INTO modelo (nombre, marca_id, estado) VALUES
 
 -- Insertar datos en la tabla Auto
 INSERT INTO auto (modelo_id, cliente_id, patente, anio, estado) VALUES 
-(1, 1, 'ABC123', '2020', true),
-(2, 2, 'XYZ987', '2018', true),
-(3, 3, 'DEF456', '2022', true);
+(1, 1, 'AB123CC', '2020', true),
+(2, 2, 'XZ987CC', '2018', true),
+(3, 3, 'DE456CC', '2022', true);
 
 -- Insertar datos en la tabla Servicio
 INSERT INTO servicio (nombre, precio, estado, minutosestimados) VALUES 
-('Limpieza', 50.0, true, null),
-('Reparación', 100.0, true, null),
-('Instalación', 80.0, true, null);
+('Limpieza', 50.0, true, 50),
+('Reparación', 100.0, true, 120),
+('Instalación', 80.0, true, 60);
 
 -- Insertar datos en la tabla Estado
 INSERT INTO estado (descripcion, nombre) VALUES 
 ('Creacion de orden de trabajo', 'iniciado'),
 ('Se termina el trabajo de la orden', 'terminado'),
 ('El cliente cancela la orden', 'cancelado');
+
 
 -- Insertar datos en la tabla OrdenTrabajo
 INSERT INTO orden_trabajo (descripcion, fecha_inicio, fecha_fin, total, tecnico_id, vehiculo_id, estado_id, habilitado) VALUES 
