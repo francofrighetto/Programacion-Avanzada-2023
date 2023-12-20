@@ -17,10 +17,10 @@ INSERT INTO marca (nombre, estado) VALUES
 ('Chevrolet', true);
 
 -- Insertar datos en la tabla Modelo
-INSERT INTO modelo (id,nombre, marca_id, estado) VALUES 
-(default,'Corolla', 1, true),
-(default,'Fiesta', 2, true),
-(default,'Cruze', 3, true);
+INSERT INTO modelo (nombre, marca_id, estado) VALUES 
+('Corolla', 1, true),
+('Fiesta', 2, true),
+('Cruze', 3, true);
 
 -- Insertar datos en la tabla Auto
 INSERT INTO auto (modelo_id, cliente_id, patente, anio, estado) VALUES 
