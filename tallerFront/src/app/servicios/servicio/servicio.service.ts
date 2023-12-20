@@ -36,7 +36,7 @@ export class ServicioService {
 
   getServiciosPag(currentPage:number,pageSize:number): Observable<Servicio[]>{
     const params = { currentPage, pageSize };
-    return this.http.get<Servicio[]>(environment.apiUrl + endpoints.servicio + endpoints.mostrarHabilitados, { params });
+    return this.http.get<Servicio[]>(environment.apiUrl + endpoints.servicio + endpoints.mostrarpaginado, { params });
   }
 
   getLongitud():Observable<number>{
