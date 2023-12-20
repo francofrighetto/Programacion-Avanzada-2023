@@ -122,6 +122,7 @@ export class InformesComponent implements OnInit {
       });
 
       this.hayHistograma = this.barChartLabels.length>0;
+    this.mostrarHistograma = true;
       this.calcularDiferenciaMinutos();
 
     })

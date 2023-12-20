@@ -24,7 +24,7 @@ public interface EstadisticaRepository extends JpaRepository<Estadistica, Long> 
             " GROUP BY nombre, minutosestimados;", nativeQuery = true)
     List<Object> comparacionMinutosServicios(String fechaInferior, String fechaSuperior);
 
-    @Query(value = "SELECT SUM(CASE WHEN habilitado = true THEN 1 ELSE 0 END) AS noTerminado, SUM(CASE WHEN habilitado = false THEN 1 ELSE 0 END) AS terminado,  SUM(total) AS total  FROM orden_trabajo "
+    @Query(value = "SELECT SUM(CASE WHEN estado_id = 1 THEN 1 ELSE 0 END) AS noTerminado, SUM(CASE WHEN estado_id = 2 THEN 1 ELSE 0 END) AS terminado,  SUM(total) AS total  FROM orden_trabajo "
             + " where fecha_inicio >= TO_TIMESTAMP(:fechaInferior, 'YYYYMMDD') and fecha_inicio <= TO_TIMESTAMP(:fechaSuperior, 'YYYYMMDD'); ", nativeQuery = true)
     List<Object> estadisticaOrden(String fechaInferior, String fechaSuperior);
 

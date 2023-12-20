@@ -84,6 +84,10 @@ public class OrdenTrabajoController {
         // OrdenTrabajo ordenTrabajo = ordenTrabajoService.findById(id).orElse(null);
         try {
 
+            if (!model.validarRangoFechas()) {
+                this.response.put("message", "Rango invalido fecha");
+                return new ResponseEntity<>(this.response, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
             ordenTrabajoService.save(model);
             Optional<OrdenTrabajo> ordenOptional = ordenTrabajoService.findById(id);
             if (ordenOptional.isPresent()) {
@@ -139,7 +143,8 @@ public class OrdenTrabajoController {
 
     @CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3600)
     @GetMapping(value = "/mostrar/{nombre}/{fechaInferior}/{fechaSuperior}")
-    public List<OrdenTrabajo> buscarPorAtributo(@PathVariable String nombre, @PathVariable String fechaInferior, @PathVariable String fechaSuperior) {
-        return ordenTrabajoService.buscarPorAtributo(nombre,fechaInferior,fechaSuperior);
+    public List<OrdenTrabajo> buscarPorAtributo(@PathVariable String nombre, @PathVariable String fechaInferior,
+            @PathVariable String fechaSuperior) {
+        return ordenTrabajoService.buscarPorAtributo(nombre, fechaInferior, fechaSuperior);
     }
 }

@@ -367,6 +367,15 @@ export class OrdenComponent implements OnInit {
         this.closeModal();
         this.mostrarAlerta("success", "Exito al finalizar orden");
         this.getOrdenes();
+      },
+      (error:any)=>{
+        console.log(error.error);
+      this.verOrden.estado = this.estados![0];
+        if (error.error.message=="Rango invalido fecha"){
+        this.closeModal();
+        this.mostrarAlerta("danger", "Rango invalido fecha");
+
+        }
       })
     }else{
       this.errorFin=true;
