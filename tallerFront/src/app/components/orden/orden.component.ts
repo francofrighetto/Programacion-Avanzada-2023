@@ -59,6 +59,8 @@ export class OrdenComponent implements OnInit {
     activo: false
   }
 
+  errorFin:boolean=false;
+
   public formFechas = new FormGroup({
     fechaInicio: new FormControl(
       this.formatoFechaGuion(new Date(1970, 4, 5).toLocaleDateString()), Validators.compose([Validators.required])
@@ -71,7 +73,9 @@ export class OrdenComponent implements OnInit {
 
 
   public formFin = new FormGroup({
-    inputMinRealizado: new FormControl("", [Validators.required, Validators.min(1)])
+    // inputMinRealizado: new FormControl("", [Validators.required, Validators.min(1)])
+    inputFechaFin: new FormControl("")
+
   })
 
   public formRegister = new FormGroup({
@@ -82,7 +86,6 @@ export class OrdenComponent implements OnInit {
     inputFecha: new FormControl(
       "", Validators.compose([Validators.required])
     ),
-    inputFechaFin: new FormControl(""),
 
     inputCantidad1: new FormControl(""),
     inputCantidad2: new FormControl(""),
@@ -134,6 +137,11 @@ export class OrdenComponent implements OnInit {
     // this.verOrden.descripcion = orden.descripcion;
     // this.verOrden.detalle = orden.detalle;
     this.modalFin = true;
+    let i=0;
+    this.verOrden.detalle.forEach(e=>{
+      this.formFin.addControl("inputMinRealizado"+i, new FormControl("", [Validators.required, Validators.min(1)]));
+      i++;
+    })
 
   }
 
@@ -146,7 +154,6 @@ export class OrdenComponent implements OnInit {
   getOrdenes() {
     this.ordenService.getOrdenesPag(this.pageNumber, this.pageSize).subscribe(data => {
       this.ordenes = data;
-      console.log(this.ordenes)
     })
   }
   getAutos() {
@@ -163,7 +170,7 @@ export class OrdenComponent implements OnInit {
   getEstados() {
     this.estadoService.getEstados().subscribe(data => {
       this.estados = data;
-      console.log(this.estados)
+      console.log(this.estados);
     })
   }
 
@@ -174,7 +181,6 @@ export class OrdenComponent implements OnInit {
   }
 
   nuevaOrden() {
-    console.log(this.orden);
     this.orden.estado = this.estados![0];
     if (this.formRegister.valid) {
       this.ordenService.nuevaOrden(this.orden).subscribe((data: any) => {
@@ -348,7 +354,6 @@ export class OrdenComponent implements OnInit {
     this.detalleOrdenService.getDetalleOrden(orden.id!).subscribe((data: any) => {
       if (data != undefined && data.length != 0) {
         this.mostrarDetalle = data[0].orden;
-        console.log(this.mostrarDetalle);
       }
     })
 
@@ -356,12 +361,18 @@ export class OrdenComponent implements OnInit {
 
   finalizar() {
     if (this.formFin.valid) {
-      this.verOrden.estado = this.estados![2];
+      this.errorFin=false;
+      this.verOrden.estado = this.estados![1];
       this.ordenService.actualizarOrden(this.verOrden).subscribe(data => {
         this.closeModal();
+        this.mostrarAlerta("success", "Exito al finalizar orden");
+        this.getOrdenes();
       })
+    }else{
+      this.errorFin=true;
     }
   }
+
 
   generarFactura(orden: Orden) {
     const datos = {
@@ -369,7 +380,6 @@ export class OrdenComponent implements OnInit {
       cliente: orden.auto.cliente,
       auto: orden.auto,
     }
-    console.log(datos)
     this.generadorPdfService.generarFactura(datos);
   }
 
@@ -387,7 +397,6 @@ export class OrdenComponent implements OnInit {
   }
 
   formatearFechaSQL(fecha: string) {
-    console.log(fecha);
     if (fecha == "") {
       return "no";
     }

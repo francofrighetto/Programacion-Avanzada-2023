@@ -28,7 +28,7 @@ public interface EstadisticaRepository extends JpaRepository<Estadistica, Long> 
             + " where fecha_inicio >= TO_TIMESTAMP(:fechaInferior, 'YYYYMMDD') and fecha_inicio <= TO_TIMESTAMP(:fechaSuperior, 'YYYYMMDD'); ", nativeQuery = true)
     List<Object> estadisticaOrden(String fechaInferior, String fechaSuperior);
 
-    @Query(value = "select count(ser.nombre), ser.nombre from detalle_orden_trabajo as det" +
+    @Query(value = "select sum(det.cantidad), ser.nombre from detalle_orden_trabajo as det" +
             " left join servicio as ser on servicio_id = ser.id " +
             " left join orden_trabajo ON orden_trabajo.id = det.orden_id " +
             " where servicio_id is not null and fecha_inicio >= TO_TIMESTAMP(:fechaInferior, 'YYYYMMDD') and fecha_inicio <= TO_TIMESTAMP(:fechaSuperior, 'YYYYMMDD') "

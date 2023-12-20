@@ -49,6 +49,9 @@ export class InformesComponent implements OnInit {
   totalPrcentaje: number = 0;
   serviciosLentos: any = [];
 
+  hayCirculo: boolean = false;
+  hayHistograma: boolean = false;
+
 
   public barChartOptions = {
     scaleShowVerticalLines: false,
@@ -98,7 +101,7 @@ export class InformesComponent implements OnInit {
     this.buscarDatos();
   }
 
-  buscarDatos(){
+  buscarDatos() {
     this.getCantidadServiciosEnDetalleOrden();
     this.getComparacionMinutos();
     this.getEstadsiticaOrden();
@@ -107,8 +110,8 @@ export class InformesComponent implements OnInit {
   getComparacionMinutos() {
     this.mostrarHistograma = false;
     this.barChartLabels = [];
-    this.barChartData[0].data=[];
-    this.barChartData[1].data=[];
+    this.barChartData[0].data = [];
+    this.barChartData[1].data = [];
     this.estadisticaService.comparacionMinutos(this.formatearFechaSQL(this.formFechas.get('fechaInicio')?.value), this.formatearFechaSQL(this.formFechas.get('fechaFin')?.value)).subscribe(data => {
       data.forEach((servicio: any) => {
         this.barChartLabels.push(servicio[0]);
@@ -118,7 +121,7 @@ export class InformesComponent implements OnInit {
         this.barChartData[1].data.push(servicio[2].toFixed(2));
       });
 
-      this.mostrarHistograma = true;
+      this.hayHistograma = this.barChartLabels.length>0;
       this.calcularDiferenciaMinutos();
 
     })
@@ -126,9 +129,9 @@ export class InformesComponent implements OnInit {
 
 
   getCantidadServiciosEnDetalleOrden() {
-    this.mostrarCirculo=false;
-    this.pieChartData.labels=[];
-    this.pieChartData.datasets[0].data=[];
+    this.mostrarCirculo = false;
+    this.pieChartData.labels = [];
+    this.pieChartData.datasets[0].data = [];
     this.estadisticaService.cantidadServiciosEnDetalleOrden(this.formatearFechaSQL(this.formFechas.get('fechaInicio')?.value), this.formatearFechaSQL(this.formFechas.get('fechaFin')?.value)).subscribe(data => {
       this.totalPrcentaje = 0;
 
@@ -140,11 +143,12 @@ export class InformesComponent implements OnInit {
         this.pieChartData.datasets[0].data.push(element[0])
       });
 
-      // this.pieChartData.labels?.shift();
-
-      // this.pieChartData.datasets[0].data.shift();
-
       this.mostrarCirculo = true;
+      if (this.pieChartData.labels==undefined){
+        this.hayCirculo=false;
+      }else{
+      this.hayCirculo = this.pieChartData.labels.length> 0;
+      }
     })
 
   }
@@ -285,10 +289,10 @@ export class InformesComponent implements OnInit {
       }
     }
 
-    if (fechaVector[2].length==4){
-    fechaVector.unshift(fechaVector[2]);
-    fechaVector.pop()
-  }
+    if (fechaVector[2].length == 4) {
+      fechaVector.unshift(fechaVector[2]);
+      fechaVector.pop()
+    }
     return fechaVector.join("");
   }
 
