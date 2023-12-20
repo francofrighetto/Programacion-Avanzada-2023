@@ -37,8 +37,8 @@ INSERT INTO servicio (nombre, precio, estado, minutosestimados) VALUES
 -- Insertar datos en la tabla Estado
 INSERT INTO estado (descripcion, nombre) VALUES 
 ('Creacion de orden de trabajo', 'iniciado'),
-('El cliente cancela la orden', 'cancelado'),
-('Se termina el trabajo de la orden', 'terminado');
+('Se termina el trabajo de la orden', 'terminado'),
+('El cliente cancela la orden', 'cancelado');
 
 -- Insertar datos en la tabla OrdenTrabajo
 INSERT INTO orden_trabajo (descripcion, fecha_inicio, fecha_fin, total, tecnico_id, vehiculo_id, estado_id, habilitado) VALUES 
