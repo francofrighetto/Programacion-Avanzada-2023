@@ -17,3 +17,6 @@ Luego ejecutar ```ng serve``` para levantar la página, que va a ser en ```local
 Al tocar el boton play, instalará las dependencias automáticamente<br>
 Se levantara la página en ```localhost:8080```
 
+## Gestionar base de datos y carga de registros
+Se debe crear la base de datos 'taller' e inicializar el proyecto para que se genere la migracion y se creen las tablas.
+Siguiente a esto debemos ejecutar el script 'script_carga_datos.sql', para poner los datos asignados por defecto al proyecto.
